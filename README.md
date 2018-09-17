@@ -87,6 +87,22 @@ decent.
 
 See if images inside the carousel can be wrapped in `gatsby-image` component.
 
+### Now
+
+[https://zeit.co/now](https://zeit.co/now)
+
+Deploy site using the static deployment option with Now. Look into CI option for
+Now that would automatically rebuild the site on github change or prismic
+change. If not, could use Netlify to deploy and use their webhooks to create the
+above behaviour.
+
+[https://www.netlify.com/](https://www.netlify.com/)
+
+I would prefer to stick with Now if possible due to personal performance
+experiences. Other possible option:
+
+[https://surge.sh/](https://surge.sh/)
+
 ## Ideas
 
 ### Potential libs for masonry
