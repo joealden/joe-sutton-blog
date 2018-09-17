@@ -4,6 +4,8 @@ Joe Sutton's Blog (design inspiration / resource site).
 
 ## TODO
 
+### Non-tech
+
 - Find out what the difference is between tags and catagories as talked about in
   `Site Map -> All Posts`.
 - What is the use of the search results page? Where are you going to be
@@ -13,6 +15,16 @@ Joe Sutton's Blog (design inspiration / resource site).
   site.
 - Think about how to create a fold out menu like
   [snowbird](https://www.snowbird.com/) does.
+
+### Tech
+
+- Create base gatsby project structure
+- Add the following files/dirs:
+  - `.vscode` with rec extensions
+  - `.editorconfig`
+  - `.gitignore`
+  - `.prettierrc`
+  - `.tsconfig.json` for editor settings
 
 ## Tools to use
 
