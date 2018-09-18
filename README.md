@@ -1,6 +1,6 @@
-# joe-sutton-blog
+# joe-suttons-blog
 
-Joe Sutton's Blog (design inspiration / resource site).
+Joe Sutton's blog (design inspiration / resource site).
 
 ## TODO
 
@@ -18,48 +18,26 @@ Joe Sutton's Blog (design inspiration / resource site).
 
 ### Tech
 
-- Create base gatsby project structure
 - Add the following files/dirs:
   - `.vscode` with rec extensions
-  - `.editorconfig`
-  - `.gitignore`
-  - `.prettierrc`
   - `.tsconfig.json` for editor settings
 
 ## Tools to use
 
 ### Gatsby
 
-[https://next.gatsbyjs.org/](https://next.gatsbyjs.org/)
-
-Use v2 as it should be coming out of beta soon (will mitigate migration pain).
-Make sure that docs referred to are v2 not v1 and plugin versions are v2
-compatible.
+[https://gatsbyjs.org/](https://gatsbyjs.org/)
 
 #### Plugins to use
 
-- **gatsby-plugin-typescript** to add typescript file (`.ts` and `.tsx`)
-  support. It is worth noting that it uses babel to strip types, so it is not
-  compiled with tsc. This means that errors will need to be caught in vscode.
-- **gatsby-plugin-styled-components** for `styled-components` SSR support. Needs
-  `styled-components` and `babel-plugin-styled-components` as peer deps.
-- **gatsby-plugin-react-helmet** for `react-helmet` SSR support, needs
-  `react-helmet` as peer dep.
-- **gatsby-image** for optimising images and for traced placeholder feature,
-  among other things.
 - **gatsby-source-prismic** to query prismic for site data that jsutts will be
   able to edit (I need to figure out structure when I've got a better idea of
   what content is going to be on it).
-- **gatsby-plugin-manifest** for creating a manifest file and perform automatic
-  icon generation.
-- **gatsby-plugin-offline** to add offline support and fallback offline page.
-  Must be loaded after manifest plugin in order for the service worker to cache
-  the manifest file.
-- **gatsby-plugin-sitemap** to create a `sitemap.xml` file (for SEO).
-- **gatsby-plugin-robots-txt** to create a `robots.txt` file (for SEO).
 
 #### Plugins to maybe add
 
+- **gatsby-image** for optimising images and for traced placeholder feature,
+  among other things.
 - **gatsby-plugin-google-analytics** for intergrating google analytics into the
   site (if jsutts wants it).
 - **gatsby-plugin-nprogress** to add `nprogress` loading bar to the site.
