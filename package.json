@@ -1,14 +1,14 @@
 {
-  "name": "joe-suttons-blog",
-  "description": "Joe Sutton's blog (design inspiration / resource site)",
+  "name": "listed",
+  "description": "Design inspiration / resource site",
   "author": "Joe Alden <me@joealden.com> (joealden.com)",
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
-  "homepage": "https://github.com/joealden/joe-suttons-blog",
+  "homepage": "https://github.com/joealden/listed",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joealden/joe-suttons-blog.git"
+    "url": "git+https://github.com/joealden/listed.git"
   },
   "scripts": {
     "build": "gatsby build",
