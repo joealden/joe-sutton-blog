@@ -1,6 +1,6 @@
-# joe-suttons-blog
+# Listed
 
-Joe Sutton's blog (design inspiration / resource site).
+Design inspiration / resource site.
 
 ## TODO
 
