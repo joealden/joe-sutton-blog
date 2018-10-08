@@ -5,6 +5,13 @@ module.exports = {
     siteUrl: "https://placeholder.com"
   },
   plugins: [
+    {
+      resolve: "gatsby-source-contentful",
+      options: {
+        spaceId: `mxz8f4tr5n6u`,
+        accessToken: `d2462b5dba8a51ce5d581b41eb730a7b454378c49404aab77a2dbcf0abae0a88`
+      }
+    },
     "gatsby-plugin-typescript",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-react-helmet",
