@@ -2,6 +2,46 @@
 
 Design inspiration / resource site.
 
+## GraphQL to use
+
+```gql
+fragment commonFields on ContentfulPost {
+  id
+  title
+  link
+  image {
+    file {
+      url
+    }
+  }
+}
+
+query allPosts {
+  allContentfulPost(sort: { fields: createdAt, order: ASC }) {
+    edges {
+      node {
+        ...commonFields
+        createdAt
+        categories
+        tags
+      }
+    }
+  }
+}
+
+query featuredPosts {
+  allContentfulFeaturedPosts {
+    edges {
+      node {
+        posts {
+          ...commonFields
+        }
+      }
+    }
+  }
+}
+```
+
 ## TODO
 
 ### Non-tech
