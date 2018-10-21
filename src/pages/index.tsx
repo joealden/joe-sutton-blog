@@ -1,20 +1,54 @@
 import React from "react";
-import { Link } from "gatsby";
-import styled from "styled-components";
 
-const HomePage: React.SFC = () => (
-  <>
-    <Link to="/">Go to home page</Link>
-    <Link to="/gallery">Go to gallery page</Link>
-    <Link to="/posts">Go to all posts page</Link>
-    <Heading>Home Page</Heading>
-    <p>3 days of Featured Link/Post in a carousel/slider</p>
-    <p>Featured Image/Shot</p>
-  </>
-);
+import styled, { ThemeProvider } from "../utils/styled-components";
+import ThemeInterface, { darkTheme, lightTheme } from "../utils/theme";
 
-const Heading = styled.h1`
-  color: blue;
+import Circle from "../components/Circle";
+import GlobalStyles from "../components/GlobalStyles";
+
+interface ListedState {
+  currentTheme: ThemeInterface;
+}
+
+class Listed extends React.Component<{}, ListedState> {
+  state = {
+    currentTheme: darkTheme
+  };
+
+  toggleTheme = () => {
+    if (this.state.currentTheme === darkTheme) {
+      this.setState({ currentTheme: lightTheme });
+      localStorage.setItem("currentTheme", "light");
+    } else {
+      this.setState({ currentTheme: darkTheme });
+      localStorage.setItem("currentTheme", "dark");
+    }
+  };
+
+  render() {
+    const { currentTheme } = this.state;
+
+    return (
+      <ThemeProvider theme={currentTheme}>
+        <>
+          <ToggleThemeButton onClick={this.toggleTheme}>
+            <Circle />
+          </ToggleThemeButton>
+          <GlobalStyles />
+        </>
+      </ThemeProvider>
+    );
+  }
+}
+
+const ToggleThemeButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  /* Maybe instead just alter for a11y reasons */
+  outline: none;
 `;
 
-export default HomePage;
+export default Listed;

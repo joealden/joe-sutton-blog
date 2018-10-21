@@ -7,6 +7,7 @@ module.exports = {
   plugins: [
     {
       resolve: "gatsby-source-contentful",
+      /* Revoke this token and create a new one through an env variable when finished */
       options: {
         spaceId: `mxz8f4tr5n6u`,
         accessToken: `d2462b5dba8a51ce5d581b41eb730a7b454378c49404aab77a2dbcf0abae0a88`
@@ -26,7 +27,6 @@ module.exports = {
         background_color: "#FFFFFF",
         theme_color: "#000000",
         display: "minimal-ui",
-        // This path is relative to the root of the site.
         icon: "src/images/gatsby-icon.png"
       }
     },
