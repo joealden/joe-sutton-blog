@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 
 import styled, { ThemeProvider } from "../utils/styled-components";
 import ThemeInterface, { darkTheme, lightTheme } from "../utils/theme";
@@ -31,6 +32,9 @@ class Listed extends React.Component<{}, ListedState> {
     return (
       <ThemeProvider theme={currentTheme}>
         <>
+          <Helmet>
+            <title>Listed.</title>
+          </Helmet>
           <ToggleThemeButton onClick={this.toggleTheme}>
             <Circle />
           </ToggleThemeButton>
