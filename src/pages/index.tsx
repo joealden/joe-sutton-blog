@@ -2,7 +2,12 @@ import React from "react";
 import Helmet from "react-helmet";
 
 import styled, { ThemeProvider } from "../utils/styled-components";
-import ThemeInterface, { darkTheme, lightTheme } from "../utils/theme";
+import ThemeInterface, {
+  darkTheme,
+  lightTheme,
+  fadedDarkTheme,
+  fadedLightTheme
+} from "../utils/theme";
 
 import Circle from "../components/Circle";
 import GlobalStyles from "../components/GlobalStyles";
@@ -10,12 +15,14 @@ import GlobalStyles from "../components/GlobalStyles";
 interface ListedState {
   currentTheme: ThemeInterface;
   infoOpen: boolean;
+  filterOpen: boolean;
 }
 
 class Listed extends React.Component<{}, ListedState> {
   state = {
     currentTheme: darkTheme,
-    infoOpen: false
+    infoOpen: false,
+    filterOpen: false
   };
 
   /* TODO: Sort out types */
@@ -49,8 +56,20 @@ class Listed extends React.Component<{}, ListedState> {
 
     if (mainContainer.style.transform === "translateY(0px)") {
       mainContainer.style.transform = "translateY(-460px)";
+      if (this.state.currentTheme === fadedDarkTheme) {
+        this.setState({ currentTheme: darkTheme });
+      } else {
+        this.setState({ currentTheme: lightTheme });
+      }
+      this.setState({ filterOpen: false });
     } else {
       mainContainer.style.transform = "translateY(0px)";
+      if (this.state.currentTheme === darkTheme) {
+        this.setState({ currentTheme: fadedDarkTheme });
+      } else {
+        this.setState({ currentTheme: fadedLightTheme });
+      }
+      this.setState({ filterOpen: true });
     }
   };
 
@@ -78,7 +97,7 @@ class Listed extends React.Component<{}, ListedState> {
   };
 
   render() {
-    const { currentTheme, infoOpen } = this.state;
+    const { currentTheme, infoOpen, filterOpen } = this.state;
 
     return (
       <ThemeProvider theme={currentTheme}>
@@ -108,6 +127,7 @@ class Listed extends React.Component<{}, ListedState> {
                   </ToggleThemeButton>
                 </RightBar>
               </ListAndRightBarContainer>
+              {filterOpen && <Overlay onClick={this.toggleFilter} />}
             </BottomWrapper>
           </MainContainer>
           <GlobalStyles />
@@ -124,6 +144,9 @@ const MainContainer = styled.main`
   grid-template-columns: 60px repeat(4, 1fr);
   grid-template-rows: ${FilterHeight};
   grid-template-areas: "filter filter filter filter filter";
+
+  filter: brightness(100%);
+  transition: filter 0.3s ease;
 `;
 
 const Filter = styled.div`
@@ -239,6 +262,15 @@ const RightBar = styled.div`
   transition: border-color 0.3s ease, color 0.3s ease;
 
   padding: 16px 30px;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
 `;
 
 const ToggleThemeButton = styled.button`
