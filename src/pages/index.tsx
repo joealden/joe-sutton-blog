@@ -57,7 +57,7 @@ class Listed extends React.Component<{}, ListedState> {
     const listAndRightBar = this.listAndRightbarContainerRef.current;
 
     if (info.style.transform === "translateX(0px)") {
-      info.style.transform = "translateX(-100%)";
+      info.style.transform = "translateX(calc(-100% - 1px))";
       listAndRightBar.style.transform = "translateX(0px)";
     } else {
       info.style.transform = "translateX(0px)";
@@ -192,10 +192,13 @@ const Info = styled.div`
   grid-area: 2 / 3 / 1 / 2;
   background-color: ${props => props.theme.primaryColor};
   z-index: 10;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  border-right: 1px solid ${props => props.theme.borderColor};
 
+  /* 1px is also subtracted so that the borders don't clash */
+  transform: translateX(calc(-100% - 1px));
+
+  transition: transform 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease;
+  border-right: 1px solid ${props => props.theme.borderColor};
   padding: 20px;
 `;
 
