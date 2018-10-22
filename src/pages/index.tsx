@@ -123,6 +123,7 @@ const OpenFilterButton = styled.button`
   font-weight: normal;
   padding: 0;
   cursor: pointer;
+  transition: color 0.3s ease;
 `;
 
 const RightBar = styled.div`
