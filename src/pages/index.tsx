@@ -2,12 +2,7 @@ import React from "react";
 import Helmet from "react-helmet";
 
 import styled, { ThemeProvider } from "../utils/styled-components";
-import ThemeInterface, {
-  darkTheme,
-  lightTheme,
-  fadedDarkTheme,
-  fadedLightTheme
-} from "../utils/theme";
+import ThemeInterface, { darkTheme, lightTheme } from "../utils/theme";
 
 import Circle from "../components/Circle";
 import GlobalStyles from "../components/GlobalStyles";
@@ -26,6 +21,7 @@ class Listed extends React.Component<{}, ListedState> {
   };
 
   /* TODO: Sort out types */
+  bottomWrapperOuterRef: any = React.createRef();
   bottomWrapperRef: any = React.createRef();
   infoRef: any = React.createRef();
   listAndRightbarContainerRef: any = React.createRef();
@@ -52,23 +48,16 @@ class Listed extends React.Component<{}, ListedState> {
   }
 
   toggleFilter = () => {
-    const mainContainer = this.bottomWrapperRef.current;
+    const bottomWrapper = this.bottomWrapperRef.current;
+    const bottomWrapperOuter = this.bottomWrapperOuterRef.current;
 
-    if (mainContainer.style.transform === "translateY(0px)") {
-      mainContainer.style.transform = "translateY(-460px)";
-      if (this.state.currentTheme === fadedDarkTheme) {
-        this.setState({ currentTheme: darkTheme });
-      } else {
-        this.setState({ currentTheme: lightTheme });
-      }
+    if (bottomWrapperOuter.style.transform === "translateY(0px)") {
+      bottomWrapperOuter.style.transform = "translateY(-460px)";
+      bottomWrapper.style.opacity = "1";
       this.setState({ filterOpen: false });
     } else {
-      mainContainer.style.transform = "translateY(0px)";
-      if (this.state.currentTheme === darkTheme) {
-        this.setState({ currentTheme: fadedDarkTheme });
-      } else {
-        this.setState({ currentTheme: fadedLightTheme });
-      }
+      bottomWrapperOuter.style.transform = "translateY(0px)";
+      bottomWrapper.style.opacity = "0.6";
       this.setState({ filterOpen: true });
     }
   };
@@ -80,10 +69,12 @@ class Listed extends React.Component<{}, ListedState> {
     if (info.style.transform === "translateX(0px)") {
       info.style.transform = "translateX(calc(-100% - 1px))";
       listAndRightBar.style.transform = "translateX(0px)";
+      listAndRightBar.style.opacity = "1";
       this.setState({ infoOpen: false });
     } else {
       info.style.transform = "translateX(0px)";
       listAndRightBar.style.transform = `translateX(${info.offsetWidth}px)`;
+      listAndRightBar.style.opacity = "0.6";
       this.setState({ infoOpen: true });
     }
   };
@@ -107,28 +98,33 @@ class Listed extends React.Component<{}, ListedState> {
           </Helmet>
           <MainContainer>
             <Filter>Filter</Filter>
-            <BottomWrapper ref={this.bottomWrapperRef}>
-              <LeftBar>
-                <p>Listed</p>
-                <div onClick={this.toggleInfo}>
-                  <span>{infoOpen ? "Close" : "Info"}</span>
-                </div>
-              </LeftBar>
-              <Info ref={this.infoRef}>Info</Info>
-              <ListAndRightBarContainer ref={this.listAndRightbarContainerRef}>
-                <List>
-                  <OpenFilterButton onClick={this.toggleFilter}>
-                    Filter
-                  </OpenFilterButton>
-                </List>
-                <RightBar>
-                  <ToggleThemeButton onClick={this.toggleTheme}>
-                    <Circle />
-                  </ToggleThemeButton>
-                </RightBar>
-              </ListAndRightBarContainer>
-              {filterOpen && <Overlay onClick={this.toggleFilter} />}
-            </BottomWrapper>
+            <BottomWrapperOuter ref={this.bottomWrapperOuterRef}>
+              <BottomWrapper ref={this.bottomWrapperRef}>
+                <LeftBar>
+                  <p>Listed</p>
+                  <div onClick={this.toggleInfo}>
+                    <span>{infoOpen ? "Close" : "Info"}</span>
+                  </div>
+                </LeftBar>
+                <Info ref={this.infoRef}>Info</Info>
+                <ListAndRightBarContainer
+                  ref={this.listAndRightbarContainerRef}
+                >
+                  <List>
+                    <OpenFilterButton onClick={this.toggleFilter}>
+                      Filter
+                    </OpenFilterButton>
+                  </List>
+                  <RightBar>
+                    <ToggleThemeButton onClick={this.toggleTheme}>
+                      <Circle />
+                    </ToggleThemeButton>
+                  </RightBar>
+                  {infoOpen && <Overlay onClick={this.toggleInfo} />}
+                </ListAndRightBarContainer>
+                {filterOpen && <Overlay onClick={this.toggleFilter} />}
+              </BottomWrapper>
+            </BottomWrapperOuter>
           </MainContainer>
           <GlobalStyles />
         </>
@@ -141,12 +137,10 @@ const FilterHeight = "460px";
 
 const MainContainer = styled.main`
   display: grid;
+  background-color: ${props => props.theme.primaryColor};
   grid-template-columns: 60px repeat(4, 1fr);
   grid-template-rows: ${FilterHeight};
   grid-template-areas: "filter filter filter filter filter";
-
-  filter: brightness(100%);
-  transition: filter 0.3s ease;
 `;
 
 const Filter = styled.div`
@@ -157,6 +151,13 @@ const Filter = styled.div`
   padding: 30px;
 `;
 
+const BottomWrapperOuter = styled.div`
+  width: 100vw;
+  background-color: ${props => props.theme.primaryColor};
+  transform: translateY(-${FilterHeight});
+  transition: transform 0.3s ease, background-color 0.3s ease;
+`;
+
 const BottomWrapper = styled.div`
   display: grid;
   width: 100vw;
@@ -164,9 +165,8 @@ const BottomWrapper = styled.div`
   grid-template-rows: 100vh;
   grid-template-areas: "leftbar list list list rightbar";
 
-  background-color: ${props => props.theme.primaryColor};
-  transform: translateY(-${FilterHeight});
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 `;
 
 const LeftBar = styled.div`
