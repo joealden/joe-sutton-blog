@@ -16,16 +16,52 @@ class Listed extends React.Component<{}, ListedState> {
     currentTheme: darkTheme
   };
 
-  /* TODO: Sort out type */
-  mainContainerRef: any = React.createRef();
+  /* TODO: Sort out types */
+  bottomWrapperRef: any = React.createRef();
+  infoRef: any = React.createRef();
+  listAndRightbarContainerRef: any = React.createRef();
+
+  handleResize = () => {
+    const info = this.infoRef.current;
+    const listAndRightBar = this.listAndRightbarContainerRef.current;
+
+    if (info.style.transform === "translateX(0px)") {
+      listAndRightBar.style.transition = "none";
+      listAndRightBar.style.transform = `translateX(${info.offsetWidth}px)`;
+      setImmediate(() => {
+        listAndRightBar.style.transition = "transform 0.3s ease";
+      });
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
 
   openFilter = () => {
-    const mainContainer = this.mainContainerRef.current;
+    const mainContainer = this.bottomWrapperRef.current;
 
     if (mainContainer.style.transform === "translateY(0px)") {
       mainContainer.style.transform = "translateY(-460px)";
     } else {
       mainContainer.style.transform = "translateY(0px)";
+    }
+  };
+
+  openInfo = () => {
+    const info = this.infoRef.current;
+    const listAndRightBar = this.listAndRightbarContainerRef.current;
+
+    if (info.style.transform === "translateX(0px)") {
+      info.style.transform = "translateX(-100%)";
+      listAndRightBar.style.transform = "translateX(0px)";
+    } else {
+      info.style.transform = "translateX(0px)";
+      listAndRightBar.style.transform = `translateX(${info.offsetWidth}px)`;
     }
   };
 
@@ -48,21 +84,29 @@ class Listed extends React.Component<{}, ListedState> {
           <Helmet>
             <title>Listed</title>
           </Helmet>
-          <MainContainer ref={this.mainContainerRef}>
+          <MainContainer>
             <Filter>Filter</Filter>
-            <LeftBar>
-              <p>Listed</p>
-            </LeftBar>
-            <List>
-              <OpenFilterButton onClick={this.openFilter}>
-                Filter
-              </OpenFilterButton>
-            </List>
-            <RightBar>
-              <ToggleThemeButton onClick={this.toggleTheme}>
-                <Circle />
-              </ToggleThemeButton>
-            </RightBar>
+            <BottomWrapper ref={this.bottomWrapperRef}>
+              <LeftBar>
+                <p>Listed</p>
+                <div onClick={this.openInfo}>
+                  <span>Info</span>
+                </div>
+              </LeftBar>
+              <Info ref={this.infoRef}>Info</Info>
+              <ListAndRightBarContainer ref={this.listAndRightbarContainerRef}>
+                <List>
+                  <OpenFilterButton onClick={this.openFilter}>
+                    Filter
+                  </OpenFilterButton>
+                </List>
+                <RightBar>
+                  <ToggleThemeButton onClick={this.toggleTheme}>
+                    <Circle />
+                  </ToggleThemeButton>
+                </RightBar>
+              </ListAndRightBarContainer>
+            </BottomWrapper>
           </MainContainer>
           <GlobalStyles />
         </>
@@ -76,11 +120,8 @@ const FilterHeight = "460px";
 const MainContainer = styled.main`
   display: grid;
   grid-template-columns: 60px repeat(4, 1fr);
-  grid-template-rows: ${FilterHeight} 100vh;
-  grid-template-areas: "filter filter filter filter filter" "leftbar list list list rightbar";
-
-  transform: translateY(-${FilterHeight});
-  transition: transform 0.3s ease;
+  grid-template-rows: ${FilterHeight};
+  grid-template-areas: "filter filter filter filter filter";
 `;
 
 const Filter = styled.div`
@@ -91,15 +132,30 @@ const Filter = styled.div`
   padding: 30px;
 `;
 
+const BottomWrapper = styled.div`
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 60px repeat(4, 1fr);
+  grid-template-rows: 100vh;
+  grid-template-areas: "leftbar list list list rightbar";
+
+  background-color: ${props => props.theme.primaryColor};
+  transform: translateY(-${FilterHeight});
+  transition: transform 0.3s ease, background-color 0.3s ease;
+`;
+
 const LeftBar = styled.div`
   grid-area: leftbar;
   border-right: 1px solid ${props => props.theme.borderColor};
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition: border-color 0.3s ease, color 0.3s ease,
+    background-color 0.3s ease;
 
   padding: 20px 0;
 
   display: flex;
   flex-direction: column;
+  z-index: 100;
+  background-color: ${props => props.theme.primaryColor};
 
   p {
     margin: 0 auto;
@@ -107,13 +163,60 @@ const LeftBar = styled.div`
     writing-mode: vertical-rl;
     transform: rotate(180deg);
   }
+
+  /**
+   * This is not a button because of weird chrome behaviour
+   * that means that buttons don't take the writing-mode
+   * property correctly.
+   */
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    margin-top: 50px;
+    padding: 15px 0;
+    font-size: 18px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: normal;
+    color: ${props => props.theme.secondaryColor};
+    transition: color 0.3s ease;
+  }
+`;
+
+const Info = styled.div`
+  grid-area: 2 / 3 / 1 / 2;
+  background-color: ${props => props.theme.primaryColor};
+  z-index: 10;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  border-right: 1px solid ${props => props.theme.borderColor};
+
+  padding: 20px;
+`;
+
+const ListAndRightBarContainer = styled.div`
+  grid-area: list;
+  display: grid;
+  width: calc(100vw - 60px);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 100vh;
+  grid-template-areas: "list list list rightbar";
+  transition: transform 0.3s ease;
 `;
 
 const List = styled.div`
   grid-area: list;
   transition: color 0.3s ease;
-
   padding: 16px 30px;
+
+  button {
+    outline: none;
+  }
 `;
 
 const OpenFilterButton = styled.button`
