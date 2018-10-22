@@ -9,11 +9,13 @@ import GlobalStyles from "../components/GlobalStyles";
 
 interface ListedState {
   currentTheme: ThemeInterface;
+  infoOpen: boolean;
 }
 
 class Listed extends React.Component<{}, ListedState> {
   state = {
-    currentTheme: darkTheme
+    currentTheme: darkTheme,
+    infoOpen: false
   };
 
   /* TODO: Sort out types */
@@ -42,7 +44,7 @@ class Listed extends React.Component<{}, ListedState> {
     window.removeEventListener("resize", this.handleResize);
   }
 
-  openFilter = () => {
+  toggleFilter = () => {
     const mainContainer = this.bottomWrapperRef.current;
 
     if (mainContainer.style.transform === "translateY(0px)") {
@@ -52,31 +54,31 @@ class Listed extends React.Component<{}, ListedState> {
     }
   };
 
-  openInfo = () => {
+  toggleInfo = () => {
     const info = this.infoRef.current;
     const listAndRightBar = this.listAndRightbarContainerRef.current;
 
     if (info.style.transform === "translateX(0px)") {
       info.style.transform = "translateX(calc(-100% - 1px))";
       listAndRightBar.style.transform = "translateX(0px)";
+      this.setState({ infoOpen: false });
     } else {
       info.style.transform = "translateX(0px)";
       listAndRightBar.style.transform = `translateX(${info.offsetWidth}px)`;
+      this.setState({ infoOpen: true });
     }
   };
 
   toggleTheme = () => {
     if (this.state.currentTheme === darkTheme) {
       this.setState({ currentTheme: lightTheme });
-      localStorage.setItem("currentTheme", "light");
     } else {
       this.setState({ currentTheme: darkTheme });
-      localStorage.setItem("currentTheme", "dark");
     }
   };
 
   render() {
-    const { currentTheme } = this.state;
+    const { currentTheme, infoOpen } = this.state;
 
     return (
       <ThemeProvider theme={currentTheme}>
@@ -89,14 +91,14 @@ class Listed extends React.Component<{}, ListedState> {
             <BottomWrapper ref={this.bottomWrapperRef}>
               <LeftBar>
                 <p>Listed</p>
-                <div onClick={this.openInfo}>
-                  <span>Info</span>
+                <div onClick={this.toggleInfo}>
+                  <span>{infoOpen ? "Close" : "Info"}</span>
                 </div>
               </LeftBar>
               <Info ref={this.infoRef}>Info</Info>
               <ListAndRightBarContainer ref={this.listAndRightbarContainerRef}>
                 <List>
-                  <OpenFilterButton onClick={this.openFilter}>
+                  <OpenFilterButton onClick={this.toggleFilter}>
                     Filter
                   </OpenFilterButton>
                 </List>
@@ -174,8 +176,7 @@ const LeftBar = styled.div`
     justify-content: center;
     align-items: center;
     user-select: none;
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
+    transform: rotate(-90deg);
     margin-top: 50px;
     padding: 15px 0;
     font-size: 18px;
