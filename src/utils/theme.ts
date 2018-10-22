@@ -2,6 +2,7 @@ export default interface ThemeInterface {
   primaryColor: string;
   secondaryColor: string;
   ternaryColor: string;
+  borderColor: string;
 }
 
 const baseTheme = {
@@ -11,11 +12,13 @@ const baseTheme = {
 export const darkTheme: ThemeInterface = {
   ...baseTheme,
   primaryColor: "#111111",
-  secondaryColor: "#FFFFFF"
+  secondaryColor: "#FFFFFF",
+  borderColor: "#2B2B2B"
 };
 
 export const lightTheme: ThemeInterface = {
   ...baseTheme,
   primaryColor: "#F8F8F8",
-  secondaryColor: "#060606"
+  secondaryColor: "#060606",
+  borderColor: "#D6D6D6"
 };
