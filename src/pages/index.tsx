@@ -25,6 +25,7 @@ class Listed extends React.Component<{}, ListedState> {
   bottomWrapperRef: any = React.createRef();
   infoRef: any = React.createRef();
   listAndRightbarContainerRef: any = React.createRef();
+  listRef: any = React.createRef();
 
   handleResize = () => {
     const info = this.infoRef.current;
@@ -39,12 +40,30 @@ class Listed extends React.Component<{}, ListedState> {
     }
   };
 
+  currentScollHeight = 0;
+  currentlyScrolling = false;
+
+  scrollList = () => {
+    const list = this.listRef as React.RefObject<HTMLUListElement>;
+    console.log(list);
+    this.currentScollHeight = this.currentScollHeight + 50;
+    if (!this.currentlyScrolling) {
+      this.currentlyScrolling = true;
+      list.current.style.transform = `translateY(-${
+        this.currentScollHeight
+      }px)`;
+      setTimeout(() => (this.currentlyScrolling = false), 500);
+    }
+  };
+
   componentDidMount() {
     window.addEventListener("resize", this.handleResize);
+    window.addEventListener("wheel", this.scrollList);
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("wheel", this.scrollList);
   }
 
   toggleFilter = () => {
@@ -101,9 +120,9 @@ class Listed extends React.Component<{}, ListedState> {
             <BottomWrapperOuter ref={this.bottomWrapperOuterRef}>
               <BottomWrapper ref={this.bottomWrapperRef}>
                 <LeftBar>
-                  <p>Listed</p>
+                  <span>Listed</span>
                   <div onClick={this.toggleInfo}>
-                    <span>{infoOpen ? "Close" : "Info"}</span>
+                    <span>Info</span>
                   </div>
                 </LeftBar>
                 <Info ref={this.infoRef}>Info</Info>
@@ -114,6 +133,16 @@ class Listed extends React.Component<{}, ListedState> {
                     <OpenFilterButton onClick={this.toggleFilter}>
                       Filter
                     </OpenFilterButton>
+                    <InnerList ref={this.listRef}>
+                      <li>Akademi</li>
+                      <li>Rally Interactive</li>
+                      <li>Leo et Violette</li>
+                      <li>Bear Grylls</li>
+                      <li>ETO Amsterdam</li>
+                      <li>Toy Fight</li>
+                      <li>Suisse Int</li>
+                      <li>Akademi</li>
+                    </InnerList>
                   </List>
                   <RightBar>
                     <ToggleThemeButton onClick={this.toggleTheme}>
@@ -133,11 +162,31 @@ class Listed extends React.Component<{}, ListedState> {
   }
 }
 
+const InnerList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-top: 10vw;
+  transition: transform 0.5s;
+
+  li {
+    font-size: 6vw;
+    color: ${props => props.theme.listColor};
+    line-height: 6vw;
+    letter-spacing: -0.24vw;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: ${props => props.theme.foregroundColor};
+    }
+  }
+`;
+
 const FilterHeight = "460px";
 
 const MainContainer = styled.main`
   display: grid;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.backgroundColor};
   grid-template-columns: 60px repeat(4, 1fr);
   grid-template-rows: ${FilterHeight};
   grid-template-areas: "filter filter filter filter filter";
@@ -145,7 +194,7 @@ const MainContainer = styled.main`
 
 const Filter = styled.div`
   grid-area: filter;
-  background-color: ${props => props.theme.ternaryColor};
+  background-color: ${props => props.theme.accentColor};
   color: #060606;
 
   padding: 30px;
@@ -153,7 +202,7 @@ const Filter = styled.div`
 
 const BottomWrapperOuter = styled.div`
   width: 100vw;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.backgroundColor};
   transform: translateY(-${FilterHeight});
   transition: transform 0.3s ease, background-color 0.3s ease;
 `;
@@ -171,7 +220,7 @@ const BottomWrapper = styled.div`
 
 const LeftBar = styled.div`
   grid-area: leftbar;
-  border-right: 1px solid ${props => props.theme.borderColor};
+  border-right: 1px solid ${props => props.theme.lineColor};
   transition: border-color 0.3s ease, color 0.3s ease,
     background-color 0.3s ease;
 
@@ -180,9 +229,9 @@ const LeftBar = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 100;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.backgroundColor};
 
-  p {
+  > span {
     margin: 0 auto;
     font-size: 18px;
     writing-mode: vertical-rl;
@@ -207,14 +256,14 @@ const LeftBar = styled.div`
     background: none;
     border: none;
     font-weight: normal;
-    color: ${props => props.theme.secondaryColor};
+    color: ${props => props.theme.foregroundColor};
     transition: color 0.3s ease;
   }
 `;
 
 const Info = styled.div`
   grid-area: 2 / 3 / 1 / 2;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.backgroundColor};
   z-index: 10;
 
   /* 1px is also subtracted so that the borders don't clash */
@@ -222,7 +271,7 @@ const Info = styled.div`
 
   transition: transform 0.3s ease, border-color 0.3s ease,
     background-color 0.3s ease;
-  border-right: 1px solid ${props => props.theme.borderColor};
+  border-right: 1px solid ${props => props.theme.lineColor};
   padding: 20px;
 `;
 
@@ -249,7 +298,7 @@ const List = styled.div`
 const OpenFilterButton = styled.button`
   border: none;
   background: none;
-  color: ${props => props.theme.secondaryColor};
+  color: ${props => props.theme.foregroundColor};
   font-weight: normal;
   padding: 0;
   cursor: pointer;
@@ -258,7 +307,7 @@ const OpenFilterButton = styled.button`
 
 const RightBar = styled.div`
   grid-area: rightbar;
-  border-left: 1px solid ${props => props.theme.borderColor};
+  border-left: 1px solid ${props => props.theme.lineColor};
   transition: border-color 0.3s ease, color 0.3s ease;
 
   padding: 16px 30px;

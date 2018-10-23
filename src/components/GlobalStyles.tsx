@@ -16,8 +16,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: "SuisseIntl";
     margin: 0;
     overflow: hidden;
-    background-color: ${props => props.theme.primaryColor};
-    color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.backgroundColor};
+    color: ${props => props.theme.foregroundColor};
     transition: background-color 0.3s ease;
   }
 `;

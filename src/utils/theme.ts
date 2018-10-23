@@ -1,24 +1,27 @@
 export default interface ThemeInterface {
-  primaryColor: string;
-  secondaryColor: string;
-  ternaryColor: string;
-  borderColor: string;
+  backgroundColor: string;
+  foregroundColor: string;
+  listColor: string;
+  lineColor: string;
+  accentColor: string;
 }
 
 const baseTheme = {
-  ternaryColor: "#19F2BE"
+  accentColor: "#19F2BE"
 };
 
 export const darkTheme: ThemeInterface = {
   ...baseTheme,
-  primaryColor: "#111111",
-  secondaryColor: "#FFFFFF",
-  borderColor: "#2B2B2B"
+  backgroundColor: "#111111",
+  foregroundColor: "#FFFFFF",
+  listColor: "#535353",
+  lineColor: "#2B2B2B"
 };
 
 export const lightTheme: ThemeInterface = {
   ...baseTheme,
-  primaryColor: "#F8F8F8",
-  secondaryColor: "#060606",
-  borderColor: "#D6D6D6"
+  backgroundColor: "#F8F8F8",
+  foregroundColor: "#060606",
+  listColor: "#C3C3C3",
+  lineColor: "#D6D6D6"
 };
