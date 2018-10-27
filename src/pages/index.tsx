@@ -40,30 +40,12 @@ class Listed extends React.Component<{}, ListedState> {
     }
   };
 
-  currentScollHeight = 0;
-  currentlyScrolling = false;
-
-  scrollList = () => {
-    const list = this.listRef as React.RefObject<HTMLUListElement>;
-    console.log(list);
-    this.currentScollHeight = this.currentScollHeight + 50;
-    if (!this.currentlyScrolling) {
-      this.currentlyScrolling = true;
-      list.current.style.transform = `translateY(-${
-        this.currentScollHeight
-      }px)`;
-      setTimeout(() => (this.currentlyScrolling = false), 500);
-    }
-  };
-
   componentDidMount() {
     window.addEventListener("resize", this.handleResize);
-    window.addEventListener("wheel", this.scrollList);
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize);
-    window.removeEventListener("wheel", this.scrollList);
   }
 
   toggleFilter = () => {
@@ -133,15 +115,24 @@ class Listed extends React.Component<{}, ListedState> {
                     <OpenFilterButton onClick={this.toggleFilter}>
                       Filter
                     </OpenFilterButton>
+
                     <InnerList ref={this.listRef}>
                       <li>Akademi</li>
                       <li>Rally Interactive</li>
                       <li>Leo et Violette</li>
                       <li>Bear Grylls</li>
-                      <li>ETO Amsterdam</li>
-                      <li>Toy Fight</li>
-                      <li>Suisse Int</li>
                       <li>Akademi</li>
+                      <li>Rally Interactive</li>
+                      <li>Leo et Violette</li>
+                      <li>Bear Grylls</li>
+                      <li>Akademi</li>
+                      <li>Rally Interactive</li>
+                      <li>Leo et Violette</li>
+                      <li>Bear Grylls</li>
+                      <li>Akademi</li>
+                      <li>Rally Interactive</li>
+                      <li>Leo et Violette</li>
+                      <li>Bear Grylls</li>
                     </InnerList>
                   </List>
                   <RightBar>
@@ -166,7 +157,8 @@ const InnerList = styled.ul`
   list-style: none;
   padding: 0;
   margin-top: 10vw;
-  transition: transform 0.5s;
+  overflow: auto;
+  height: 77vh;
 
   li {
     font-size: 6vw;
@@ -201,6 +193,7 @@ const Filter = styled.div`
 `;
 
 const BottomWrapperOuter = styled.div`
+  overflow: hidden;
   width: 100vw;
   background-color: ${props => props.theme.backgroundColor};
   transform: translateY(-${FilterHeight});
