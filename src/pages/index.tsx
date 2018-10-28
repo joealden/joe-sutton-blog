@@ -57,6 +57,9 @@ class Listed extends React.Component<{}, ListedState> {
     return (
       <ThemeProvider theme={currentTheme}>
         <SiteContainer>
+          <Helmet>
+            <title>Listed</title>
+          </Helmet>
           <Header
             showBackToTopButton={showBackToTopButton}
             toggleTheme={this.toggleTheme}
