@@ -182,7 +182,7 @@ const InfoContainer = styled.div`
     visibility: hidden;
     transform: rotate(-90deg);
 
-    margin-bottom: 1.1vw;
+    margin-bottom: 1.4vw;
     opacity: 0;
     user-select: none;
 
@@ -209,7 +209,7 @@ const NameContainer = styled.div`
   span:first-child {
     display: inline-block;
     font-size: 6vw;
-    line-height: 100%;
+    line-height: 110%;
     letter-spacing: -0.24vw;
     color: ${props => props.theme.listColor};
     transition: color ${props => props.theme.transition};
@@ -221,7 +221,7 @@ const NameContainer = styled.div`
     svg {
       width: 2vw;
       height: 2vw;
-      margin-top: 0.7vw;
+      margin-top: 1vw;
       margin-left: 0.3vw;
 
       polygon {
@@ -241,7 +241,9 @@ const CatagoryContainer = styled.div`
   align-items: flex-end;
 
   span {
-    margin-bottom: 0.9vw;
+    font-size: inherit;
+    line-height: 70%;
+    margin-bottom: 1.2vw;
     color: ${props => props.theme.foregroundColor};
     opacity: 0;
     visibility: hidden;
