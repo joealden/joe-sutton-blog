@@ -1,0 +1,25 @@
+/**
+ * NOTE:
+ *
+ * This font face declaration was extracted from the
+ * GlobalStyles styled-components component because it
+ * was causing rendering issues where the pages component
+ * tree got re-rendered (due to state changes like
+ * infoOpen and filterOpen).
+ *
+ * I'm guessing this is because everything the component
+ * tree is re-rendered, this font-face declaration is
+ * re-declared. For whatever reason, this was the cause
+ * for the text to flash / change font when state was
+ * in the main page component.
+ *
+ * TODO:
+ *
+ * Add woff2 and possibly ttf options for optimal browser
+ * support.
+*/
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("../../static/SuisseIntl-Regular.woff");
+}

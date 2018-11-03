@@ -1,13 +1,6 @@
 import { createGlobalStyle } from "../utils/styled-components";
-import { withPrefix } from "gatsby";
 
 const GlobalStyles = createGlobalStyle`
-  /* Sort out woff2 and ttf usages for supported browsers*/
-  @font-face {
-    font-family: "SuisseIntl";
-    src: url(${withPrefix("SuisseIntl-Regular.woff")});
-  }
-  
   * {
     box-sizing: border-box;
     font-family: inherit;

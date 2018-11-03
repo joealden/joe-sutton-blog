@@ -9,6 +9,8 @@ import Info from "../components/Info";
 import Header from "../components/Header";
 import List from "../components/List";
 
+import "../styles/styles.css";
+
 interface ListedState {
   currentTheme: ThemeInterface;
   showBackToTopButton: boolean;
