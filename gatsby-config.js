@@ -29,7 +29,6 @@ module.exports = {
         display: "minimal-ui",
         icon: "src/images/gatsby-icon.png"
       }
-    } /*,
-    "gatsby-plugin-offline" */
+    }
   ]
 };
