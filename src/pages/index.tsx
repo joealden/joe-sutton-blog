@@ -110,7 +110,7 @@ class Listed extends React.Component<{}, ListedState> {
                 : "translateX(0)"
             }}
           >
-            <Info />
+            <Info toggleInfo={this.toggleInfo} />
             <HeaderAndListContainer>
               <Overlay
                 style={{
@@ -165,6 +165,7 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  cursor: pointer;
   background-color: ${props => props.theme.backgroundColor};
   transition: opacity ${props => props.theme.transition},
     visibility ${props => props.theme.transition};

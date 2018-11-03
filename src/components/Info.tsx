@@ -1,13 +1,24 @@
 import React from "react";
 import styled from "../utils/styled-components";
 
-class Info extends React.Component {
+interface InfoProps {
+  toggleInfo: () => void;
+}
+
+class Info extends React.Component<InfoProps> {
   render() {
+    const { toggleInfo } = this.props;
+
     return (
       <InfoContainer>
-        <DetailsContainer>
-          <p>testing</p>
-        </DetailsContainer>
+        <InnerContainer>
+          <CloseButtonContainer>
+            <button onClick={toggleInfo}>Close</button>
+          </CloseButtonContainer>
+          <DetailsContainer>
+            <p>testing</p>
+          </DetailsContainer>
+        </InnerContainer>
       </InfoContainer>
     );
   }
@@ -32,11 +43,33 @@ const InfoContainer = styled.div`
     border ${props => props.theme.transition};
 `;
 
-const DetailsContainer = styled.div`
+const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
   position: sticky;
   top: 0;
   left: 0;
-  height: 100vh;
+`;
+
+const CloseButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  height: 60px;
+  padding: 0 20px;
+
+  button {
+    transition: color ${props => props.theme.transition};
+
+    &:hover {
+      color: ${props => props.theme.accentColor};
+    }
+  }
+`;
+
+const DetailsContainer = styled.div`
+  flex: 1;
 
   display: flex;
   justify-content: center;
