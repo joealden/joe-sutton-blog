@@ -21,5 +21,6 @@
 
 @font-face {
   font-family: "SuisseIntl";
-  src: url("../../static/SuisseIntl-Regular.woff");
+  src: url("../../static/SuisseIntl-Regular.woff2") format("woff2"),
+    url("../../static/SuisseIntl-Regular.woff") format("woff");
 }
