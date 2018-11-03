@@ -88,6 +88,10 @@ const FilterAndBackToTopWrapper = styled.div`
       visibility ${props => props.theme.transition};
     opacity: 1;
 
+    &:hover svg polygon {
+      fill: ${props => props.theme.accentColor};
+    }
+
     &.hidden {
       opacity: 0;
       visibility: hidden;

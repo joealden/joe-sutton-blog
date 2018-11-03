@@ -40,6 +40,10 @@ const GlobalStyles = createGlobalStyle`
     font-size: inherit;
     /* Think about a11y */
     outline: none;
+
+    &:hover {
+      color: ${props => props.theme.accentColor};
+    }
   }
 `;
 
