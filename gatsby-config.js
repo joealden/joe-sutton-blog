@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "Joe Sutton's Blog",
+    title: "Listed",
     // Needs changing. Used for sitemap + robots-txt
-    siteUrl: "https://placeholder.com"
+    siteUrl: "https://listed.design"
   },
   plugins: [
     {
@@ -21,13 +21,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "Joe Sutton's Blog",
-        short_name: "Joe Sutton's Blog",
+        name: "Listed",
+        short_name: "Listed",
         start_url: "/",
         background_color: "#FFFFFF",
         theme_color: "#000000",
         display: "minimal-ui",
-        icon: "src/images/gatsby-icon.png"
+        icon: "src/images/listed-icon.png"
       }
     }
   ]
