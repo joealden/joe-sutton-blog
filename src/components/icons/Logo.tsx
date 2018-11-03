@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-const StyledSVG = styled.svg`
-  display: block;
-
-  rect {
-    fill: ${props => props.theme.foregroundColor};
-    transition: fill 0.3s ease;
-  }
-`;
-
-const size = 25;
-
-/* Changed to 20x20 to fix jumping bug in chrome */
 const Logo: React.SFC = () => (
-  <StyledSVG height={size} width={size}>
-    <rect width={size} height={size} />
+  <StyledSVG viewBox="0 0 30 30">
+    <polygon points="7.5 22.5 7.5 0 0 0 0 30 30 30 30 22.5 7.5 22.5" />
+    <polygon points="30 0 30 15 22.5 15 22.5 7.5 15 7.5 15 0 30 0" />
   </StyledSVG>
 );
 
 export default Logo;
+
+const StyledSVG = styled.svg`
+  display: block;
+  width: 30px;
+
+  polygon {
+    fill: ${props => props.theme.foregroundColor};
+    transition: fill ${props => props.theme.transition};
+  }
+`;

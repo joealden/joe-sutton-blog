@@ -2,6 +2,7 @@ import { createGlobalStyle } from "../utils/styled-components";
 import { withPrefix } from "gatsby";
 
 const GlobalStyles = createGlobalStyle`
+  /* Sort out woff2 and ttf usages for supported browsers*/
   @font-face {
     font-family: "SuisseIntl";
     src: url(${withPrefix("SuisseIntl-Regular.woff")});
@@ -27,8 +28,8 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0;
-    overflow-x: hidden;
     overflow-y: scroll;
+    overflow-x: hidden;
     background-color: ${props => props.theme.backgroundColor};
     color: ${props => props.theme.foregroundColor};
     transition: background-color ${props => props.theme.transition};
@@ -42,6 +43,10 @@ const GlobalStyles = createGlobalStyle`
     padding: 10px;
     cursor: pointer;
     transition: color ${props => props.theme.transition};
+    /* Chrome needs explicit setting of this property */
+    font-size: inherit;
+    /* Think about a11y */
+    outline: none;
   }
 `;
 
