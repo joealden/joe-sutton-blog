@@ -65,7 +65,6 @@ class Listed extends React.Component<{}, ListedState> {
              * Find solutions to these problem scenarios.
              */
             if (infoOpen || filterOpen) {
-              console.log(event);
               event.preventDefault();
             }
           }}
