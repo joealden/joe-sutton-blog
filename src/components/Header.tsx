@@ -6,45 +6,75 @@ import Logo from "../components/icons/Logo";
 import BackToTop from "../components/icons/BackToTop";
 
 interface HeaderProps {
-  showBackToTopButton: boolean;
   toggleTheme: (event: React.MouseEvent<HTMLButtonElement>) => void;
   toggleFilter: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Header: React.SFC<HeaderProps> = ({
-  showBackToTopButton,
-  toggleTheme,
-  toggleFilter
-}) => {
-  return (
-    <HeaderWrapper>
-      <LogoWrapper>
-        <Logo />
-      </LogoWrapper>
-      <FilterAndBackToTopWrapper>
-        <button onClick={toggleFilter}>Filter</button>
-        <button
-          className={showBackToTopButton ? "" : "hidden"}
-          onClick={() =>
-            window.scrollTo({
-              behavior: "smooth",
-              left: 0,
-              top: 0
-            })
-          }
-        >
-          <BackToTop />
-        </button>
-      </FilterAndBackToTopWrapper>
-      <AboutAndThemeChangeWrapper>
-        <button>About</button>
-        <button onClick={toggleTheme}>
-          <Circle />
-        </button>
-      </AboutAndThemeChangeWrapper>
-    </HeaderWrapper>
-  );
-};
+interface HeaderState {
+  showBackToTopButton: boolean;
+}
+
+class Header extends React.Component<HeaderProps, HeaderState> {
+  state = {
+    showBackToTopButton: false
+  };
+
+  shouldBackToTopButtonBeShown = () => {
+    const { showBackToTopButton } = this.state;
+
+    if (window.pageYOffset > 200) {
+      if (showBackToTopButton === false) {
+        this.setState({ showBackToTopButton: true });
+      }
+    } else {
+      if (showBackToTopButton === true) {
+        this.setState({ showBackToTopButton: false });
+      }
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.shouldBackToTopButtonBeShown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.shouldBackToTopButtonBeShown);
+  }
+
+  render() {
+    const { toggleTheme, toggleFilter } = this.props;
+    const { showBackToTopButton } = this.state;
+
+    return (
+      <HeaderWrapper>
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+        <FilterAndBackToTopWrapper>
+          <button onClick={toggleFilter}>Filter</button>
+          <button
+            className={showBackToTopButton ? "" : "hidden"}
+            onClick={() =>
+              window.scrollTo({
+                behavior: "smooth",
+                left: 0,
+                top: 0
+              })
+            }
+          >
+            <BackToTop />
+          </button>
+        </FilterAndBackToTopWrapper>
+        <AboutAndThemeChangeWrapper>
+          <button>About</button>
+          <button onClick={toggleTheme}>
+            <Circle />
+          </button>
+        </AboutAndThemeChangeWrapper>
+      </HeaderWrapper>
+    );
+  }
+}
 
 export default Header;
 

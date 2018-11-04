@@ -13,7 +13,6 @@ import "../styles/styles.css";
 
 interface ListedState {
   currentTheme: ThemeInterface;
-  showBackToTopButton: boolean;
   infoOpen: boolean;
   filterOpen: boolean;
 }
@@ -21,7 +20,6 @@ interface ListedState {
 class Listed extends React.Component<{}, ListedState> {
   state = {
     currentTheme: darkTheme,
-    showBackToTopButton: false,
     infoOpen: false,
     filterOpen: false
   };
@@ -50,35 +48,8 @@ class Listed extends React.Component<{}, ListedState> {
     }
   };
 
-  shouldBackToTopButtonBeShown = () => {
-    const { showBackToTopButton } = this.state;
-
-    if (window.pageYOffset > 200) {
-      if (showBackToTopButton === false) {
-        this.setState({ showBackToTopButton: true });
-      }
-    } else {
-      if (showBackToTopButton === true) {
-        this.setState({ showBackToTopButton: false });
-      }
-    }
-  };
-
-  componentDidMount() {
-    window.addEventListener("scroll", this.shouldBackToTopButtonBeShown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.shouldBackToTopButtonBeShown);
-  }
-
   render() {
-    const {
-      currentTheme,
-      showBackToTopButton,
-      infoOpen,
-      filterOpen
-    } = this.state;
+    const { currentTheme, infoOpen, filterOpen } = this.state;
 
     return (
       <ThemeProvider theme={currentTheme}>
@@ -112,6 +83,11 @@ class Listed extends React.Component<{}, ListedState> {
           >
             <Info toggleInfo={this.toggleInfo} />
             <HeaderAndListContainer>
+              <Underlay>
+                <div />
+                <div />
+                <div />
+              </Underlay>
               <Overlay
                 style={{
                   visibility: infoOpen || filterOpen ? "visible" : "hidden",
@@ -128,7 +104,6 @@ class Listed extends React.Component<{}, ListedState> {
                 }}
               />
               <Header
-                showBackToTopButton={showBackToTopButton}
                 toggleTheme={this.toggleTheme}
                 toggleFilter={this.toggleFilter}
               />
@@ -156,6 +131,24 @@ const MainContainer = styled.div`
 
 const HeaderAndListContainer = styled.div`
   position: relative;
+  min-height: 100vh;
+`;
+
+const Underlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: 60px 3fr 1fr;
+
+  div:nth-child(2) {
+    border-left: 1px solid ${props => props.theme.lineColor};
+    border-right: 1px solid ${props => props.theme.lineColor};
+    transition: border-color ${props => props.theme.transition};
+  }
 `;
 
 const Overlay = styled.div`

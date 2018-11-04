@@ -168,10 +168,6 @@ const NameAndCatagoryContainer = styled.div`
   padding: 0 30px;
   display: flex;
   justify-content: space-between;
-
-  border-left: 1px solid ${props => props.theme.lineColor};
-  border-right: 1px solid ${props => props.theme.lineColor};
-  transition: border-color ${props => props.theme.transition};
 `;
 
 const NameContainer = styled.div`
@@ -365,6 +361,150 @@ const tempData = [
   },
   {
     id: "20",
+    title: "Bear Grylls",
+    catagory: "Website",
+    link: "http://www.beargrylls.com/"
+  },
+  {
+    id: "21",
+    title: "Akademi",
+    catagory: "Website",
+    link: "https://studioakademi.com/"
+  },
+  {
+    id: "22",
+    title: "Rally Interactive",
+    catagory: "Brand Identity",
+    link: "http://rallyinteractive.com/"
+  },
+  {
+    id: "23",
+    title: "Leo et Violette",
+    catagory: "Website",
+    link: "https://www.leoetviolette.com/"
+  },
+  {
+    id: "24",
+    title: "Bear Grylls",
+    catagory: "Website",
+    link: "http://www.beargrylls.com/"
+  },
+  {
+    id: "25",
+    title: "Akademi",
+    catagory: "Website",
+    link: "https://studioakademi.com/"
+  },
+  {
+    id: "26",
+    title: "Rally Interactive",
+    catagory: "Brand Identity",
+    link: "http://rallyinteractive.com/"
+  },
+  {
+    id: "27",
+    title: "Leo et Violette",
+    catagory: "Website",
+    link: "https://www.leoetviolette.com/"
+  },
+  {
+    id: "28",
+    title: "Bear Grylls",
+    catagory: "Website",
+    link: "http://www.beargrylls.com/"
+  },
+  {
+    id: "29",
+    title: "Akademi",
+    catagory: "Website",
+    link: "https://studioakademi.com/"
+  },
+  {
+    id: "30",
+    title: "Rally Interactive",
+    catagory: "Brand Identity",
+    link: "http://rallyinteractive.com/"
+  },
+  {
+    id: "31",
+    title: "Leo et Violette",
+    catagory: "Website",
+    link: "https://www.leoetviolette.com/"
+  },
+  {
+    id: "32",
+    title: "Bear Grylls",
+    catagory: "Website",
+    link: "http://www.beargrylls.com/"
+  },
+  {
+    id: "33",
+    title: "Akademi",
+    catagory: "Website",
+    link: "https://studioakademi.com/"
+  },
+  {
+    id: "34",
+    title: "Rally Interactive",
+    catagory: "Brand Identity",
+    link: "http://rallyinteractive.com/"
+  },
+  {
+    id: "35",
+    title: "Leo et Violette",
+    catagory: "Website",
+    link: "https://www.leoetviolette.com/"
+  },
+  {
+    id: "36",
+    title: "Bear Grylls",
+    catagory: "Website",
+    link: "http://www.beargrylls.com/"
+  },
+  {
+    id: "37",
+    title: "Akademi",
+    catagory: "Website",
+    link: "https://studioakademi.com/"
+  },
+  {
+    id: "38",
+    title: "Rally Interactive",
+    catagory: "Brand Identity",
+    link: "http://rallyinteractive.com/"
+  },
+  {
+    id: "39",
+    title: "Leo et Violette",
+    catagory: "Website",
+    link: "https://www.leoetviolette.com/"
+  },
+  {
+    id: "40",
+    title: "Bear Grylls",
+    catagory: "Website",
+    link: "http://www.beargrylls.com/"
+  },
+  {
+    id: "41",
+    title: "Akademi",
+    catagory: "Website",
+    link: "https://studioakademi.com/"
+  },
+  {
+    id: "42",
+    title: "Rally Interactive",
+    catagory: "Brand Identity",
+    link: "http://rallyinteractive.com/"
+  },
+  {
+    id: "43",
+    title: "Leo et Violette",
+    catagory: "Website",
+    link: "https://www.leoetviolette.com/"
+  },
+  {
+    id: "44",
     title: "Bear Grylls",
     catagory: "Website",
     link: "http://www.beargrylls.com/"
