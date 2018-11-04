@@ -57,7 +57,7 @@ const FilterCover = styled.div`
   width: 100%;
   height: ${FilterHeight};
   z-index: 10001;
-  background-color: ${props => props.theme.accentColor};
+  background-color: ${props => props.theme.backgroundColor};
   transition: background-color ${props => props.theme.transition};
   transform: translateY(-100%);
 `;
