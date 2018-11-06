@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "../../utils/styled-components";
 
 const Arrow: React.SFC = () => (
   <svg viewBox="0 0 32 32">
