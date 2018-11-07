@@ -33,8 +33,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
   };
 
+  /* https://developers.google.com/web/updates/2016/06/passive-event-listeners */
   componentDidMount() {
-    window.addEventListener("scroll", this.shouldBackToTopButtonBeShown);
+    window.addEventListener("scroll", this.shouldBackToTopButtonBeShown, {
+      passive: true
+    });
   }
 
   componentWillUnmount() {
