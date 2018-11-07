@@ -109,6 +109,7 @@ const NameContainer = styled.div`
     font-size: 6vw;
     line-height: 110%;
     letter-spacing: -0.24vw;
+    margin-top: -0.7vw;
     color: ${props => props.theme.listColor};
     transition: color ${props => props.theme.transition};
   }
