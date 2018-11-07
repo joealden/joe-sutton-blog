@@ -67,7 +67,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         </FilterAndBackToTopWrapper>
         <AboutAndThemeChangeWrapper>
           <button>About</button>
-          <button onClick={toggleTheme}>
+          <button onClick={toggleTheme} aria-label="Toggle Theme">
             <Circle />
           </button>
         </AboutAndThemeChangeWrapper>
