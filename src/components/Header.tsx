@@ -53,6 +53,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         <FilterAndBackToTopWrapper>
           <button onClick={toggleFilter}>Filter</button>
           <button
+            aria-label="Back To Top"
             className={showBackToTopButton ? "" : "hidden"}
             onClick={() =>
               window.scrollTo({
@@ -67,7 +68,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         </FilterAndBackToTopWrapper>
         <AboutAndThemeChangeWrapper>
           <button>About</button>
-          <button onClick={toggleTheme} aria-label="Toggle Theme">
+          <button aria-label="Toggle Theme" onClick={toggleTheme}>
             <Circle />
           </button>
         </AboutAndThemeChangeWrapper>
