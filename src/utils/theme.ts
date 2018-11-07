@@ -16,7 +16,7 @@ export const darkTheme: ThemeInterface = {
   ...baseTheme,
   backgroundColor: "#111111",
   foregroundColor: "#FFFFFF",
-  listColor: "#535353",
+  listColor: "#FFFFFF",
   lineColor: "#2B2B2B"
 };
 
