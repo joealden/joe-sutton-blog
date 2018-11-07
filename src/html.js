@@ -6,11 +6,16 @@ export default class HTML extends React.Component {
     return (
       <html {...this.props.htmlAttributes} lang="en">
         <head>
+          <title>Listed</title>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+          <meta
+            name="description"
+            content="Listed - A curated list of inspirational design"
           />
           {this.props.headComponents}
         </head>
