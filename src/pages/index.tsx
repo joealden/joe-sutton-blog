@@ -47,27 +47,36 @@ class Listed extends React.Component<{}, ListedState> {
     }
   };
 
+  handleScroll = (event: WheelEvent) => {
+    const { infoOpen, filterOpen } = this.state;
+
+    if (infoOpen || filterOpen) {
+      event.preventDefault();
+    }
+  };
+
+  /**
+   * TODO:
+   * This stops scrolling with the mousewheel, but
+   * scrolling also needs to be stopped when the user
+   * uses either the arrow buttons or the actual scroll
+   * bar.
+   *
+   * Find solutions to these problem scenarios.
+   */
+  componentDidMount() {
+    window.addEventListener("wheel", this.handleScroll);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("wheel", this.handleScroll);
+  }
+
   render() {
     const { currentTheme, infoOpen, filterOpen } = this.state;
 
     return (
       <ThemeProvider theme={currentTheme}>
-        <SiteContainer
-          onWheel={event => {
-            /**
-             * TODO:
-             * This stops scrolling with the mousewheel, but
-             * scrolling also needs to be stopped when the user
-             * uses either the arrow buttons or the actual scroll
-             * bar.
-             *
-             * Find solutions to these problem scenarios.
-             */
-            if (infoOpen || filterOpen) {
-              event.preventDefault();
-            }
-          }}
-        >
+        <SiteContainer>
           <Filter filterOpen={filterOpen} />
           <MainContainer
             style={{
