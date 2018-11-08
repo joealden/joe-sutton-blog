@@ -120,7 +120,7 @@ const NameContainer = styled.div`
     svg {
       width: 2vw;
       height: 2vw;
-      margin-top: 1vw;
+      margin-top: 0.3vw;
       margin-left: 0.3vw;
 
       polygon {
