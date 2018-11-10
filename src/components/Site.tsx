@@ -9,7 +9,7 @@ import Info from "./Info";
 import Underlay from "./Underlay";
 import Overlay from "./Overlay";
 import Header from "./Header";
-import List from "./List";
+import ListContainer from "./ListContainer";
 
 export enum FilterSortBy {
   NewestFirst,
@@ -129,7 +129,7 @@ class Site extends React.Component<SiteProps, SiteState> {
               handleClick={handleOverlayClick}
             />
             <Header toggleTheme={toggleTheme} toggleFilter={toggleFilter} />
-            <List
+            <ListContainer
               toggleInfo={toggleInfo}
               posts={posts}
               sortBy={filter.sortBy}

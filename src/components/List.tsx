@@ -1,19 +1,13 @@
 import React from "react";
 import styled from "../utils/styled-components";
-import memoize from "memoize-one";
 
 import { Post } from "../pages/index";
-import { FilterSortBy } from "./Site";
 
-import sortPosts from "../utils/sortPosts";
 import { ListItem, PaddingListItem } from "./ListItem";
-
-const memoizedSortPosts = memoize(sortPosts);
 
 interface ListProps {
   toggleInfo: () => void;
   posts: Array<Post>;
-  sortBy: FilterSortBy;
 }
 
 interface ListState {
@@ -28,15 +22,13 @@ class List extends React.Component<ListProps, ListState> {
   setCurrentlyActiveItem = (id: string) => this.setState({ activeItemId: id });
 
   render() {
-    const { toggleInfo, posts, sortBy } = this.props;
+    const { toggleInfo, posts } = this.props;
     const { activeItemId } = this.state;
-
-    const sortedPosts: Array<Post> = memoizedSortPosts(posts, sortBy);
 
     return (
       <ListWrapper>
         <PaddingListItem />
-        {sortedPosts.map(post => {
+        {posts.map(post => {
           const { id, categories, link, title } = post;
           const className = activeItemId === id ? "active-item" : "";
 
