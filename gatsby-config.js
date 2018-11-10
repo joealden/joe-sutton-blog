@@ -28,6 +28,7 @@ module.exports = {
         display: "minimal-ui",
         icon: "src/images/listed-icon.png"
       }
-    }
+    },
+    "gatsby-plugin-netlify"
   ]
 };
