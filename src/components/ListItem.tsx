@@ -109,7 +109,7 @@ const NameContainer = styled.div`
     font-size: 6vw;
     line-height: 110%;
     letter-spacing: -0.24vw;
-    margin-top: -0.7vw;
+    margin-top: -0.5vw;
     color: ${props => props.theme.listColor};
     transition: color ${props => props.theme.transition};
   }
@@ -120,7 +120,7 @@ const NameContainer = styled.div`
     svg {
       width: 2vw;
       height: 2vw;
-      margin-top: 0.3vw;
+      margin-top: 0.55vw;
       margin-left: 0.3vw;
 
       polygon {
