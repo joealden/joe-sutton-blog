@@ -1,7 +1,6 @@
 module.exports = {
   siteMetadata: {
     title: "Listed",
-    // Needs changing. Used for sitemap + robots-txt
     siteUrl: "https://listed.design"
   },
   plugins: [
