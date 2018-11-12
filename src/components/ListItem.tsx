@@ -2,6 +2,8 @@ import React from "react";
 import Img from "gatsby-image";
 import styled from "../utils/styled-components";
 
+import { Image } from "../pages/index";
+
 import Arrow from "../components/icons/Arrow";
 
 interface ListItemProps {
@@ -12,9 +14,7 @@ interface ListItemProps {
   catagory: string;
   link: string;
   id: string;
-  image: {
-    fluid: Object;
-  };
+  image: Image;
 }
 
 export const ListItem: React.SFC<ListItemProps> = ({

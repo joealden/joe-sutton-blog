@@ -27,7 +27,7 @@ export const query = graphql`
           createdAt
           image {
             fluid(maxWidth: 1130) {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_withWebp
             }
           }
         }
@@ -36,6 +36,16 @@ export const query = graphql`
   }
 `;
 
+export type Image = {
+  fluid: {
+    base64: string;
+    aspectRatio: number;
+    src: string;
+    srcSet: string;
+    sizes: string;
+  };
+};
+
 export type Post = {
   id: string;
   title: string;
@@ -43,15 +53,7 @@ export type Post = {
   categories: Array<string>;
   tags: Array<string>;
   createdAt: string;
-  image: {
-    fluid: {
-      base64: string;
-      aspectRatio: number;
-      src: string;
-      srcSet: string;
-      sizes: string;
-    };
-  };
+  image: Image;
 };
 
 type ContentfulPosts = {
