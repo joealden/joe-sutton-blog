@@ -912,6 +912,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.6.6.tgz#004b98298d04c7ca3b4f50ca2035d4f60d2eed1b"
   integrity sha512-h4t4jFjtm1YV7UirAFuSuFGyLa+NNxjdkq6DpFLANNQY5rHueFZHVY+8Cu1HYVP6DrheB0kv4m5xPjo7eKT7yQ==
 
+"@emotion/unitless@^0.7.0":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.2.tgz#b180097bb44a40c3b59efea9cf28df2fe542d518"
+  integrity sha512-mK4SHgIiJiwRZyenDXlaLUdR7vm8xUvJ4VYmpWNTDtF3ykEbI1XNVcbhAZwt07xjtCvLenoJMP8Eqx1FXvoWDQ==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1023,10 +1028,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.4.18":
-  version "16.4.18"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.18.tgz#2e28a2e7f92d3fa7d6a65f2b73275c3e3138a13d"
-  integrity sha512-eFzJKEg6pdeaukVLVZ8Xb79CTl/ysX+ExmOfAAqcFlCCK5TgFDD9kWR0S18sglQ3EmM8U+80enjUqbfnUyqpdA==
+"@types/react@^16.7.3":
+  version "16.7.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.3.tgz#dd96b19b21c450fab7d136f71d48f4b8fc72777e"
+  integrity sha512-ve/2lnXuLNaTDR1SPvsEX25m+NoNW3PMJxL2jd372UR8oJPwR5+jgtcheUoN27O+qKLFmQy0y0YKRwZcwtny3w==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -5603,10 +5608,10 @@ gatsby-link@^2.0.6:
     "@types/reach__router" "^1.0.0"
     prop-types "^15.6.1"
 
-gatsby-plugin-manifest@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.0.8.tgz#b89b4838ee82b907236068fd2187923ad7c03134"
-  integrity sha512-vDGK+Vv8nBAPNLTRALQfSi2//HSk5XX6SlFoG7yihg84H6gNgctEjYiz1IkdUDiMlgqgviQYJlgSorKfHYC57A==
+gatsby-plugin-manifest@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.0.9.tgz#800d837705c32743d18c12226a0b3325185f75af"
+  integrity sha512-QhU3HCGUT62nD4OGBVGIRivVS9vIkXPlRl3xdW0iInGZRLcwid0NYjpY3rWKi/Bji9dDGzT4ZcghpGYcEkCNdA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     bluebird "^3.5.0"
@@ -5701,10 +5706,10 @@ gatsby-react-router-scroll@^2.0.1:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-source-contentful@^2.0.13:
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-2.0.13.tgz#1c7ae892a47ccff33b892f880e6e64a8bd35dff7"
-  integrity sha512-dlPfnA3lcsTHHXZs2+BBT6wVRbb3iV7517wOCvbcmcZxnfR6Qd6Ib9CVtAE6AaYt2VXT5HTvENP8cW5VviypFA==
+gatsby-source-contentful@^2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-2.0.14.tgz#1883a7bfe23ec208267f67ff9d33a65232d1ad20"
+  integrity sha512-OCeiYwnWYpxVhs7IH0vNHwZ+Wul1gRtYI7o0NU7qrSHgm2LuDKQZdpK5uRft6uTgqfXJitGvo+WkqgokuS2LxQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     axios "^0.18.0"
@@ -5719,10 +5724,10 @@ gatsby-source-contentful@^2.0.13:
     lodash "^4.17.10"
     qs "^6.4.0"
 
-gatsby@^2.0.42:
-  version "2.0.42"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.42.tgz#6673fe5d04b7fae56ae08e109627d53de54aab9a"
-  integrity sha512-oXQE2659oOv/ekKGBQNgJXeoDFU1XRZcoX4fvn4o2C5ga5t0hIowaLVwgb7tADcSfE0RKdEZK67pJUkP4LlZzw==
+gatsby@^2.0.46:
+  version "2.0.46"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.46.tgz#08ebdf0669e07d1d79d7e0bc2566e885c273dab2"
+  integrity sha512-3emLDJ6B94TQtbC4ftyaec6ip5ffulpi0D+x3iXYuyFrKLnwngeXWrufC8keXOb4zNilFAG21zoTjBSkNCzgJw==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -11533,12 +11538,13 @@ style-loader@^0.21.0:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
-styled-components@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.0.3.tgz#6c1a95a93857aa613fdfc26ad40899217100d8c3"
-  integrity sha512-oEZovK4xMGAMhOA9h74dCYJsp3IwUFhEvtYe4gwTy0cBZ3a17YMxBfM2oXsEoED9f+HCM5UQZW2h297n4u8hUw==
+styled-components@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.1.0.tgz#16f5cbe1afcc8adc932e9764992c19906e6a6289"
+  integrity sha512-cxdVoxXDFu0D343ECr2ZY4YijI2oKk3xZKxZkgTLfFf7Zixx17CZlNIU2XpBYL/8OUKZv3AkDAOH8oaqrPJdBA==
   dependencies:
     "@emotion/is-prop-valid" "^0.6.8"
+    "@emotion/unitless" "^0.7.0"
     babel-plugin-styled-components ">= 1"
     css-to-react-native "^2.2.2"
     memoize-one "^4.0.0"
