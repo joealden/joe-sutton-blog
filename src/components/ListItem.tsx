@@ -1,4 +1,5 @@
 import React from "react";
+import Img from "gatsby-image";
 import styled from "../utils/styled-components";
 
 import Arrow from "../components/icons/Arrow";
@@ -11,6 +12,9 @@ interface ListItemProps {
   catagory: string;
   link: string;
   id: string;
+  image: {
+    fluid: Object;
+  };
 }
 
 export const ListItem: React.SFC<ListItemProps> = ({
@@ -20,7 +24,8 @@ export const ListItem: React.SFC<ListItemProps> = ({
   title,
   catagory,
   link,
-  id
+  id,
+  image
 }) => (
   <StyledLi
     className={className}
@@ -48,7 +53,11 @@ export const ListItem: React.SFC<ListItemProps> = ({
           <span>{catagory}</span>
         </CatagoryContainer>
       </NameAndCatagoryContainer>
-      <ImageContainer />
+      <ImageContainer>
+        <ImageWrapper>
+          <Img fluid={image.fluid} />
+        </ImageWrapper>
+      </ImageContainer>
     </a>
   </StyledLi>
 );
@@ -153,8 +162,19 @@ const CatagoryContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  padding-left: 30px;
-  overflow: hidden;
+  position: relative;
+`;
+
+const ImageWrapper = styled.div`
+  padding: 0.55vw 30px 0 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity ${props => props.theme.transition},
+    visibility ${props => props.theme.transition};
 `;
 
 export const PaddingListItem: React.SFC = () => (

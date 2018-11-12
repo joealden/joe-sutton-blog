@@ -29,7 +29,7 @@ class List extends React.Component<ListProps, ListState> {
       <ListWrapper>
         <PaddingListItem />
         {posts.map(post => {
-          const { id, categories, link, title } = post;
+          const { id, categories, link, title, image } = post;
           const className = activeItemId === id ? "active-item" : "";
 
           return (
@@ -42,6 +42,7 @@ class List extends React.Component<ListProps, ListState> {
               id={id}
               link={link}
               title={title}
+              image={image}
             />
           );
         })}
@@ -62,7 +63,8 @@ const ListWrapper = styled.ul`
     & > a > div:nth-child(2) > div:nth-child(2),
     & > a > div:nth-child(1),
     & > a > div:nth-child(2) > div:first-child > span:last-child svg polygon,
-    & > a > div:nth-child(2) > div:last-child > span {
+    & > a > div:nth-child(2) > div:last-child > span,
+    & > a > div:nth-child(3) > div {
       opacity: 1;
       visibility: visible;
     }
