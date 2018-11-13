@@ -17,34 +17,30 @@ const Info: React.SFC<InfoProps> = ({ closeInfo, post }) => (
       </CloseButtonContainer>
       <DetailsContainer>
         <div>
-          <a href={post.link} rel="noreferrer noopener" target="_blank">
-            <div>{post.title}</div>
+          <InfoTitle>{post.title}</InfoTitle>
+          <InfoLink href={post.link} rel="noreferrer noopener" target="_blank">
             <Img fluid={post.image.fluid} />
-          </a>
-          <div>
-            <div>
-              <div>Added On</div>
+          </InfoLink>
+          <InfoItemContainer>
+            <InfoItem>
+              <div>Added on</div>
               <div>{post.createdAt}</div>
-            </div>
-            <div>
+            </InfoItem>
+            <InfoItem>
               <div>Category</div>
-              <div>{post.categories[0]}</div>
-            </div>
-            <div>
+              <div>{post.category}</div>
+            </InfoItem>
+            <InfoItem>
               {/**
                * Handle number of tags (ask jsutts
                * if every post will have a least one).
                */}
               <div>Tags</div>
               <div>
-                {post.tags.map(tag => (
-                  <>
-                    <span>{tag}</span>,
-                  </>
-                ))}
+                <span>Placeholder</span>
               </div>
-            </div>
-          </div>
+            </InfoItem>
+          </InfoItemContainer>
         </div>
       </DetailsContainer>
     </InnerContainer>
@@ -104,5 +100,30 @@ const DetailsContainer = styled.div`
 
   div {
     width: 100%;
+  }
+`;
+
+const InfoTitle = styled.div`
+  font-size: 30px;
+  margin-bottom: 25px;
+`;
+
+const InfoLink = styled.a`
+  color: ${props => props.theme.foregroundColor};
+  text-decoration: none;
+`;
+
+const InfoItemContainer = styled.div`
+  margin-top: 25px;
+`;
+
+const InfoItem = styled.div`
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  div:first-child {
+    margin-bottom: 2px;
+    color: #838383;
   }
 `;

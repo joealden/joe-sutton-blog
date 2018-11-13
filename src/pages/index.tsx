@@ -22,7 +22,7 @@ export const query = graphql`
           id
           title
           link
-          categories
+          category
           tags
           createdAt
           image {
@@ -50,7 +50,7 @@ export type Post = {
   id: string;
   title: string;
   link: string;
-  categories: Array<string>;
+  category: string;
   tags: Array<string>;
   createdAt: string;
   image: Image;

@@ -29,7 +29,7 @@ class List extends React.Component<ListProps, ListState> {
       <ListWrapper>
         <PaddingListItem />
         {posts.map(post => {
-          const { id, categories, link, title, image } = post;
+          const { id, category, link, title, image } = post;
           const className = activeItemId === id ? "active-item" : "";
 
           return (
@@ -38,7 +38,7 @@ class List extends React.Component<ListProps, ListState> {
               setCurrentlyActiveItem={this.setCurrentlyActiveItem}
               className={className}
               key={id}
-              catagory={categories[0]}
+              catagory={category}
               id={id}
               link={link}
               title={title}
