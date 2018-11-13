@@ -6,8 +6,8 @@ import Logo from "../components/icons/Logo";
 import BackToTop from "../components/icons/BackToTop";
 
 interface HeaderProps {
-  toggleTheme: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  toggleFilter: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  toggleTheme: () => void;
+  openFilter: () => void;
 }
 
 interface HeaderState {
@@ -45,7 +45,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   }
 
   render() {
-    const { toggleTheme, toggleFilter } = this.props;
+    const { toggleTheme, openFilter } = this.props;
     const { showBackToTopButton } = this.state;
 
     return (
@@ -54,7 +54,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           <Logo />
         </LogoWrapper>
         <FilterAndBackToTopWrapper>
-          <button onClick={toggleFilter}>Filter</button>
+          <button onClick={openFilter}>Filter</button>
           <button
             aria-label="Back To Top"
             className={showBackToTopButton ? "" : "hidden"}

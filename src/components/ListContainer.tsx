@@ -10,18 +10,18 @@ import sortPosts from "../utils/sortPosts";
 const memoizedSortPosts = memoize(sortPosts);
 
 interface ListContainerProps {
-  toggleInfo: () => void;
+  openInfo: (post: Post) => void;
   posts: Array<Post>;
   sortBy: FilterSortBy;
 }
 
 const ListContainer: React.SFC<ListContainerProps> = ({
-  toggleInfo,
+  openInfo,
   posts,
   sortBy
 }) => {
   const sortedPosts: Array<Post> = memoizedSortPosts(posts, sortBy);
-  return <List toggleInfo={toggleInfo} posts={sortedPosts} />;
+  return <List openInfo={openInfo} posts={sortedPosts} />;
 };
 
 export default ListContainer;

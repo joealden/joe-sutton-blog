@@ -6,7 +6,7 @@ import { Post } from "../pages/index";
 import { ListItem, PaddingListItem } from "./ListItem";
 
 interface ListProps {
-  toggleInfo: () => void;
+  openInfo: (post: Post) => void;
   posts: Array<Post>;
 }
 
@@ -22,7 +22,7 @@ class List extends React.Component<ListProps, ListState> {
   setCurrentlyActiveItem = (id: string) => this.setState({ activeItemId: id });
 
   render() {
-    const { toggleInfo, posts } = this.props;
+    const { openInfo, posts } = this.props;
     const { activeItemId } = this.state;
 
     return (
@@ -34,7 +34,7 @@ class List extends React.Component<ListProps, ListState> {
 
           return (
             <ListItem
-              toggleInfo={toggleInfo}
+              openInfo={() => openInfo(post)}
               setCurrentlyActiveItem={this.setCurrentlyActiveItem}
               className={className}
               key={id}

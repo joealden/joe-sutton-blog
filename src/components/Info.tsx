@@ -1,28 +1,55 @@
 import React from "react";
 import styled from "../utils/styled-components";
+import Img from "gatsby-image";
+
+import { Post } from "../pages/index";
 
 interface InfoProps {
-  toggleInfo: () => void;
+  closeInfo: () => void;
+  post: Post;
 }
 
-class Info extends React.Component<InfoProps> {
-  render() {
-    const { toggleInfo } = this.props;
-
-    return (
-      <InfoContainer>
-        <InnerContainer>
-          <CloseButtonContainer>
-            <button onClick={toggleInfo}>Close</button>
-          </CloseButtonContainer>
-          <DetailsContainer>
-            <p>testing</p>
-          </DetailsContainer>
-        </InnerContainer>
-      </InfoContainer>
-    );
-  }
-}
+const Info: React.SFC<InfoProps> = ({ closeInfo, post }) => (
+  <InfoContainer>
+    <InnerContainer>
+      <CloseButtonContainer>
+        <button onClick={closeInfo}>Close</button>
+      </CloseButtonContainer>
+      <DetailsContainer>
+        <div>
+          <a href={post.link} rel="noreferrer noopener" target="_blank">
+            <div>{post.title}</div>
+            <Img fluid={post.image.fluid} />
+          </a>
+          <div>
+            <div>
+              <div>Added On</div>
+              <div>{post.createdAt}</div>
+            </div>
+            <div>
+              <div>Category</div>
+              <div>{post.categories[0]}</div>
+            </div>
+            <div>
+              {/**
+               * Handle number of tags (ask jsutts
+               * if every post will have a least one).
+               */}
+              <div>Tags</div>
+              <div>
+                {post.tags.map(tag => (
+                  <>
+                    <span>{tag}</span>,
+                  </>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </DetailsContainer>
+    </InnerContainer>
+  </InfoContainer>
+);
 
 export default Info;
 
@@ -70,12 +97,12 @@ const CloseButtonContainer = styled.div`
 
 const DetailsContainer = styled.div`
   flex: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 30px;
 
-  p {
-    margin: 0;
+  div {
+    width: 100%;
   }
 `;

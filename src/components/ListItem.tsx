@@ -7,7 +7,7 @@ import { Image } from "../pages/index";
 import Arrow from "../components/icons/Arrow";
 
 interface ListItemProps {
-  toggleInfo: () => void;
+  openInfo: () => void;
   setCurrentlyActiveItem: (id: string) => void;
   className: string;
   title: string;
@@ -18,7 +18,7 @@ interface ListItemProps {
 }
 
 export const ListItem: React.SFC<ListItemProps> = ({
-  toggleInfo,
+  openInfo,
   setCurrentlyActiveItem,
   className,
   title,
@@ -36,7 +36,7 @@ export const ListItem: React.SFC<ListItemProps> = ({
         <span
           onClick={event => {
             event.preventDefault();
-            toggleInfo();
+            openInfo();
           }}
         >
           Info
