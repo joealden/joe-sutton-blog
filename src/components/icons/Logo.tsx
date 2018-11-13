@@ -12,7 +12,7 @@ export default Logo;
 
 const StyledSVG = styled.svg`
   display: block;
-  width: 30px;
+  width: 25px;
 
   polygon {
     fill: ${props => props.theme.foregroundColor};
