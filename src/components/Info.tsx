@@ -106,6 +106,10 @@ const DetailsContainer = styled.div`
 const InfoTitle = styled.div`
   font-size: 30px;
   margin-bottom: 25px;
+
+  @media screen and (min-width: 2000px) {
+    margin-bottom: 30px;
+  }
 `;
 
 const InfoLink = styled.a`
@@ -115,11 +119,19 @@ const InfoLink = styled.a`
 
 const InfoItemContainer = styled.div`
   margin-top: 25px;
+
+  @media screen and (min-width: 2000px) {
+    margin-top: 30px;
+  }
 `;
 
 const InfoItem = styled.div`
   &:not(:last-child) {
     margin-bottom: 20px;
+
+    @media screen and (min-width: 2000px) {
+      margin-bottom: 25px;
+    }
   }
 
   div:first-child {
