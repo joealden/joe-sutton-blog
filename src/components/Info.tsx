@@ -104,7 +104,6 @@ const DetailsContainer = styled.div`
 `;
 
 const InfoTitle = styled.div`
-  font-size: 30px;
   margin-bottom: 25px;
 
   @media screen and (min-width: 2000px) {
