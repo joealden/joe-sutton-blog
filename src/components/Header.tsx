@@ -60,7 +60,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             className={showBackToTopButton ? "" : "hidden"}
             onClick={() =>
               window.scrollTo({
-                behavior: "smooth",
                 left: 0,
                 top: 0
               })
