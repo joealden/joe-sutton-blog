@@ -9,7 +9,7 @@ interface InfoProps {
   post: Post;
 }
 
-const Info: React.SFC<InfoProps> = ({ closeInfo, post }) => {
+const Info: React.FunctionComponent<InfoProps> = ({ closeInfo, post }) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
   const month = createdAt.getMonth();

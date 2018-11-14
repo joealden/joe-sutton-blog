@@ -17,7 +17,7 @@ interface ListItemProps {
   image: Image;
 }
 
-export const ListItem: React.SFC<ListItemProps> = ({
+export const ListItem: React.FunctionComponent<ListItemProps> = ({
   openInfo,
   setCurrentlyActiveItem,
   className,
@@ -177,7 +177,7 @@ const ImageWrapper = styled.div`
     visibility ${props => props.theme.transition};
 `;
 
-export const PaddingListItem: React.SFC = () => (
+export const PaddingListItem: React.FunctionComponent = () => (
   <EmptyStyledLi>
     <a>
       <InfoContainer />

@@ -7,7 +7,7 @@ interface IndexProps {
   data: ContentfulPosts;
 }
 
-const Index: React.SFC<IndexProps> = ({ data }) => {
+const Index: React.FunctionComponent<IndexProps> = ({ data }) => {
   const posts = data.allContentfulPost.edges.map(edge => edge.node);
   return <Listed posts={posts} />;
 };

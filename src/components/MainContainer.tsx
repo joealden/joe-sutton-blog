@@ -6,7 +6,7 @@ interface MainContainerProps {
   children: React.ReactNode;
 }
 
-const MainContainer: React.SFC<MainContainerProps> = ({
+const MainContainer: React.FunctionComponent<MainContainerProps> = ({
   infoOpen,
   children
 }) => (

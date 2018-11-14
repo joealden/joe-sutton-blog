@@ -7,7 +7,7 @@ interface OverlayProps {
   handleClick: () => void;
 }
 
-const Overlay: React.SFC<OverlayProps> = ({
+const Overlay: React.FunctionComponent<OverlayProps> = ({
   filterOpen,
   infoOpen,
   handleClick

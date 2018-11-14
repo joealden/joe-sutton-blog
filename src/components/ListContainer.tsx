@@ -15,7 +15,7 @@ interface ListContainerProps {
   sortBy: FilterSortBy;
 }
 
-const ListContainer: React.SFC<ListContainerProps> = ({
+const ListContainer: React.FunctionComponent<ListContainerProps> = ({
   openInfo,
   posts,
   sortBy

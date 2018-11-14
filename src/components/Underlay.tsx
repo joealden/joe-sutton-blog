@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "../utils/styled-components";
 
-const Underlay: React.SFC = () => (
+const Underlay: React.FunctionComponent = () => (
   <UnderlayWrapper>
     <div />
     <div />
