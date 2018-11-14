@@ -1,10 +1,10 @@
 export default interface ThemeInterface {
+  accentColor: string;
+  transition: string;
   backgroundColor: string;
   foregroundColor: string;
   listColor: string;
   lineColor: string;
-  accentColor: string;
-  transition: string;
 }
 
 const baseTheme = {
