@@ -152,7 +152,7 @@ const InfoLink = styled.a`
     &:after {
       content: "Visit";
       display: flex;
-      color: ${props => props.theme.accentColor};
+      color: white;
       align-items: center;
       justify-content: center;
       position: absolute;
@@ -164,7 +164,7 @@ const InfoLink = styled.a`
       visibility: hidden;
       transition: opacity ${props => props.theme.transition},
         visibility ${props => props.theme.transition};
-      background-color: ${props => props.theme.backgroundColorTranslucent};
+      background-color: rgba(0, 0, 0, 0.7);
     }
   }
 `;
