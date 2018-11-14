@@ -52,12 +52,12 @@ const Info: React.SFC<InfoProps> = ({ closeInfo, post }) => {
 
                     return [
                       ...acc,
-                      <>
+                      <React.Fragment key={currentTag}>
                         <Tag onClick={() => alert("Placeholder")}>
                           {currentTag}
                         </Tag>
                         {punctuation}
-                      </>
+                      </React.Fragment>
                     ];
                   }, [])}
                 </div>
@@ -127,11 +127,15 @@ const DetailsContainer = styled.div`
 `;
 
 const InfoTitle = styled.div`
-  font-size: 30px;
+  font-size: calc(20px * 1.5);
   margin-bottom: 25px;
 
-  @media screen and (min-width: 2000px) {
+  @media screen and (max-width: 2000px) {
     margin-bottom: 30px;
+    font-size: calc(18px * 1.5);
+  }
+  @media screen and (max-width: 1300px) {
+    font-size: calc(16px * 1.5);
   }
 `;
 
