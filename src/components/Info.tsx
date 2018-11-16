@@ -103,6 +103,7 @@ const CloseButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   height: 60px;
+  min-height: 60px;
   padding: 0 20px;
 
   button {
