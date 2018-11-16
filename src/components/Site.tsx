@@ -6,6 +6,7 @@ import { Post } from "../pages/index";
 import Filter from "./Filter";
 import MainContainer from "./MainContainer";
 import Info from "./Info";
+import About from "./About";
 import Underlay from "./Underlay";
 import Overlay from "./Overlay";
 import Header from "./Header";
@@ -38,6 +39,7 @@ interface SiteState {
     open: boolean;
     sortBy: FilterSortBy;
   };
+  aboutOpen: boolean;
 }
 
 class Site extends React.Component<SiteProps, SiteState> {
@@ -49,7 +51,8 @@ class Site extends React.Component<SiteProps, SiteState> {
     filter: {
       open: false,
       sortBy: FilterSortBy.NewestFirst
-    }
+    },
+    aboutOpen: false
   };
 
   /* ----------------- Info ----------------- */
@@ -88,16 +91,24 @@ class Site extends React.Component<SiteProps, SiteState> {
       }
     }));
 
+  /* ----------------- About ---------------- */
+
+  openAbout = () => this.setState({ aboutOpen: true });
+  closeAbout = () => this.setState({ aboutOpen: false });
+
   /* ------------ Other Handlers ------------ */
 
   handleOverlayClick = () => {
-    const { info, filter } = this.state;
+    const { info, filter, aboutOpen } = this.state;
 
     if (info.open) {
       this.closeInfo();
     }
     if (filter.open) {
       this.closeFilter();
+    }
+    if (aboutOpen) {
+      this.closeAbout();
     }
   };
 
@@ -112,9 +123,9 @@ class Site extends React.Component<SiteProps, SiteState> {
    */
 
   handleWheel = (event: React.WheelEvent<HTMLElement>) => {
-    const { info, filter } = this.state;
+    const { info, filter, aboutOpen } = this.state;
 
-    if (info.open || filter.open) {
+    if (info.open || filter.open || aboutOpen) {
       event.preventDefault();
     }
   };
@@ -124,26 +135,32 @@ class Site extends React.Component<SiteProps, SiteState> {
       openInfo,
       closeInfo,
       openFilter,
+      openAbout,
+      closeAbout,
       handleWheel,
       handleOverlayClick
     } = this;
 
     const { toggleTheme, posts } = this.props;
-    const { info, filter } = this.state;
+    const { info, filter, aboutOpen } = this.state;
 
     return (
       <SiteContainer onWheel={handleWheel}>
-        <Filter filterOpen={filter.open} />
+        <Filter open={filter.open} />
         <MainContainer infoOpen={info.open}>
           <Info closeInfo={closeInfo} post={info.post} />
+          <About isOpen={aboutOpen} close={closeAbout} />
           <HeaderAndListContainer>
             <Underlay />
             <Overlay
-              infoOpen={info.open}
-              filterOpen={filter.open}
+              visible={info.open || filter.open || aboutOpen}
               handleClick={handleOverlayClick}
             />
-            <Header toggleTheme={toggleTheme} openFilter={openFilter} />
+            <Header
+              toggleTheme={toggleTheme}
+              openFilter={openFilter}
+              openAbout={openAbout}
+            />
             <ListContainer
               openInfo={openInfo}
               posts={posts}

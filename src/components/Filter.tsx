@@ -2,18 +2,18 @@ import React from "react";
 import styled from "../utils/styled-components";
 
 interface FilterProps {
-  filterOpen: boolean;
+  open: boolean;
 }
 
 class Filter extends React.Component<FilterProps> {
   render() {
-    const { filterOpen } = this.props;
+    const { open } = this.props;
 
     return (
       <>
         <FilterContainer
           style={{
-            transform: filterOpen ? "translateY(0)" : "translateY(-100%)"
+            transform: open ? "translateY(0)" : "translateY(-100%)"
           }}
         >
           <p>test</p>

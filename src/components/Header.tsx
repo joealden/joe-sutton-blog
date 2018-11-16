@@ -8,6 +8,7 @@ import BackToTop from "../components/icons/BackToTop";
 interface HeaderProps {
   toggleTheme: () => void;
   openFilter: () => void;
+  openAbout: () => void;
 }
 
 interface HeaderState {
@@ -45,7 +46,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   }
 
   render() {
-    const { toggleTheme, openFilter } = this.props;
+    const { toggleTheme, openFilter, openAbout } = this.props;
     const { showBackToTopButton } = this.state;
 
     return (
@@ -70,7 +71,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           </button>
         </FilterAndBackToTopWrapper>
         <AboutAndThemeChangeWrapper>
-          <button>About</button>
+          <button onClick={openAbout}>About</button>
           <button aria-label="Toggle Theme" onClick={toggleTheme}>
             <Circle />
           </button>

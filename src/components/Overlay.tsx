@@ -2,20 +2,18 @@ import React from "react";
 import styled from "../utils/styled-components";
 
 interface OverlayProps {
-  infoOpen: boolean;
-  filterOpen: boolean;
+  visible: boolean;
   handleClick: () => void;
 }
 
 const Overlay: React.FunctionComponent<OverlayProps> = ({
-  filterOpen,
-  infoOpen,
+  visible,
   handleClick
 }) => (
   <OverlayWrapper
     style={{
-      visibility: infoOpen || filterOpen ? "visible" : "hidden",
-      opacity: infoOpen || filterOpen ? 0.5 : 0
+      visibility: visible ? "visible" : "hidden",
+      opacity: visible ? 0.5 : 0
     }}
     onClick={handleClick}
   />
