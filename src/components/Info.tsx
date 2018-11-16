@@ -77,14 +77,11 @@ const InfoContainer = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-
   z-index: 1000;
   width: var(--column-width);
   transform: translateX(calc(var(--column-width) * -1));
-
   background-color: ${props => props.theme.backgroundColor};
   border-right: 1px solid ${props => props.theme.lineColor};
-
   transition: background-color ${props => props.theme.transition},
     border ${props => props.theme.transition};
 `;
@@ -116,11 +113,16 @@ const CloseButtonContainer = styled.div`
 `;
 
 const DetailsContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0 30px;
+
+  /* Figure out a better way to align this */
+  margin-top: calc(12.91vw - calc(20px * 1.5));
+  @media screen and (max-width: 2000px) {
+    margin-top: calc(12.91vw - calc(18px * 1.5));
+  }
+  @media screen and (max-width: 1300px) {
+    margin-top: calc(12.91vw - calc(16px * 1.5));
+  }
 
   div {
     width: 100%;
