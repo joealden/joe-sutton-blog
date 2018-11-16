@@ -62,3 +62,7 @@ button {
   /* Think about a11y */
   outline: none;
 }
+
+a {
+  text-decoration: none;
+}

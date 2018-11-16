@@ -67,7 +67,6 @@ const StyledLi = styled.li`
     display: grid;
     grid-template-columns: 60px 3fr 1fr;
     cursor: pointer;
-    text-decoration: none;
     color: ${props => props.theme.foregroundColor};
     /* Think about a11y of this */
     outline: none;

@@ -141,7 +141,6 @@ const InfoTitle = styled.div`
 
 const InfoLink = styled.a`
   color: ${props => props.theme.foregroundColor};
-  text-decoration: none;
 
   div {
     position: relative;
