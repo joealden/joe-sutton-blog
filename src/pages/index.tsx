@@ -9,7 +9,11 @@ interface IndexProps {
 
 const Index: React.FunctionComponent<IndexProps> = ({ data }) => {
   const posts = data.allContentfulPost.edges.map(edge => edge.node);
-  return <Listed posts={posts} />;
+  return (
+    <React.StrictMode>
+      <Listed posts={posts} />
+    </React.StrictMode>
+  );
 };
 
 export default Index;
