@@ -148,10 +148,10 @@ class Site extends React.Component<SiteProps, SiteState> {
       <SiteContainer onWheel={handleWheel}>
         <Filter open={filter.open} />
         <MainContainer infoOpen={info.open}>
+          <Underlay />
           <Info closeInfo={closeInfo} post={info.post} />
           <About isOpen={aboutOpen} close={closeAbout} />
           <HeaderAndListContainer>
-            <Underlay />
             <Overlay
               visible={info.open || filter.open || aboutOpen}
               handleClick={handleOverlayClick}
@@ -183,4 +183,6 @@ const SiteContainer = styled.main`
 const HeaderAndListContainer = styled.div`
   position: relative;
   min-height: 100vh;
+  grid-column-start: 1;
+  grid-column-end: 4;
 `;

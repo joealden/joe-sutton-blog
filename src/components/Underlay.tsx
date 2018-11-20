@@ -23,7 +23,11 @@ const UnderlayWrapper = styled.div`
 
   div:nth-child(2) {
     border-left: 1px solid ${props => props.theme.lineColor};
-    border-right: 1px solid ${props => props.theme.lineColor};
+    transition: border-color ${props => props.theme.transition};
+  }
+
+  div:nth-child(3) {
+    border-left: 1px solid ${props => props.theme.lineColor};
     transition: border-color ${props => props.theme.transition};
   }
 `;

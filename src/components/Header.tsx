@@ -115,7 +115,6 @@ const commonFlexHeaderStyles = css`
 const FilterAndBackToTopWrapper = styled.div`
   ${commonFlexHeaderStyles};
   border-left: 1px solid ${props => props.theme.lineColor};
-  border-right: 1px solid ${props => props.theme.lineColor};
   transition: border-color ${props => props.theme.transition};
 
   button:last-child {
@@ -136,4 +135,6 @@ const FilterAndBackToTopWrapper = styled.div`
 
 const AboutAndThemeChangeWrapper = styled.div`
   ${commonFlexHeaderStyles};
+  border-left: 1px solid ${props => props.theme.lineColor};
+  transition: border-color ${props => props.theme.transition};
 `;

@@ -73,12 +73,13 @@ const Info: React.FunctionComponent<InfoProps> = ({ closeInfo, post }) => {
 export default Info;
 
 const InfoContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 1000;
   width: var(--column-width);
+
   transform: translateX(calc(var(--column-width) * -1));
   background-color: ${props => props.theme.backgroundColor};
   border-right: 1px solid ${props => props.theme.lineColor};

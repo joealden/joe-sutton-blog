@@ -74,20 +74,14 @@ const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
 export default About;
 
 const AboutContainer = styled.div`
+  grid-column-start: 3;
+  grid-column-end: 4;
+
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-
-  /**
-   * For some reason the column-width var is not exactly
-   * the same as 1fr in the main grid. Also, Chrome and
-   * Firefox calculate this value to be 1px different, so
-   * as it stands, in Firefox the About section is 1px
-   * narrower than it should be (as Chrome has the largest
-   * user base). Find a solution to this issue.
-   */
-  width: calc(var(--column-width) - 3px);
+  left: 0;
 
   border-left: 1px solid ${props => props.theme.lineColor};
   background-color: ${props => props.theme.backgroundColor};
