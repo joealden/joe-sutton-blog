@@ -18,7 +18,7 @@
   font-family: "SuisseIntl";
   src: url("../../static/SuisseIntl-Regular.woff2") format("woff2"),
     url("../../static/SuisseIntl-Regular.woff") format("woff");
-  font-display: optional;
+  font-display: swap;
 }
 
 /* All non-dynamic styles have been moved from GlobalStyles to here */
