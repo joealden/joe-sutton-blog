@@ -35,10 +35,12 @@ interface SiteState {
     open: boolean;
     post: Post;
   };
+
   filter: {
     open: boolean;
     sortBy: FilterSortBy;
   };
+
   aboutOpen: boolean;
 }
 
@@ -48,10 +50,12 @@ class Site extends React.Component<SiteProps, SiteState> {
       open: false,
       post: this.props.posts[0]
     },
+
     filter: {
       open: false,
       sortBy: FilterSortBy.NewestFirst
     },
+
     aboutOpen: false
   };
 
@@ -88,6 +92,14 @@ class Site extends React.Component<SiteProps, SiteState> {
       filter: {
         ...prevState.filter,
         open: false
+      }
+    }));
+
+  setFilterSortBy = (sortBy: FilterSortBy) =>
+    this.setState(prevState => ({
+      filter: {
+        ...prevState.filter,
+        sortBy
       }
     }));
 
@@ -135,6 +147,8 @@ class Site extends React.Component<SiteProps, SiteState> {
       openInfo,
       closeInfo,
       openFilter,
+      closeFilter,
+      setFilterSortBy,
       openAbout,
       closeAbout,
       handleWheel,
@@ -146,7 +160,12 @@ class Site extends React.Component<SiteProps, SiteState> {
 
     return (
       <SiteContainer onWheel={handleWheel}>
-        <Filter open={filter.open} />
+        <Filter
+          isOpen={filter.open}
+          close={closeFilter}
+          sortBy={filter.sortBy}
+          setSortBy={setFilterSortBy}
+        />
         <MainContainer infoOpen={info.open}>
           <Underlay />
           <Info closeInfo={closeInfo} post={info.post} />

@@ -21,7 +21,7 @@ const ListContainer: React.FunctionComponent<ListContainerProps> = ({
   sortBy
 }) => {
   const sortedPosts: Array<Post> = memoizedSortPosts(posts, sortBy);
-  return <List openInfo={openInfo} posts={sortedPosts} />;
+  return <List openInfo={openInfo} posts={sortedPosts} sortBy={sortBy} />;
 };
 
 export default ListContainer;

@@ -2,12 +2,14 @@ import React from "react";
 import styled from "../utils/styled-components";
 
 import { Post } from "../pages/index";
+import { FilterSortBy } from "./Site";
 
 import { ListItem, PaddingListItem } from "./ListItem";
 
 interface ListProps {
   openInfo: (post: Post) => void;
   posts: Array<Post>;
+  sortBy: FilterSortBy;
 }
 
 interface ListState {
@@ -20,6 +22,21 @@ class List extends React.Component<ListProps, ListState> {
   };
 
   setCurrentlyActiveItem = (id: string) => this.setState({ activeItemId: id });
+
+  /**
+   * This is needed so that if the user changes the sortBy option in
+   * the filter dropdown, the currentlyActiveItem (the list item that
+   * is highlighted, has the link arrow and has its preview image showing)
+   * is set to the top most item of that new sortBy choice. If this was
+   * not in place, the currentlyActiveItem would stay the say as it was
+   * before the sortBy option was changed even if the item moved in the
+   * list. This was not the desired behaviour.
+   */
+  componentDidUpdate(prevProps: ListProps) {
+    if (this.props.sortBy !== prevProps.sortBy) {
+      this.setCurrentlyActiveItem(this.props.posts[0].id);
+    }
+  }
 
   render() {
     const { openInfo, posts } = this.props;

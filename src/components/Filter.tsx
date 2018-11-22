@@ -1,22 +1,96 @@
 import React from "react";
 import styled from "../utils/styled-components";
 
+import { FilterSortBy } from "./Site";
+
+import ActiveSortIndicator from "./ActiveSortIndicator";
+
 interface FilterProps {
-  open: boolean;
+  isOpen: boolean;
+  close: () => void;
+  sortBy: FilterSortBy;
+  setSortBy: (sortBy: FilterSortBy) => void;
 }
 
 class Filter extends React.Component<FilterProps> {
   render() {
-    const { open } = this.props;
+    const { isOpen, close, sortBy, setSortBy } = this.props;
+
+    const setSortByIfNotCurrent = (nextSortBy: FilterSortBy) => {
+      if (sortBy !== nextSortBy) setSortBy(nextSortBy);
+    };
 
     return (
       <>
         <FilterContainer
           style={{
-            transform: open ? "translateY(0)" : "translateY(-100%)"
+            transform: isOpen ? "translateY(0)" : "translateY(-100%)"
           }}
         >
-          <p>test</p>
+          <InnerFilter>
+            <SortBy>
+              <h3>Sort By</h3>
+              <ul>
+                <li
+                  onClick={() =>
+                    setSortByIfNotCurrent(FilterSortBy.NewestFirst)
+                  }
+                >
+                  <span>Newest - Oldest</span>
+                  <ActiveSortIndicator
+                    active={sortBy === FilterSortBy.NewestFirst}
+                  />
+                </li>
+                <li
+                  onClick={() =>
+                    setSortByIfNotCurrent(FilterSortBy.OldestFirst)
+                  }
+                >
+                  <span>Oldest - Newest</span>
+                  <ActiveSortIndicator
+                    active={sortBy === FilterSortBy.OldestFirst}
+                  />
+                </li>
+                <li
+                  onClick={() => {
+                    if (sortBy === FilterSortBy.Random1) {
+                      setSortBy(FilterSortBy.Random2);
+                    } else {
+                      setSortBy(FilterSortBy.Random1);
+                    }
+                  }}
+                >
+                  <span>Random</span>
+                  <ActiveSortIndicator
+                    active={
+                      sortBy === FilterSortBy.Random1 ||
+                      sortBy === FilterSortBy.Random2
+                    }
+                  />
+                </li>
+                <li onClick={() => setSortByIfNotCurrent(FilterSortBy.AToZ)}>
+                  <span>A - Z</span>
+                  <ActiveSortIndicator active={sortBy === FilterSortBy.AToZ} />
+                </li>
+                <li onClick={() => setSortByIfNotCurrent(FilterSortBy.ZToA)}>
+                  <span>Z - A</span>
+                  <ActiveSortIndicator active={sortBy === FilterSortBy.ZToA} />
+                </li>
+              </ul>
+            </SortBy>
+            <Categories>
+              <h3>Categories</h3>
+            </Categories>
+            <SearchTags>
+              <h3>Search Tags</h3>
+            </SearchTags>
+            <FilterTitle>
+              <h2>Filter</h2>
+            </FilterTitle>
+          </InnerFilter>
+          <CloseButtonContainer>
+            <button onClick={close}>Close</button>
+          </CloseButtonContainer>
         </FilterContainer>
         <FilterCover />
       </>
@@ -26,20 +100,109 @@ class Filter extends React.Component<FilterProps> {
 
 export default Filter;
 
-const FilterHeight = "500px";
-
 const FilterContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: ${FilterHeight};
   z-index: 10000;
   background-color: ${props => props.theme.accentColor};
   color: #060606;
   transition: transform ${props => props.theme.transition};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 85px 0 25px 0;
+`;
 
-  padding: 90px;
+const InnerFilter = styled.div`
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr 1fr;
+  grid-template-areas: "logo sort-by categories search-tags filter-title";
+
+  > div {
+    margin: 0 30px;
+  }
+
+  h3 {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin: 0 0 15px 0;
+
+    &:after {
+      content: "";
+      display: block;
+      margin-top: 15px;
+      height: 1px;
+      width: 100%;
+      background-color: #060606;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        padding: 1px 0;
+        transition: opacity ${props => props.theme.transition};
+        user-select: none;
+      }
+
+      &:hover {
+        span {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+`;
+
+const CloseButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+
+  button {
+    color: #060606;
+    transition: opacity ${props => props.theme.transition};
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+`;
+
+const SortBy = styled.div`
+  grid-area: sort-by;
+`;
+
+const Categories = styled.div`
+  grid-area: categories;
+`;
+
+const SearchTags = styled.div`
+  grid-area: search-tags;
+`;
+
+const FilterTitle = styled.div`
+  grid-area: filter-title;
+  writing-mode: vertical-rl;
+
+  h2 {
+    font-weight: normal;
+    font-size: 5vw;
+    margin: 0 60px 0 0;
+    line-height: 80%;
+    user-select: none;
+  }
 `;
 
 /**
@@ -55,7 +218,10 @@ const FilterCover = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: ${FilterHeight};
+
+  /* Work out what this actually needs to be */
+  height: 500px;
+
   z-index: 10001;
   background-color: ${props => props.theme.backgroundColor};
   transition: background-color ${props => props.theme.transition};
