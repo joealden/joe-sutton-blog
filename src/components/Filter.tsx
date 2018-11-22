@@ -176,6 +176,7 @@ const CloseButtonContainer = styled.div`
 
     &:hover {
       opacity: 0.5;
+      color: #060606;
     }
   }
 `;
