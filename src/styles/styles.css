@@ -18,6 +18,7 @@
   font-family: "SuisseIntl";
   src: url("../../static/SuisseIntl-Regular.woff2") format("woff2"),
     url("../../static/SuisseIntl-Regular.woff") format("woff");
+  font-display: optional;
 }
 
 /* All non-dynamic styles have been moved from GlobalStyles to here */
@@ -29,7 +30,7 @@
 }
 
 html {
-  font-family: "SuisseIntl";
+  font-family: "SuisseIntl", Arial, Helvetica, sans-serif;
   font-size: 20px;
 }
 
