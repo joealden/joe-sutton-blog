@@ -46,10 +46,12 @@ const SiteWrapper = styled.div`
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background-color: ${props => props.theme.backgroundColor};
     z-index: 1000;
 
     height: 60px;
+    min-height: 60px;
     /* 8px on right because button has 10px padding */
     margin: 0 10px 0 20px;
     display: grid;

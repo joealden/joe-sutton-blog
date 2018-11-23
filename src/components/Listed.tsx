@@ -5,10 +5,9 @@ import ThemeInterface, { darkTheme, lightTheme } from "../utils/theme";
 
 import { Post } from "../pages/index";
 
+import DesktopSite from "./desktop/Site";
+import MobileSite from "./mobile/Site";
 import GlobalStyles from "./GlobalStyles";
-
-const DesktopSite = React.lazy(() => import("./desktop/Site"));
-const MobileSite = React.lazy(() => import("./mobile/Site"));
 
 interface ListedProps {
   posts: Array<Post>;
