@@ -92,6 +92,8 @@ const SiteWrapper = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 12px 20px;
+      cursor: pointer;
+      user-select: none;
 
       span:first-child {
         font-size: 7vw;
