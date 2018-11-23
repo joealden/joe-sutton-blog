@@ -4,6 +4,7 @@ import styled from "../../utils/styled-components";
 import { Post } from "../../pages/index";
 
 import Logo from "../icons/Logo";
+import Hamburger from "../icons/Hamburger";
 
 interface SiteProps {
   toggleTheme: () => void;
@@ -22,7 +23,9 @@ const Site: React.FunctionComponent<SiteProps> = ({ toggleTheme, posts }) => (
         </button>
       </div>
       <div>
-        <button>---</button>
+        <button>
+          <Hamburger />
+        </button>
       </div>
     </header>
     <ul>
@@ -101,8 +104,11 @@ const SiteWrapper = styled.div`
         line-height: 70%;
         display: flex;
         align-items: flex-end;
-        font-size: 14px;
+        font-size: 12px;
 
+        @media screen and (min-width: 350px) {
+          font-size: 14px;
+        }
         @media screen and (min-width: 550px) {
           font-size: 16px;
         }
