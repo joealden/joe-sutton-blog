@@ -1,9 +1,9 @@
 import React from "react";
-import styled, { css } from "../utils/styled-components";
+import styled, { css } from "../../utils/styled-components";
 
-import Circle from "../components/icons/Circle";
-import Logo from "../components/icons/Logo";
-import BackToTop from "../components/icons/BackToTop";
+import Circle from "../icons/Circle";
+import Logo from "../icons/Logo";
+import BackToTop from "../icons/BackToTop";
 
 interface HeaderProps {
   toggleTheme: () => void;

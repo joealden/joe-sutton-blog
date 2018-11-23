@@ -2,7 +2,7 @@
 import shuffle from "lodash.shuffle";
 
 import { Post } from "../pages/index";
-import { FilterSortBy } from "../components/Site";
+import { FilterSortBy } from "../components/desktop/Site";
 
 const sortPosts = (posts: Array<Post>, sortBy: FilterSortBy) => {
   switch (sortBy) {

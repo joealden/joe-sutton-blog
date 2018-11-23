@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "../utils/styled-components";
+import styled from "../../utils/styled-components";
 
-import { Post } from "../pages/index";
+import { Post } from "../../pages/index";
 
 import Filter from "./Filter";
 import MainContainer from "./MainContainer";

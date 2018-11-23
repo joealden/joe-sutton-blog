@@ -1,11 +1,11 @@
 import React from "react";
 import memoize from "memoize-one";
 
-import { Post } from "../pages/index";
+import { Post } from "../../pages/index";
 import { FilterSortBy } from "./Site";
 
 import List from "./List";
-import sortPosts from "../utils/sortPosts";
+import sortPosts from "../../utils/sortPosts";
 
 const memoizedSortPosts = memoize(sortPosts);
 

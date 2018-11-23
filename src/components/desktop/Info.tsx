@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "../utils/styled-components";
+import styled from "../../utils/styled-components";
 import Img from "gatsby-image";
 
-import { Post } from "../pages/index";
+import { Post } from "../../pages/index";
 
 interface InfoProps {
   closeInfo: () => void;

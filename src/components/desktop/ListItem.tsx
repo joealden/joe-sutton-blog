@@ -1,10 +1,10 @@
 import React from "react";
 import Img from "gatsby-image";
-import styled from "../utils/styled-components";
+import styled from "../../utils/styled-components";
 
-import { Image } from "../pages/index";
+import { Image } from "../../pages/index";
 
-import Arrow from "../components/icons/Arrow";
+import Arrow from "../icons/Arrow";
 
 interface ListItemProps {
   openInfo: () => void;
