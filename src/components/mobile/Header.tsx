@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "../../utils/styled-components";
 
+import BackToTop from "../icons/BackToTop";
 import Logo from "../icons/Logo";
 import Hamburger from "../icons/Hamburger";
 
@@ -10,11 +11,13 @@ interface HeaderProps {
 
 interface HeaderState {
   menuOpen: boolean;
+  showBackToTopButton: boolean;
 }
 
 class Header extends React.Component<HeaderProps, HeaderState> {
   state = {
-    menuOpen: false
+    menuOpen: false,
+    showBackToTopButton: false
   };
 
   toggleMenu = () => {
@@ -27,19 +30,74 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
   };
 
+  /** -------------------------------------------------------------------- /
+   * TODO:
+   * This code is duplicated from the desktop Header component.
+   * Extract this functionality out into its own file.
+   */
+
+  shouldBackToTopButtonBeShown = () => {
+    const { showBackToTopButton } = this.state;
+
+    if (window.pageYOffset > 100) {
+      if (showBackToTopButton === false) {
+        this.setState({ showBackToTopButton: true });
+      }
+    } else {
+      if (showBackToTopButton === true) {
+        this.setState({ showBackToTopButton: false });
+      }
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.shouldBackToTopButtonBeShown, {
+      passive: true
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.shouldBackToTopButtonBeShown);
+  }
+
+  /* -------------------------------------------------------------------- */
+
   render() {
     const { toggleTheme } = this.props;
-    const { menuOpen } = this.state;
+    const { menuOpen, showBackToTopButton } = this.state;
     const { toggleMenu } = this;
 
     return (
-      <HeaderWrapper>
+      <HeaderWrapper
+        style={{
+          padding: showBackToTopButton ? "0 10px 0 10px" : "0 10px 0 20px"
+        }}
+      >
         <InnerHeaderWrapper>
           <LogoWrapper>
-            <Logo />
+            {showBackToTopButton ? (
+              <button
+                aria-label="Back To Top"
+                onClick={() =>
+                  window.scrollTo({
+                    left: 0,
+                    top: 0,
+                    behavior: "smooth"
+                  })
+                }
+              >
+                <BackToTop />
+              </button>
+            ) : (
+              <Logo />
+            )}
           </LogoWrapper>
           <FilterButtonWrapper>
-            <button>
+            <button
+              style={{
+                marginLeft: showBackToTopButton ? "10px" : "0"
+              }}
+            >
               <span>Filter</span>
             </button>
           </FilterButtonWrapper>
@@ -68,7 +126,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
 export default Header;
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper: any = styled("header")`
   position: fixed;
   top: 0;
   left: 0;
@@ -79,9 +137,6 @@ const HeaderWrapper = styled.header`
   z-index: 1000;
 
   transition: background-color ${props => props.theme.transition};
-
-  /* 8px on right because button has 10px padding */
-  padding: 0 10px 0 20px;
 `;
 
 const InnerHeaderWrapper = styled.div`
