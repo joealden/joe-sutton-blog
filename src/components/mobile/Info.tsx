@@ -48,7 +48,7 @@ const Info: React.FunctionComponent<InfoProps> = ({ isOpen, close, post }) => {
               <span>Visit</span>
             </div>
           </div>
-          <Img fluid={post.image.fluid} />
+          <Img alt={post.title} fluid={post.image.fluid} />
         </InfoLink>
 
         <InfoItemContainer>
