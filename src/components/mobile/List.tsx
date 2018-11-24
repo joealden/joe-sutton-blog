@@ -3,20 +3,51 @@ import styled from "../../utils/styled-components";
 
 import { Post } from "../../pages/index";
 
+import Info from "./Info";
+
 interface ListProps {
   posts: Array<Post>;
 }
 
-const List: React.FunctionComponent<ListProps> = ({ posts }) => (
-  <ListWrapper>
-    {posts.map(post => (
-      <li key={post.id} onClick={() => alert("test")}>
-        <span>{post.title}</span>
-        <span>{post.category}</span>
-      </li>
-    ))}
-  </ListWrapper>
-);
+interface ListState {
+  infoOpen: boolean;
+  infoPost: Post;
+}
+
+class List extends React.Component<ListProps, ListState> {
+  state = {
+    infoOpen: false,
+    infoPost: this.props.posts[0]
+  };
+
+  openInfo = (post: Post) =>
+    this.setState({
+      infoOpen: true,
+      infoPost: post
+    });
+
+  closeInfo = () => this.setState({ infoOpen: false });
+
+  render() {
+    const { posts } = this.props;
+    const { infoOpen, infoPost } = this.state;
+    const { openInfo, closeInfo } = this;
+
+    return (
+      <>
+        <ListWrapper>
+          {posts.map(post => (
+            <li key={post.id} onClick={() => openInfo(post)}>
+              <span>{post.title}</span>
+              <span>{post.category}</span>
+            </li>
+          ))}
+        </ListWrapper>
+        <Info isOpen={infoOpen} post={infoPost} close={closeInfo} />
+      </>
+    );
+  }
+}
 
 export default List;
 
