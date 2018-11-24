@@ -22,4 +22,8 @@ export default Site;
 
 const SiteWrapper = styled.div`
   font-size: 18px;
+
+  > * {
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
