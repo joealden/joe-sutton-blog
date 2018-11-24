@@ -41,9 +41,6 @@ class List extends React.Component<ListProps, ListState> {
             <li key={post.id} onClick={() => openInfo(post)}>
               <span>{post.title}</span>
               <span>{post.category}</span>
-              <span>
-                <Img alt={post.title} fluid={post.image.fluid} />
-              </span>
             </li>
           ))}
         </ListWrapper>
@@ -76,7 +73,7 @@ const ListWrapper = styled.ul`
       line-height: 70%;
     }
 
-    span:nth-child(2) {
+    span:last-child {
       opacity: 0.5;
       line-height: 70%;
       display: flex;
@@ -92,10 +89,6 @@ const ListWrapper = styled.ul`
       @media screen and (min-width: 700px) {
         font-size: 18px;
       }
-    }
-
-    span:last-child {
-      display: none;
     }
   }
 `;
