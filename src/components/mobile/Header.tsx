@@ -55,10 +55,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           }}
         >
           <div>
-            <button onClick={toggleTheme}>Switch Theme</button>
+            <button>About</button>
           </div>
           <div>
-            <button>About</button>
+            <button onClick={toggleTheme}>Switch Theme</button>
           </div>
         </Menu>
       </HeaderWrapper>
