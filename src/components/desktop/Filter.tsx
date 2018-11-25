@@ -3,7 +3,7 @@ import styled from "../../utils/styled-components";
 
 import { FilterSortBy } from "../../utils/types";
 
-import ActiveSortIndicator from "./ActiveSortIndicator";
+import SortByList from "../SortByList";
 
 interface FilterProps {
   isOpen: boolean;
@@ -16,10 +16,6 @@ class Filter extends React.Component<FilterProps> {
   render() {
     const { isOpen, close, sortBy, setSortBy } = this.props;
 
-    const setSortByIfNotCurrent = (nextSortBy: FilterSortBy) => {
-      if (sortBy !== nextSortBy) setSortBy(nextSortBy);
-    };
-
     return (
       <>
         <FilterContainer
@@ -29,54 +25,7 @@ class Filter extends React.Component<FilterProps> {
         >
           <InnerFilter>
             <SortBy>
-              <h3>Sort By</h3>
-              <ul>
-                <li
-                  onClick={() =>
-                    setSortByIfNotCurrent(FilterSortBy.NewestFirst)
-                  }
-                >
-                  <span>Newest - Oldest</span>
-                  <ActiveSortIndicator
-                    active={sortBy === FilterSortBy.NewestFirst}
-                  />
-                </li>
-                <li
-                  onClick={() =>
-                    setSortByIfNotCurrent(FilterSortBy.OldestFirst)
-                  }
-                >
-                  <span>Oldest - Newest</span>
-                  <ActiveSortIndicator
-                    active={sortBy === FilterSortBy.OldestFirst}
-                  />
-                </li>
-                <li
-                  onClick={() => {
-                    if (sortBy === FilterSortBy.Random1) {
-                      setSortBy(FilterSortBy.Random2);
-                    } else {
-                      setSortBy(FilterSortBy.Random1);
-                    }
-                  }}
-                >
-                  <span>Random</span>
-                  <ActiveSortIndicator
-                    active={
-                      sortBy === FilterSortBy.Random1 ||
-                      sortBy === FilterSortBy.Random2
-                    }
-                  />
-                </li>
-                <li onClick={() => setSortByIfNotCurrent(FilterSortBy.AToZ)}>
-                  <span>A - Z</span>
-                  <ActiveSortIndicator active={sortBy === FilterSortBy.AToZ} />
-                </li>
-                <li onClick={() => setSortByIfNotCurrent(FilterSortBy.ZToA)}>
-                  <span>Z - A</span>
-                  <ActiveSortIndicator active={sortBy === FilterSortBy.ZToA} />
-                </li>
-              </ul>
+              <SortByList sortBy={sortBy} setSortBy={setSortBy} />
             </SortBy>
             <Categories>
               <h3>Categories</h3>

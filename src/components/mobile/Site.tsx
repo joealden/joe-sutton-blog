@@ -45,9 +45,10 @@ const Site: React.FunctionComponent<SiteProps> = ({
       openAbout={openAbout}
     />
     <Filter
+      isOpen={filter.open}
       close={closeFilter}
-      setFilterSortBy={setFilterSortBy}
-      filter={filter}
+      sortBy={filter.sortBy}
+      setSortBy={setFilterSortBy}
     />
     <About isOpen={aboutOpen} close={closeAbout} />
     <List posts={posts} openInfo={openInfo} />

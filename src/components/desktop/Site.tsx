@@ -10,7 +10,7 @@ import About from "./About";
 import Underlay from "./Underlay";
 import Overlay from "./Overlay";
 import Header from "./Header";
-import ListContainer from "./ListContainer";
+import List from "./List";
 
 interface SiteProps {
   toggleTheme: () => void;
@@ -90,11 +90,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
             openFilter={openFilter}
             openAbout={openAbout}
           />
-          <ListContainer
-            openInfo={openInfo}
-            posts={posts}
-            sortBy={filter.sortBy}
-          />
+          <List openInfo={openInfo} posts={posts} sortBy={filter.sortBy} />
         </HeaderAndListContainer>
       </MainContainer>
     </SiteContainer>

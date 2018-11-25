@@ -1,4 +1,5 @@
 import React from "react";
+import memoize from "memoize-one";
 import MediaQuery from "react-responsive";
 
 import { Post, FilterSortBy, InfoType, FilterType } from "../utils/types";
@@ -6,6 +7,10 @@ import { Post, FilterSortBy, InfoType, FilterType } from "../utils/types";
 import MobileSite from "./mobile/Site";
 import DesktopSite from "./desktop/Site";
 import GlobalStyles from "./GlobalStyles";
+
+import sortPosts from "../utils/sortPosts";
+
+const memoizedSortPosts = memoize(sortPosts);
 
 interface SiteProps {
   toggleTheme: () => void;
@@ -96,12 +101,14 @@ class Site extends React.Component<SiteProps, SiteState> {
     const { toggleTheme, posts } = this.props;
     const { info, filter, aboutOpen } = this.state;
 
+    const sortedPosts: Array<Post> = memoizedSortPosts(posts, filter.sortBy);
+
     return (
       <>
         <MediaQuery maxWidth={1023}>
           <MobileSite
             toggleTheme={toggleTheme}
-            posts={posts}
+            posts={sortedPosts}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
@@ -117,7 +124,7 @@ class Site extends React.Component<SiteProps, SiteState> {
         <MediaQuery minWidth={1024}>
           <DesktopSite
             toggleTheme={toggleTheme}
-            posts={posts}
+            posts={sortedPosts}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
