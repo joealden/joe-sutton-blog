@@ -68,14 +68,15 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const { toggleMenu } = this;
 
     return (
-      <HeaderWrapper
-        style={{
-          padding: showBackToTopButton ? "0 10px 0 10px" : "0 10px 0 20px"
-        }}
-      >
+      <HeaderWrapper>
         <InnerHeaderWrapper>
           <LogoWrapper>
-            {showBackToTopButton ? (
+            <div
+              style={{
+                opacity: showBackToTopButton ? 1 : 0,
+                visibility: showBackToTopButton ? "visible" : "hidden"
+              }}
+            >
               <button
                 aria-label="Back To Top"
                 onClick={() =>
@@ -88,16 +89,19 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               >
                 <BackToTop />
               </button>
-            ) : (
-              <Logo />
-            )}
-          </LogoWrapper>
-          <FilterButtonWrapper>
-            <button
+            </div>
+
+            <div
               style={{
-                marginLeft: showBackToTopButton ? "10px" : "0"
+                opacity: showBackToTopButton ? 0 : 1,
+                visibility: showBackToTopButton ? "hidden" : "visible"
               }}
             >
+              <Logo />
+            </div>
+          </LogoWrapper>
+          <FilterButtonWrapper>
+            <button>
               <span>Filter</span>
             </button>
           </FilterButtonWrapper>
@@ -126,7 +130,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
 export default Header;
 
-const HeaderWrapper: any = styled("header")`
+const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;
@@ -135,7 +139,7 @@ const HeaderWrapper: any = styled("header")`
   min-height: 60px;
   background-color: ${props => props.theme.backgroundColor};
   z-index: 1000;
-
+  padding: 0 10px;
   transition: background-color ${props => props.theme.transition};
 `;
 
@@ -156,6 +160,16 @@ const commonInnerHeaderStyles = css`
 
 const LogoWrapper = styled.div`
   ${commonInnerHeaderStyles};
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "left-position";
+
+  > div {
+    grid-area: left-position;
+    transition: opacity ${props => props.theme.transition},
+      visibility ${props => props.theme.transition};
+  }
 `;
 
 const FilterButtonWrapper = styled.div`
