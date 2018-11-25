@@ -1,8 +1,7 @@
 import React from "react";
 import memoize from "memoize-one";
 
-import { Post } from "../../pages/index";
-import { FilterSortBy } from "./Site";
+import { Post, FilterSortBy } from "../../utils/types";
 
 import List from "./List";
 import sortPosts from "../../utils/sortPosts";

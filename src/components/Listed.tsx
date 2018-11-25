@@ -1,13 +1,10 @@
 import React from "react";
-import MediaQuery from "react-responsive";
 import { ThemeProvider } from "../utils/styled-components";
 import ThemeInterface, { darkTheme, lightTheme } from "../utils/theme";
 
-import { Post } from "../pages/index";
+import { Post } from "../utils/types";
 
-import DesktopSite from "./desktop/Site";
-import MobileSite from "./mobile/Site";
-import GlobalStyles from "./GlobalStyles";
+import Site from "./Site";
 
 interface ListedProps {
   posts: Array<Post>;
@@ -33,18 +30,11 @@ class Listed extends React.Component<ListedProps, ListedState> {
   render() {
     const { posts } = this.props;
     const { currentTheme } = this.state;
+    const { toggleTheme } = this;
 
     return (
       <ThemeProvider theme={currentTheme}>
-        <>
-          <MediaQuery maxWidth={1023}>
-            <MobileSite toggleTheme={this.toggleTheme} posts={posts} />
-          </MediaQuery>
-          <MediaQuery minWidth={1024}>
-            <DesktopSite toggleTheme={this.toggleTheme} posts={posts} />) }
-          </MediaQuery>
-          <GlobalStyles />
-        </>
+        <Site toggleTheme={toggleTheme} posts={posts} />
       </ThemeProvider>
     );
   }

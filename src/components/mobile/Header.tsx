@@ -7,6 +7,8 @@ import Hamburger from "../icons/Hamburger";
 
 interface HeaderProps {
   toggleTheme: () => void;
+  openFilter: () => void;
+  openAbout: () => void;
 }
 
 interface HeaderState {
@@ -29,12 +31,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       this.setState({ menuOpen: true });
     }
   };
-
-  /** -------------------------------------------------------------------- /
-   * TODO:
-   * This code is duplicated from the desktop Header component.
-   * Extract this functionality out into its own file.
-   */
 
   shouldBackToTopButtonBeShown = () => {
     const { showBackToTopButton } = this.state;
@@ -63,7 +59,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   /* -------------------------------------------------------------------- */
 
   render() {
-    const { toggleTheme } = this.props;
+    const { toggleTheme, openFilter, openAbout } = this.props;
+
     const { menuOpen, showBackToTopButton } = this.state;
     const { toggleMenu } = this;
 
@@ -101,7 +98,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             </div>
           </LogoWrapper>
           <FilterButtonWrapper>
-            <button>
+            <button onClick={openFilter}>
               <span>Filter</span>
             </button>
           </FilterButtonWrapper>
@@ -117,7 +114,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           }}
         >
           <div>
-            <button>About</button>
+            <button onClick={openAbout}>About</button>
           </div>
           <div>
             <button onClick={toggleTheme}>Switch Theme</button>

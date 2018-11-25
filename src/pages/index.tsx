@@ -1,7 +1,17 @@
 import React from "react";
 import { graphql } from "gatsby";
+
+import { Post } from "../utils/types";
 import Listed from "../components/Listed";
 import "../styles/styles.css";
+
+type ContentfulPosts = {
+  allContentfulPost: {
+    edges: Array<{
+      node: Post;
+    }>;
+  };
+};
 
 interface IndexProps {
   data: ContentfulPosts;
@@ -39,31 +49,3 @@ export const query = graphql`
     }
   }
 `;
-
-export type Image = {
-  fluid: {
-    base64: string;
-    aspectRatio: number;
-    src: string;
-    srcSet: string;
-    sizes: string;
-  };
-};
-
-export type Post = {
-  id: string;
-  title: string;
-  link: string;
-  category: string;
-  tags: Array<string>;
-  createdAt: string;
-  image: Image;
-};
-
-type ContentfulPosts = {
-  allContentfulPost: {
-    edges: Array<{
-      node: Post;
-    }>;
-  };
-};

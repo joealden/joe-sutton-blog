@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-import { FilterSortBy } from "./Site";
+import { FilterSortBy } from "../../utils/types";
 
 import ActiveSortIndicator from "./ActiveSortIndicator";
 

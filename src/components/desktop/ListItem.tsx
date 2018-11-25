@@ -2,7 +2,7 @@ import React from "react";
 import Img from "gatsby-image";
 import styled from "../../utils/styled-components";
 
-import { Image } from "../../pages/index";
+import { Image } from "../../utils/types";
 
 import Arrow from "../icons/Arrow";
 

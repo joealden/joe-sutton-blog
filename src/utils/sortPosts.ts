@@ -1,8 +1,7 @@
 /* TODO: Create own impl as this is 2.6k gzipped! */
 import shuffle from "lodash.shuffle";
 
-import { Post } from "../pages/index";
-import { FilterSortBy } from "../components/desktop/Site";
+import { Post, FilterSortBy } from "./types";
 
 const sortPosts = (posts: Array<Post>, sortBy: FilterSortBy) => {
   switch (sortBy) {

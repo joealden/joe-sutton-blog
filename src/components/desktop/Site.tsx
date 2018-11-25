@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-import { Post } from "../../pages/index";
+import { Post, FilterSortBy, InfoType, FilterType } from "../../utils/types";
 
 import Filter from "./Filter";
 import MainContainer from "./MainContainer";
@@ -12,115 +12,44 @@ import Overlay from "./Overlay";
 import Header from "./Header";
 import ListContainer from "./ListContainer";
 
-/**
- * Two random states needed so
- * that memoization triggers correctly.
- */
-export enum FilterSortBy {
-  NewestFirst,
-  OldestFirst,
-  AToZ,
-  ZToA,
-  Random1,
-  Random2
-}
-
 interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
-}
-
-interface SiteState {
-  info: {
-    open: boolean;
-    post: Post;
-  };
-
-  filter: {
-    open: boolean;
-    sortBy: FilterSortBy;
-  };
-
+  openInfo: (post: Post) => void;
+  closeInfo: () => void;
+  openFilter: () => void;
+  closeFilter: () => void;
+  setFilterSortBy: (sortBy: FilterSortBy) => void;
+  openAbout: () => void;
+  closeAbout: () => void;
+  info: InfoType;
+  filter: FilterType;
   aboutOpen: boolean;
 }
 
-class Site extends React.Component<SiteProps, SiteState> {
-  state = {
-    info: {
-      open: false,
-      post: this.props.posts[0]
-    },
-
-    filter: {
-      open: false,
-      sortBy: FilterSortBy.NewestFirst
-    },
-
-    aboutOpen: false
-  };
-
-  /* ----------------- Info ----------------- */
-
-  openInfo = (post: Post) =>
-    this.setState({
-      info: {
-        open: true,
-        post
-      }
-    });
-
-  closeInfo = () =>
-    this.setState(prevState => ({
-      info: {
-        ...prevState.info,
-        open: false
-      }
-    }));
-
-  /* ---------------- Filter ---------------- */
-
-  openFilter = () =>
-    this.setState(prevState => ({
-      filter: {
-        ...prevState.filter,
-        open: true
-      }
-    }));
-
-  closeFilter = () =>
-    this.setState(prevState => ({
-      filter: {
-        ...prevState.filter,
-        open: false
-      }
-    }));
-
-  setFilterSortBy = (sortBy: FilterSortBy) =>
-    this.setState(prevState => ({
-      filter: {
-        ...prevState.filter,
-        sortBy
-      }
-    }));
-
-  /* ----------------- About ---------------- */
-
-  openAbout = () => this.setState({ aboutOpen: true });
-  closeAbout = () => this.setState({ aboutOpen: false });
-
-  /* ------------ Other Handlers ------------ */
-
-  handleOverlayClick = () => {
-    const { info, filter, aboutOpen } = this.state;
-
+const Site: React.FunctionComponent<SiteProps> = ({
+  toggleTheme,
+  posts,
+  openInfo,
+  closeInfo,
+  openFilter,
+  closeFilter,
+  setFilterSortBy,
+  openAbout,
+  closeAbout,
+  info,
+  filter,
+  aboutOpen
+}) => {
+  const handleOverlayClick = () => {
     if (info.open) {
-      this.closeInfo();
+      closeInfo();
     }
     if (filter.open) {
-      this.closeFilter();
+      closeFilter();
     }
     if (aboutOpen) {
-      this.closeAbout();
+      closeAbout();
     }
   };
 
@@ -133,64 +62,44 @@ class Site extends React.Component<SiteProps, SiteState> {
    *
    * Find solutions to these problem scenarios.
    */
-
-  handleWheel = (event: React.WheelEvent<HTMLElement>) => {
-    const { info, filter, aboutOpen } = this.state;
-
+  const handleWheel = (event: React.WheelEvent<HTMLElement>) => {
     if (info.open || filter.open || aboutOpen) {
       event.preventDefault();
     }
   };
 
-  render() {
-    const {
-      openInfo,
-      closeInfo,
-      openFilter,
-      closeFilter,
-      setFilterSortBy,
-      openAbout,
-      closeAbout,
-      handleWheel,
-      handleOverlayClick
-    } = this;
-
-    const { toggleTheme, posts } = this.props;
-    const { info, filter, aboutOpen } = this.state;
-
-    return (
-      <SiteContainer onWheel={handleWheel}>
-        <Filter
-          isOpen={filter.open}
-          close={closeFilter}
-          sortBy={filter.sortBy}
-          setSortBy={setFilterSortBy}
-        />
-        <MainContainer infoOpen={info.open}>
-          <Underlay />
-          <Info closeInfo={closeInfo} post={info.post} />
-          <About isOpen={aboutOpen} close={closeAbout} />
-          <HeaderAndListContainer>
-            <Overlay
-              visible={info.open || filter.open || aboutOpen}
-              handleClick={handleOverlayClick}
-            />
-            <Header
-              toggleTheme={toggleTheme}
-              openFilter={openFilter}
-              openAbout={openAbout}
-            />
-            <ListContainer
-              openInfo={openInfo}
-              posts={posts}
-              sortBy={filter.sortBy}
-            />
-          </HeaderAndListContainer>
-        </MainContainer>
-      </SiteContainer>
-    );
-  }
-}
+  return (
+    <SiteContainer onWheel={handleWheel}>
+      <Filter
+        isOpen={filter.open}
+        close={closeFilter}
+        sortBy={filter.sortBy}
+        setSortBy={setFilterSortBy}
+      />
+      <MainContainer infoOpen={info.open}>
+        <Underlay />
+        <Info closeInfo={closeInfo} post={info.post} />
+        <About isOpen={aboutOpen} close={closeAbout} />
+        <HeaderAndListContainer>
+          <Overlay
+            visible={info.open || filter.open || aboutOpen}
+            handleClick={handleOverlayClick}
+          />
+          <Header
+            toggleTheme={toggleTheme}
+            openFilter={openFilter}
+            openAbout={openAbout}
+          />
+          <ListContainer
+            openInfo={openInfo}
+            posts={posts}
+            sortBy={filter.sortBy}
+          />
+        </HeaderAndListContainer>
+      </MainContainer>
+    </SiteContainer>
+  );
+};
 
 export default Site;
 

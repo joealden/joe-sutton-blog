@@ -2,56 +2,26 @@ import React from "react";
 import styled from "../../utils/styled-components";
 import Img from "gatsby-image";
 
-import { Post } from "../../pages/index";
-
-import Info from "./Info";
+import { Post } from "../../utils/types";
 
 interface ListProps {
   posts: Array<Post>;
+  openInfo: (post: Post) => void;
 }
 
-interface ListState {
-  infoOpen: boolean;
-  infoPost: Post;
-}
-
-class List extends React.Component<ListProps, ListState> {
-  state = {
-    infoOpen: false,
-    infoPost: this.props.posts[0]
-  };
-
-  openInfo = (post: Post) =>
-    this.setState({
-      infoOpen: true,
-      infoPost: post
-    });
-
-  closeInfo = () => this.setState({ infoOpen: false });
-
-  render() {
-    const { posts } = this.props;
-    const { infoOpen, infoPost } = this.state;
-    const { openInfo, closeInfo } = this;
-
-    return (
-      <>
-        <ListWrapper>
-          {posts.map(post => (
-            <li key={post.id} onClick={() => openInfo(post)}>
-              <span>{post.title}</span>
-              <span>{post.category}</span>
-              <span>
-                <Img alt={post.title} fluid={post.image.fluid} />
-              </span>
-            </li>
-          ))}
-        </ListWrapper>
-        <Info isOpen={infoOpen} post={infoPost} close={closeInfo} />
-      </>
-    );
-  }
-}
+const List: React.FunctionComponent<ListProps> = ({ posts, openInfo }) => (
+  <ListWrapper>
+    {posts.map(post => (
+      <li key={post.id} onClick={() => openInfo(post)}>
+        <span>{post.title}</span>
+        <span>{post.category}</span>
+        <span>
+          <Img alt={post.title} fluid={post.image.fluid} />
+        </span>
+      </li>
+    ))}
+  </ListWrapper>
+);
 
 export default List;
 

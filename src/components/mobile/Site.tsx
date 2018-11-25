@@ -1,20 +1,57 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-import { Post } from "../../pages/index";
+import { Post, FilterSortBy, InfoType, FilterType } from "../../utils/types";
 
 import Header from "./Header";
+import Filter from "./Filter";
+import About from "./About";
 import List from "./List";
+import Info from "./Info";
 
 interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
+  openInfo: (post: Post) => void;
+  closeInfo: () => void;
+  openFilter: () => void;
+  closeFilter: () => void;
+  setFilterSortBy: (sortBy: FilterSortBy) => void;
+  openAbout: () => void;
+  closeAbout: () => void;
+  info: InfoType;
+  filter: FilterType;
+  aboutOpen: boolean;
 }
 
-const Site: React.FunctionComponent<SiteProps> = ({ toggleTheme, posts }) => (
+const Site: React.FunctionComponent<SiteProps> = ({
+  toggleTheme,
+  posts,
+  openInfo,
+  closeInfo,
+  openFilter,
+  closeFilter,
+  setFilterSortBy,
+  openAbout,
+  closeAbout,
+  info,
+  filter,
+  aboutOpen
+}) => (
   <SiteWrapper>
-    <Header toggleTheme={toggleTheme} />
-    <List posts={posts} />
+    <Header
+      toggleTheme={toggleTheme}
+      openFilter={openFilter}
+      openAbout={openAbout}
+    />
+    <Filter
+      close={closeFilter}
+      setFilterSortBy={setFilterSortBy}
+      filter={filter}
+    />
+    <About isOpen={aboutOpen} close={closeAbout} />
+    <List posts={posts} openInfo={openInfo} />
+    <Info isOpen={info.open} post={info.post} close={closeInfo} />
   </SiteWrapper>
 );
 

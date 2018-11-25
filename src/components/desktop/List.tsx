@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-import { Post } from "../../pages/index";
-import { FilterSortBy } from "./Site";
+import { Post, FilterSortBy } from "../../utils/types";
 
 import { ListItem, PaddingListItem } from "./ListItem";
 
