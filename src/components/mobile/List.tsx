@@ -7,10 +7,19 @@ import { Post } from "../../utils/types";
 interface ListProps {
   posts: Array<Post>;
   openInfo: (post: Post) => void;
+  infoOpen: boolean;
 }
 
-const List: React.FunctionComponent<ListProps> = ({ posts, openInfo }) => (
-  <ListWrapper>
+const List: React.FunctionComponent<ListProps> = ({
+  posts,
+  openInfo,
+  infoOpen
+}) => (
+  <ListWrapper
+    style={{
+      transform: infoOpen ? "translateX(-100%)" : "translateX(0)"
+    }}
+  >
     {posts.map(post => (
       <li key={post.id} onClick={() => openInfo(post)}>
         <span>{post.title}</span>
@@ -30,6 +39,7 @@ const ListWrapper = styled.ul`
   padding: 0;
   /* 130px because header is 60px (60px + 70px) */
   margin: 130px 0 70px;
+  transition: transform ${props => props.theme.transition};
 
   li {
     display: flex;

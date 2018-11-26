@@ -29,8 +29,7 @@ const Info: React.FunctionComponent<InfoProps> = ({ isOpen, close, post }) => {
   return (
     <InfoWrapper
       style={{
-        visibility: isOpen ? "visible" : "hidden",
-        opacity: isOpen ? 1 : 0
+        transform: isOpen ? "translateX(0)" : "translateX(100%)"
       }}
     >
       <div>
@@ -92,13 +91,11 @@ const InfoWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   height: 100vh;
+  width: 100vw;
   background-color: ${props => props.theme.backgroundColor};
-  z-index: 100000;
-
-  transition: opacity ${props => props.theme.transition},
-    visibility ${props => props.theme.transition};
+  z-index: 10000;
+  transition: transform ${props => props.theme.transition};
 
   display: flex;
   flex-direction: column;

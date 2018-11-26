@@ -39,19 +39,20 @@ const Site: React.FunctionComponent<SiteProps> = ({
   aboutOpen
 }) => (
   <SiteWrapper>
-    <Header
-      toggleTheme={toggleTheme}
-      openFilter={openFilter}
-      openAbout={openAbout}
-    />
     <Filter
       isOpen={filter.open}
       close={closeFilter}
       sortBy={filter.sortBy}
       setSortBy={setFilterSortBy}
     />
+    <Header
+      toggleTheme={toggleTheme}
+      openFilter={openFilter}
+      openAbout={openAbout}
+      infoOpen={info.open}
+    />
     <About isOpen={aboutOpen} close={closeAbout} />
-    <List posts={posts} openInfo={openInfo} />
+    <List posts={posts} openInfo={openInfo} infoOpen={info.open} />
     <Info isOpen={info.open} post={info.post} close={closeInfo} />
   </SiteWrapper>
 );

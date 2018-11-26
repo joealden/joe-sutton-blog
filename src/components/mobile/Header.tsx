@@ -9,6 +9,7 @@ interface HeaderProps {
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
+  infoOpen: boolean;
 }
 
 interface HeaderState {
@@ -59,13 +60,17 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   /* -------------------------------------------------------------------- */
 
   render() {
-    const { toggleTheme, openFilter, openAbout } = this.props;
+    const { toggleTheme, openFilter, openAbout, infoOpen } = this.props;
 
     const { menuOpen, showBackToTopButton } = this.state;
     const { toggleMenu } = this;
 
     return (
-      <HeaderWrapper>
+      <HeaderWrapper
+        style={{
+          transform: infoOpen ? "translateX(-100%)" : "translateX(0)"
+        }}
+      >
         <InnerHeaderWrapper>
           <LogoWrapper>
             <div
@@ -137,7 +142,8 @@ const HeaderWrapper = styled.header`
   background-color: ${props => props.theme.backgroundColor};
   z-index: 1000;
   padding: 0 10px;
-  transition: background-color ${props => props.theme.transition};
+  transition: background-color ${props => props.theme.transition},
+    transform ${props => props.theme.transition};
 `;
 
 const InnerHeaderWrapper = styled.div`
