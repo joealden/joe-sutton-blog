@@ -17,9 +17,7 @@ interface IndexProps {
   data: ContentfulPosts;
 }
 
-const Index: React.FunctionComponent<IndexProps> = ({ data }, ...rest) => {
-  console.log(rest);
-
+const Index: React.FunctionComponent<IndexProps> = ({ data }) => {
   const posts = data.allContentfulPost.edges.map(edge => edge.node);
   return (
     <React.StrictMode>
