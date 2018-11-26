@@ -67,6 +67,7 @@ const FilterContents = styled.div`
   color: #060606;
   padding: 50px 20px 20px 20px;
   height: calc(100% - 60px);
+  max-height: calc(100% - 60px);
   overflow: auto;
 
   > div {
@@ -114,16 +115,10 @@ const FilterContents = styled.div`
 `;
 
 const BackToResultsButton = styled.button`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  min-height: 60px;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   height: 60px;
   width: 100%;
   background-color: #060606;
