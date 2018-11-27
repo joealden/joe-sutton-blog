@@ -4,15 +4,16 @@ import styled from "../../utils/styled-components";
 import { FilterSortBy } from "../../utils/types";
 
 import SortByList from "../SortByList";
+import CategoryList from "../CategoryList";
 
 interface FilterProps {
   isOpen: boolean;
   close: () => void;
   sortBy: FilterSortBy;
   setSortBy: (sortBy: FilterSortBy) => void;
-  allCategories: Array<string>;
-  selectedCategories: Array<string>;
-  setSelectedCategories: (selectedCategories: Array<string>) => void;
+  categories: Array<string>;
+  selectedCategory: string | null;
+  setSelectedCategory: (selectedCategory: string | null) => void;
 }
 
 const Filter: React.FunctionComponent<FilterProps> = ({
@@ -20,9 +21,9 @@ const Filter: React.FunctionComponent<FilterProps> = ({
   close,
   sortBy,
   setSortBy,
-  allCategories,
-  selectedCategories,
-  setSelectedCategories
+  categories,
+  selectedCategory,
+  setSelectedCategory
 }) => (
   <>
     <FilterContainer
@@ -35,7 +36,11 @@ const Filter: React.FunctionComponent<FilterProps> = ({
           <SortByList sortBy={sortBy} setSortBy={setSortBy} />
         </SortBy>
         <Categories>
-          <h3>Categories</h3>
+          <CategoryList
+            categories={categories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         </Categories>
         <SearchTags>
           <h3>Search Tags</h3>

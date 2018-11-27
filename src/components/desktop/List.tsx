@@ -9,31 +9,39 @@ interface ListProps {
   openInfo: (post: Post) => void;
   posts: Array<Post>;
   sortBy: FilterSortBy;
+  selectedCategory: string | null;
 }
 
 interface ListState {
-  activeItemId: string;
+  activeItemId: string | null;
 }
 
 class List extends React.Component<ListProps, ListState> {
   state = {
-    activeItemId: this.props.posts[0].id
+    activeItemId: this.props.posts[0] ? this.props.posts[0].id : null
   };
 
   setCurrentlyActiveItem = (id: string) => this.setState({ activeItemId: id });
 
   /**
-   * This is needed so that if the user changes the sortBy option in
-   * the filter dropdown, the currentlyActiveItem (the list item that
-   * is highlighted, has the link arrow and has its preview image showing)
-   * is set to the top most item of that new sortBy choice. If this was
-   * not in place, the currentlyActiveItem would stay the say as it was
-   * before the sortBy option was changed even if the item moved in the
-   * list. This was not the desired behaviour.
+   * This is needed so that if the user changes the sortBy or category option
+   * in the filter dropdown, the currentlyActiveItem (the list item that is
+   * highlighted, has the link arrow and has its preview image showing) is set
+   * to the top most item of that new sortBy choice. If this was not in place,
+   * the currentlyActiveItem would stay the say as it was before the sortBy
+   * option was changed even if the item moved in the list. This was not the
+   * desired behaviour.
    */
   componentDidUpdate(prevProps: ListProps) {
-    if (this.props.sortBy !== prevProps.sortBy) {
-      this.setCurrentlyActiveItem(this.props.posts[0].id);
+    const { posts, sortBy, selectedCategory } = this.props;
+
+    const sortByChanged = sortBy !== prevProps.sortBy;
+    const selectedCategoryChanged =
+      selectedCategory !== prevProps.selectedCategory;
+    const postsIsNotEmpty = posts.length !== 0;
+
+    if (sortByChanged || (selectedCategoryChanged && postsIsNotEmpty)) {
+      this.setCurrentlyActiveItem(posts[0].id);
     }
   }
 
@@ -43,26 +51,38 @@ class List extends React.Component<ListProps, ListState> {
 
     return (
       <ListWrapper>
-        <PaddingListItem />
-        {posts.map(post => {
-          const { id, category, link, title, image } = post;
-          const className = activeItemId === id ? "active-item" : "";
+        {posts.length === 0 ? (
+          <NoPostsMessage>
+            <div />
+            <div>
+              <p>Sorry, looks like no posts match your search criteria.</p>
+            </div>
+            <div />
+          </NoPostsMessage>
+        ) : (
+          <>
+            <PaddingListItem />
+            {posts.map(post => {
+              const { id, category, link, title, image } = post;
+              const className = activeItemId === id ? "active-item" : "";
 
-          return (
-            <ListItem
-              openInfo={() => openInfo(post)}
-              setCurrentlyActiveItem={this.setCurrentlyActiveItem}
-              className={className}
-              key={id}
-              catagory={category}
-              id={id}
-              link={link}
-              title={title}
-              image={image}
-            />
-          );
-        })}
-        <PaddingListItem />
+              return (
+                <ListItem
+                  openInfo={() => openInfo(post)}
+                  setCurrentlyActiveItem={this.setCurrentlyActiveItem}
+                  className={className}
+                  key={id}
+                  catagory={category}
+                  id={id}
+                  link={link}
+                  title={title}
+                  image={image}
+                />
+              );
+            })}
+            <PaddingListItem />}
+          </>
+        )}
       </ListWrapper>
     );
   }
@@ -91,6 +111,23 @@ const ListWrapper = styled.ul`
 
     & > a > div:nth-child(2) > div:first-child > span:last-child svg polygon {
       fill: ${props => props.theme.foregroundColor};
+    }
+  }
+`;
+
+const NoPostsMessage = styled.li`
+  height: calc(100vh - 60px);
+  display: grid;
+  grid-template-columns: 60px 3fr 1fr;
+
+  div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0;
+      color: ${props => props.theme.foregroundColor};
     }
   }
 `;

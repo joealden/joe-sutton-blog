@@ -39,5 +39,5 @@ export type InfoType = {
 export type FilterType = {
   open: boolean;
   sortBy: FilterSortBy;
-  selectedCategories: Array<string>;
+  selectedCategory: string | null;
 };

@@ -13,7 +13,7 @@ interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
   categories: Array<string>;
-  setSelectedCategories: (selectedCategories: Array<string>) => void;
+  setSelectedCategory: (selectedCategory: string | null) => void;
   openInfo: (post: Post) => void;
   closeInfo: () => void;
   openFilter: () => void;
@@ -30,7 +30,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
   toggleTheme,
   posts,
   categories,
-  setSelectedCategories,
+  setSelectedCategory,
   openInfo,
   closeInfo,
   openFilter,
@@ -48,9 +48,9 @@ const Site: React.FunctionComponent<SiteProps> = ({
       close={closeFilter}
       sortBy={filter.sortBy}
       setSortBy={setFilterSortBy}
-      allCategories={categories}
-      selectedCategories={filter.selectedCategories}
-      setSelectedCategories={setSelectedCategories}
+      categories={categories}
+      selectedCategory={filter.selectedCategory}
+      setSelectedCategory={setSelectedCategory}
     />
     <Header
       toggleTheme={toggleTheme}

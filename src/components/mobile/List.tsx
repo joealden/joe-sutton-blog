@@ -20,15 +20,21 @@ const List: React.FunctionComponent<ListProps> = ({
       transform: infoOpen ? "translateX(-100%)" : "translateX(0)"
     }}
   >
-    {posts.map(post => (
-      <li key={post.id} onClick={() => openInfo(post)}>
-        <span>{post.title}</span>
-        <span>{post.category}</span>
-        <span>
-          <Img alt={post.title} fluid={post.image.fluid} />
-        </span>
-      </li>
-    ))}
+    {posts.length === 0 ? (
+      <NoPostsMessage>
+        <p>Sorry, looks like no posts match your search criteria.</p>
+      </NoPostsMessage>
+    ) : (
+      posts.map(post => (
+        <li key={post.id} onClick={() => openInfo(post)}>
+          <span>{post.title}</span>
+          <span>{post.category}</span>
+          <span>
+            <Img alt={post.title} fluid={post.image.fluid} />
+          </span>
+        </li>
+      ))
+    )}
   </ListWrapper>
 );
 
@@ -36,6 +42,7 @@ export default List;
 
 const ListWrapper = styled.ul`
   list-style: none;
+  min-height: 100%;
   padding: 0;
   /* 130px because header is 60px (60px + 70px) */
   margin: 130px 0 70px;
@@ -77,5 +84,16 @@ const ListWrapper = styled.ul`
     span:last-child {
       display: none;
     }
+  }
+`;
+
+const NoPostsMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    max-width: 75%;
+    text-align: center;
   }
 `;

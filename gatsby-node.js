@@ -1,3 +1,9 @@
+const sortCategoriesAToZ = (categoryA, categoryB) => {
+  if (categoryA > categoryB) return 1;
+  if (categoryA < categoryB) return -1;
+  return 0;
+};
+
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
 
@@ -40,7 +46,7 @@ exports.onCreatePage = ({ page, actions }) => {
         "Foundries",
         "Studios",
         "Case Studies"
-      ];
+      ].sort(sortCategoriesAToZ);
 
       const newPage = {
         ...page,

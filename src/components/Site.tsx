@@ -33,7 +33,7 @@ class Site extends React.Component<SiteProps, SiteState> {
     filter: {
       open: false,
       sortBy: FilterSortBy.NewestFirst,
-      selectedCategories: this.props.categories
+      selectedCategory: null
     },
     aboutOpen: false
   };
@@ -82,11 +82,11 @@ class Site extends React.Component<SiteProps, SiteState> {
       }
     }));
 
-  setSelectedCategories = (selectedCategories: Array<string>) =>
+  setSelectedCategory = (selectedCategory: string) =>
     this.setState(prevState => ({
       filter: {
         ...prevState.filter,
-        selectedCategories
+        selectedCategory
       }
     }));
 
@@ -104,7 +104,7 @@ class Site extends React.Component<SiteProps, SiteState> {
       openFilter,
       closeFilter,
       setFilterSortBy,
-      setSelectedCategories,
+      setSelectedCategory,
       openAbout,
       closeAbout
     } = this;
@@ -112,10 +112,14 @@ class Site extends React.Component<SiteProps, SiteState> {
     const { toggleTheme, posts, categories } = this.props;
     const { info, filter, aboutOpen } = this.state;
 
-    /* TODO: Potential to be memoized */
-    const filteredPosts = posts.filter(post =>
-      filter.selectedCategories.includes(post.category)
-    );
+    let filteredPosts = posts;
+
+    if (typeof filter.selectedCategory === "string") {
+      /* TODO: Potential to be memoized */
+      filteredPosts = posts.filter(
+        post => post.category === filter.selectedCategory
+      );
+    }
 
     const sortedPosts: Array<Post> = memoizedSortPosts(
       filteredPosts,
@@ -129,7 +133,7 @@ class Site extends React.Component<SiteProps, SiteState> {
             toggleTheme={toggleTheme}
             posts={sortedPosts}
             categories={categories}
-            setSelectedCategories={setSelectedCategories}
+            setSelectedCategory={setSelectedCategory}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
@@ -147,7 +151,7 @@ class Site extends React.Component<SiteProps, SiteState> {
             toggleTheme={toggleTheme}
             posts={sortedPosts}
             categories={categories}
-            setSelectedCategories={setSelectedCategories}
+            setSelectedCategory={setSelectedCategory}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
@@ -159,7 +163,6 @@ class Site extends React.Component<SiteProps, SiteState> {
             filter={filter}
             aboutOpen={aboutOpen}
           />
-          ) }
         </MediaQuery>
         <GlobalStyles />
       </>
