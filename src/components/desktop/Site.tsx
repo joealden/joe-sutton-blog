@@ -15,6 +15,8 @@ import List from "./List";
 interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
+  categories: Array<string>;
+  setSelectedCategories: (selectedCategories: Array<string>) => void;
   openInfo: (post: Post) => void;
   closeInfo: () => void;
   openFilter: () => void;
@@ -30,6 +32,8 @@ interface SiteProps {
 const Site: React.FunctionComponent<SiteProps> = ({
   toggleTheme,
   posts,
+  categories,
+  setSelectedCategories,
   openInfo,
   closeInfo,
   openFilter,
@@ -75,6 +79,9 @@ const Site: React.FunctionComponent<SiteProps> = ({
         close={closeFilter}
         sortBy={filter.sortBy}
         setSortBy={setFilterSortBy}
+        allCategories={categories}
+        selectedCategories={filter.selectedCategories}
+        setSelectedCategories={setSelectedCategories}
       />
       <MainContainer infoOpen={info.open}>
         <Underlay />

@@ -8,6 +8,7 @@ import Site from "./Site";
 
 interface ListedProps {
   posts: Array<Post>;
+  categories: Array<string>;
 }
 
 interface ListedState {
@@ -28,13 +29,13 @@ class Listed extends React.Component<ListedProps, ListedState> {
   };
 
   render() {
-    const { posts } = this.props;
+    const { posts, categories } = this.props;
     const { currentTheme } = this.state;
     const { toggleTheme } = this;
 
     return (
       <ThemeProvider theme={currentTheme}>
-        <Site toggleTheme={toggleTheme} posts={posts} />
+        <Site toggleTheme={toggleTheme} posts={posts} categories={categories} />
       </ThemeProvider>
     );
   }

@@ -15,13 +15,18 @@ type ContentfulPosts = {
 
 interface IndexProps {
   data: ContentfulPosts;
+  pageContext: {
+    categories: Array<string>;
+  };
 }
 
-const Index: React.FunctionComponent<IndexProps> = ({ data }) => {
+const Index: React.FunctionComponent<IndexProps> = ({ data, pageContext }) => {
   const posts = data.allContentfulPost.edges.map(edge => edge.node);
+  const { categories } = pageContext;
+
   return (
     <React.StrictMode>
-      <Listed posts={posts} />
+      <Listed posts={posts} categories={categories} />
     </React.StrictMode>
   );
 };

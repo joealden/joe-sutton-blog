@@ -10,42 +10,47 @@ interface FilterProps {
   close: () => void;
   sortBy: FilterSortBy;
   setSortBy: (sortBy: FilterSortBy) => void;
+  allCategories: Array<string>;
+  selectedCategories: Array<string>;
+  setSelectedCategories: (selectedCategories: Array<string>) => void;
 }
 
-class Filter extends React.Component<FilterProps> {
-  render() {
-    const { isOpen, close, sortBy, setSortBy } = this.props;
-
-    return (
-      <>
-        <FilterContainer
-          style={{
-            transform: isOpen ? "translateY(0)" : "translateY(-100%)"
-          }}
-        >
-          <InnerFilter>
-            <SortBy>
-              <SortByList sortBy={sortBy} setSortBy={setSortBy} />
-            </SortBy>
-            <Categories>
-              <h3>Categories</h3>
-            </Categories>
-            <SearchTags>
-              <h3>Search Tags</h3>
-            </SearchTags>
-            <FilterTitle>
-              <h2>Filter</h2>
-            </FilterTitle>
-          </InnerFilter>
-          <CloseButtonContainer>
-            <button onClick={close}>Close</button>
-          </CloseButtonContainer>
-        </FilterContainer>
-        <FilterCover />
-      </>
-    );
-  }
-}
+const Filter: React.FunctionComponent<FilterProps> = ({
+  isOpen,
+  close,
+  sortBy,
+  setSortBy,
+  allCategories,
+  selectedCategories,
+  setSelectedCategories
+}) => (
+  <>
+    <FilterContainer
+      style={{
+        transform: isOpen ? "translateY(0)" : "translateY(-100%)"
+      }}
+    >
+      <InnerFilter>
+        <SortBy>
+          <SortByList sortBy={sortBy} setSortBy={setSortBy} />
+        </SortBy>
+        <Categories>
+          <h3>Categories</h3>
+        </Categories>
+        <SearchTags>
+          <h3>Search Tags</h3>
+        </SearchTags>
+        <FilterTitle>
+          <h2>Filter</h2>
+        </FilterTitle>
+      </InnerFilter>
+      <CloseButtonContainer>
+        <button onClick={close}>Close</button>
+      </CloseButtonContainer>
+    </FilterContainer>
+    <FilterCover />
+  </>
+);
 
 export default Filter;
 

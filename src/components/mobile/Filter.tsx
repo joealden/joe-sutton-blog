@@ -10,13 +10,19 @@ interface FilterProps {
   close: () => void;
   sortBy: FilterSortBy;
   setSortBy: (sortBy: FilterSortBy) => void;
+  allCategories: Array<string>;
+  selectedCategories: Array<string>;
+  setSelectedCategories: (selectedCategories: Array<string>) => void;
 }
 
 const Filter: React.FunctionComponent<FilterProps> = ({
   isOpen,
   close,
   sortBy,
-  setSortBy
+  setSortBy,
+  allCategories,
+  selectedCategories,
+  setSelectedCategories
 }) => (
   <FilterWrapper
     style={{

@@ -15,6 +15,7 @@ const memoizedSortPosts = memoize(sortPosts);
 interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
+  categories: Array<string>;
 }
 
 interface SiteState {
@@ -31,7 +32,8 @@ class Site extends React.Component<SiteProps, SiteState> {
     },
     filter: {
       open: false,
-      sortBy: FilterSortBy.NewestFirst
+      sortBy: FilterSortBy.NewestFirst,
+      selectedCategories: this.props.categories
     },
     aboutOpen: false
   };
@@ -80,6 +82,14 @@ class Site extends React.Component<SiteProps, SiteState> {
       }
     }));
 
+  setSelectedCategories = (selectedCategories: Array<string>) =>
+    this.setState(prevState => ({
+      filter: {
+        ...prevState.filter,
+        selectedCategories
+      }
+    }));
+
   /* ----------------- About ---------------- */
 
   openAbout = () => this.setState({ aboutOpen: true });
@@ -94,14 +104,23 @@ class Site extends React.Component<SiteProps, SiteState> {
       openFilter,
       closeFilter,
       setFilterSortBy,
+      setSelectedCategories,
       openAbout,
       closeAbout
     } = this;
 
-    const { toggleTheme, posts } = this.props;
+    const { toggleTheme, posts, categories } = this.props;
     const { info, filter, aboutOpen } = this.state;
 
-    const sortedPosts: Array<Post> = memoizedSortPosts(posts, filter.sortBy);
+    /* TODO: Potential to be memoized */
+    const filteredPosts = posts.filter(post =>
+      filter.selectedCategories.includes(post.category)
+    );
+
+    const sortedPosts: Array<Post> = memoizedSortPosts(
+      filteredPosts,
+      filter.sortBy
+    );
 
     return (
       <>
@@ -109,6 +128,8 @@ class Site extends React.Component<SiteProps, SiteState> {
           <MobileSite
             toggleTheme={toggleTheme}
             posts={sortedPosts}
+            categories={categories}
+            setSelectedCategories={setSelectedCategories}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
@@ -125,6 +146,8 @@ class Site extends React.Component<SiteProps, SiteState> {
           <DesktopSite
             toggleTheme={toggleTheme}
             posts={sortedPosts}
+            categories={categories}
+            setSelectedCategories={setSelectedCategories}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
