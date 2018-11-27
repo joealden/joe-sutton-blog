@@ -28,7 +28,7 @@ exports.onCreatePage = ({ page, actions }) => {
        *
        * https://github.com/gatsbyjs/gatsby/issues/10099#issuecomment-442085097
        *
-       * So that I can move foward with implementing the filter
+       * So that I can move forward with implementing the filter
        * section I have hardcoded in the current categories as
        * seen below. When I figure out how to access the actual
        * Contentful data, delete the below `categories` array.
