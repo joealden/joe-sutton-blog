@@ -38,7 +38,7 @@ class Site extends React.Component<SiteProps, SiteState> {
     aboutOpen: false
   };
 
-  /* ----------------- Infwo ----------------- */
+  /* ----------------- Info ----------------- */
 
   openInfo = (post: Post) =>
     this.setState({
