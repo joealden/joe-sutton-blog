@@ -8,8 +8,10 @@ import Logo from "../icons/Logo";
 import BackToTop from "../icons/BackToTop";
 
 interface HeaderProps {
-  setSelectedCategory: (selectedCategory: string | null) => void;
+  sortBy: FilterSortBy;
   setFilterSortBy: (sortBy: FilterSortBy) => void;
+  selectedCategory: string | null;
+  setSelectedCategory: (selectedCategory: string | null) => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -56,9 +58,20 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   };
 
   render() {
-    const { toggleTheme, openFilter, openAbout } = this.props;
+    const {
+      toggleTheme,
+      openFilter,
+      openAbout,
+      sortBy,
+      selectedCategory
+    } = this.props;
+
     const { showBackToTopButton } = this.state;
     const { logoClick } = this;
+
+    const sortApplied = sortBy !== FilterSortBy.NewestFirst;
+    const categoryApplied = selectedCategory !== null;
+    const filterApplied = sortApplied || categoryApplied;
 
     return (
       <HeaderWrapper>
@@ -66,7 +79,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           <Logo />
         </LogoWrapper>
         <FilterAndBackToTopWrapper>
-          <button onClick={openFilter}>Filter</button>
+          <button
+            onClick={openFilter}
+            className={filterApplied ? "filter-applied" : ""}
+          >
+            <span>Filter</span>
+          </button>
           <button
             aria-label="Back To Top"
             className={showBackToTopButton ? "" : "hidden"}
@@ -128,6 +146,19 @@ const FilterAndBackToTopWrapper = styled.div`
   ${commonFlexHeaderStyles};
   border-left: 1px solid ${props => props.theme.lineColor};
   transition: border-color ${props => props.theme.transition};
+
+  button:first-child {
+    line-height: 100%;
+
+    span {
+      border-bottom: 1px solid ${props => props.theme.backgroundColor};
+      transition: border-color ${props => props.theme.transition};
+    }
+  }
+
+  button:first-child.filter-applied span {
+    border-bottom: 1px solid ${props => props.theme.accentColor};
+  }
 
   button:last-child {
     transition: opacity ${props => props.theme.transition},
