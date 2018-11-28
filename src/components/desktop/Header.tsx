@@ -148,8 +148,6 @@ const FilterAndBackToTopWrapper = styled.div`
   transition: border-color ${props => props.theme.transition};
 
   button:first-child {
-    line-height: 100%;
-
     span {
       border-bottom: 1px solid ${props => props.theme.backgroundColor};
       transition: border-color ${props => props.theme.transition};
