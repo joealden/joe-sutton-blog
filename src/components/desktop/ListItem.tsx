@@ -32,15 +32,13 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
     onMouseOver={() => setCurrentlyActiveItem(id)}
   >
     <a href={link} rel="noreferrer noopener" target="_blank">
-      <InfoContainer>
-        <span
-          onClick={event => {
-            event.preventDefault();
-            openInfo();
-          }}
-        >
-          Info
-        </span>
+      <InfoContainer
+        onClick={event => {
+          event.preventDefault();
+          openInfo();
+        }}
+      >
+        <span>Info</span>
       </InfoContainer>
       <NameAndCatagoryContainer>
         <NameContainer>
@@ -82,7 +80,7 @@ const InfoContainer = styled.div`
 
   visibility: hidden;
   opacity: 0;
-  margin-bottom: 0.6vw;
+  padding-bottom: 0.6vw;
 
   transition: opacity ${props => props.theme.transition},
     visibility ${props => props.theme.transition};
@@ -95,8 +93,10 @@ const InfoContainer = styled.div`
 
     padding: 0.6vw;
     user-select: none;
+  }
 
-    &:hover {
+  &:hover {
+    span {
       color: ${props => props.theme.accentColor};
     }
   }
