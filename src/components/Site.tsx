@@ -9,8 +9,10 @@ import DesktopSite from "./desktop/Site";
 import GlobalStyles from "./GlobalStyles";
 
 import sortPosts from "../utils/sortPosts";
+import filterPosts from "../utils/filterPosts";
 
 const memoizedSortPosts = memoize(sortPosts);
+const memoizedFilterPosts = memoize(filterPosts);
 
 interface SiteProps {
   toggleTheme: () => void;
@@ -112,19 +114,8 @@ class Site extends React.Component<SiteProps, SiteState> {
     const { toggleTheme, posts, categories } = this.props;
     const { info, filter, aboutOpen } = this.state;
 
-    let filteredPosts = posts;
-
-    if (typeof filter.selectedCategory === "string") {
-      /* TODO: Potential to be memoized */
-      filteredPosts = posts.filter(
-        post => post.category === filter.selectedCategory
-      );
-    }
-
-    const sortedPosts: Array<Post> = memoizedSortPosts(
-      filteredPosts,
-      filter.sortBy
-    );
+    const filteredPosts = memoizedFilterPosts(posts, filter.selectedCategory);
+    const sortedPosts = memoizedSortPosts(filteredPosts, filter.sortBy);
 
     return (
       <>
