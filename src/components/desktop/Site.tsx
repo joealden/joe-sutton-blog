@@ -99,9 +99,9 @@ const Site: React.FunctionComponent<SiteProps> = ({
           />
           <Header
             sortBy={filter.sortBy}
+            setFilterSortBy={setFilterSortBy}
             selectedCategory={filter.selectedCategory}
             setSelectedCategory={setSelectedCategory}
-            setFilterSortBy={setFilterSortBy}
             toggleTheme={toggleTheme}
             openFilter={openFilter}
             openAbout={openAbout}
