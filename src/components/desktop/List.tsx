@@ -40,7 +40,7 @@ class List extends React.Component<ListProps, ListState> {
       selectedCategory !== prevProps.selectedCategory;
     const postsIsNotEmpty = posts.length !== 0;
 
-    if (sortByChanged || (selectedCategoryChanged && postsIsNotEmpty)) {
+    if ((sortByChanged || selectedCategoryChanged) && postsIsNotEmpty) {
       this.setCurrentlyActiveItem(posts[0].id);
     }
   }
