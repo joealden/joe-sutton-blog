@@ -95,5 +95,6 @@ const NoPostsMessage = styled.div`
   p {
     max-width: 75%;
     text-align: center;
+    transition: color ${props => props.theme.transition};
   }
 `;

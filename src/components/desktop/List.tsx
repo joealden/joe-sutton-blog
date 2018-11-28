@@ -127,7 +127,7 @@ const NoPostsMessage = styled.li`
 
     p {
       margin: 0;
-      color: ${props => props.theme.foregroundColor};
+      transition: color ${props => props.theme.transition};
     }
   }
 `;
