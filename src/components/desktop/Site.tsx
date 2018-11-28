@@ -98,6 +98,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
             handleClick={handleOverlayClick}
           />
           <Header
+            setSelectedCategory={setSelectedCategory}
+            setFilterSortBy={setFilterSortBy}
             toggleTheme={toggleTheme}
             openFilter={openFilter}
             openAbout={openAbout}

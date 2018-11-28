@@ -1,11 +1,15 @@
 import React from "react";
 import styled, { css } from "../../utils/styled-components";
 
+import { FilterSortBy } from "../../utils/types";
+
 import Circle from "../icons/Circle";
 import Logo from "../icons/Logo";
 import BackToTop from "../icons/BackToTop";
 
 interface HeaderProps {
+  setSelectedCategory: (selectedCategory: string | null) => void;
+  setFilterSortBy: (sortBy: FilterSortBy) => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -45,13 +49,20 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     window.removeEventListener("scroll", this.shouldBackToTopButtonBeShown);
   }
 
+  logoClick = () => {
+    const { setSelectedCategory, setFilterSortBy } = this.props;
+    setSelectedCategory(null);
+    setFilterSortBy(FilterSortBy.NewestFirst);
+  };
+
   render() {
     const { toggleTheme, openFilter, openAbout } = this.props;
     const { showBackToTopButton } = this.state;
+    const { logoClick } = this;
 
     return (
       <HeaderWrapper>
-        <LogoWrapper>
+        <LogoWrapper onClick={logoClick}>
           <Logo />
         </LogoWrapper>
         <FilterAndBackToTopWrapper>
@@ -102,6 +113,7 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const commonFlexHeaderStyles = css`
