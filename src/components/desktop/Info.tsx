@@ -4,12 +4,21 @@ import Img from "gatsby-image";
 
 import { Post } from "../../utils/types";
 
+import InfoCategory from "./InfoCategory";
+
 interface InfoProps {
   closeInfo: () => void;
   post: Post;
+  selectedCategory: string | null;
+  setSelectedCategory: (selectedCategory: string | null) => void;
 }
 
-const Info: React.FunctionComponent<InfoProps> = ({ closeInfo, post }) => {
+const Info: React.FunctionComponent<InfoProps> = ({
+  closeInfo,
+  post,
+  selectedCategory,
+  setSelectedCategory
+}) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
   const month = createdAt.getMonth();
@@ -39,9 +48,11 @@ const Info: React.FunctionComponent<InfoProps> = ({ closeInfo, post }) => {
               </InfoItem>
               <InfoItem>
                 <div>Category</div>
-                <Category onClick={() => alert("Placeholder")}>
-                  {post.category}
-                </Category>
+                <InfoCategory
+                  category={post.category}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                />
               </InfoItem>
               <InfoItem>
                 <div>Tags</div>
@@ -200,15 +211,6 @@ const InfoItem = styled.div`
 `;
 
 const Tag = styled.span`
-  cursor: pointer;
-  transition: color ${props => props.theme.transition};
-
-  &:hover {
-    color: ${props => props.theme.accentColor};
-  }
-`;
-
-const Category = styled.span`
   cursor: pointer;
   transition: color ${props => props.theme.transition};
 

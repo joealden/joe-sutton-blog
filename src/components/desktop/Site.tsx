@@ -85,7 +85,12 @@ const Site: React.FunctionComponent<SiteProps> = ({
       />
       <MainContainer infoOpen={info.open}>
         <Underlay />
-        <Info closeInfo={closeInfo} post={info.post} />
+        <Info
+          closeInfo={closeInfo}
+          post={info.post}
+          selectedCategory={filter.selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
         <About isOpen={aboutOpen} close={closeAbout} />
         <HeaderAndListContainer>
           <Overlay
