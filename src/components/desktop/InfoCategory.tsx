@@ -95,4 +95,13 @@ const CategoryTooltip = styled.span`
   z-index: 100000;
   transition: opacity ${props => props.theme.transition},
     visibility ${props => props.theme.transition};
+
+  font-size: 18px;
+
+  @media screen and (max-width: 2000px) {
+    font-size: 16px;
+  }
+  @media screen and (max-width: 1300px) {
+    font-size: 14px;
+  }
 `;
