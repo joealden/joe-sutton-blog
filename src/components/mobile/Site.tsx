@@ -53,6 +53,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
       setSelectedCategory={setSelectedCategory}
     />
     <Header
+      setSelectedCategory={setSelectedCategory}
+      setFilterSortBy={setFilterSortBy}
       toggleTheme={toggleTheme}
       openFilter={openFilter}
       openAbout={openAbout}

@@ -1,11 +1,15 @@
 import React from "react";
 import styled, { css } from "../../utils/styled-components";
 
+import { FilterSortBy } from "../../utils/types";
+
 import BackToTop from "../icons/BackToTop";
 import Logo from "../icons/Logo";
 import Hamburger from "../icons/Hamburger";
 
 interface HeaderProps {
+  setSelectedCategory: (selectedCategory: string | null) => void;
+  setFilterSortBy: (sortBy: FilterSortBy) => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -31,6 +35,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     } else {
       this.setState({ menuOpen: true });
     }
+  };
+
+  logoClick = () => {
+    const { setSelectedCategory, setFilterSortBy } = this.props;
+    setSelectedCategory(null);
+    setFilterSortBy(FilterSortBy.NewestFirst);
   };
 
   shouldBackToTopButtonBeShown = () => {
@@ -63,7 +73,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const { toggleTheme, openFilter, openAbout, infoOpen } = this.props;
 
     const { menuOpen, showBackToTopButton } = this.state;
-    const { toggleMenu } = this;
+    const { toggleMenu, logoClick } = this;
 
     return (
       <HeaderWrapper
@@ -72,7 +82,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         }}
       >
         <InnerHeaderWrapper>
-          <LogoWrapper>
+          <LogoWrapper onClick={logoClick}>
             <div
               style={{
                 opacity: showBackToTopButton ? 1 : 0,
