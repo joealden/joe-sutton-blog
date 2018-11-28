@@ -52,6 +52,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
                   category={post.category}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
+                  closeInfo={closeInfo}
                 />
               </InfoItem>
               <InfoItem>

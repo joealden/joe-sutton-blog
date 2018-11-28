@@ -10,6 +10,8 @@ interface InfoProps {
   isOpen: boolean;
   post: Post;
   close: () => void;
+  selectedCategory: string | null;
+  setSelectedCategory: (selectedCategory: string | null) => void;
 }
 
 /**
@@ -19,12 +21,23 @@ interface InfoProps {
  * - All of the stuff inside the `InfoItemContainer` component.
  */
 
-const Info: React.FunctionComponent<InfoProps> = ({ isOpen, close, post }) => {
+const Info: React.FunctionComponent<InfoProps> = ({
+  isOpen,
+  close,
+  post,
+  selectedCategory,
+  setSelectedCategory
+}) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
   const month = createdAt.getMonth();
   const year = createdAt.getFullYear();
   const dateString = `${date}/${month}/${year}`;
+
+  const onCategoryClick = () => {
+    setSelectedCategory(post.category);
+    close();
+  };
 
   return (
     <InfoWrapper
@@ -58,9 +71,11 @@ const Info: React.FunctionComponent<InfoProps> = ({ isOpen, close, post }) => {
           </InfoItem>
           <InfoItem>
             <div>Category</div>
-            <Category onClick={() => alert("Placeholder")}>
-              {post.category}
-            </Category>
+            {selectedCategory === post.category ? (
+              <NoClickCategory>{post.category}</NoClickCategory>
+            ) : (
+              <Category onClick={onCategoryClick}>{post.category}</Category>
+            )}
           </InfoItem>
           <InfoItem>
             <div>Tags</div>
@@ -201,5 +216,7 @@ const Category = styled.span`
     color: ${props => props.theme.accentColor};
   }
 `;
+
+const NoClickCategory = styled.span``;
 
 /* ------------------------------------------------------------ */

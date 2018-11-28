@@ -60,7 +60,13 @@ const Site: React.FunctionComponent<SiteProps> = ({
     />
     <About isOpen={aboutOpen} close={closeAbout} />
     <List posts={posts} openInfo={openInfo} infoOpen={info.open} />
-    <Info isOpen={info.open} post={info.post} close={closeInfo} />
+    <Info
+      isOpen={info.open}
+      post={info.post}
+      close={closeInfo}
+      selectedCategory={filter.selectedCategory}
+      setSelectedCategory={setSelectedCategory}
+    />
   </SiteWrapper>
 );
 

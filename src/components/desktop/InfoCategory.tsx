@@ -5,6 +5,7 @@ interface InfoCategoryProps {
   category: string;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string) => void;
+  closeInfo: () => void;
 }
 
 interface InfoCategoryState {
@@ -33,9 +34,10 @@ class InfoCategory extends React.Component<
     });
 
   onClick = () => {
-    const { category, setSelectedCategory } = this.props;
+    const { category, setSelectedCategory, closeInfo } = this.props;
     setSelectedCategory(category);
     this.setState({ showTooltip: false });
+    closeInfo();
   };
 
   render() {
