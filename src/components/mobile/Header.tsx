@@ -8,8 +8,10 @@ import Logo from "../icons/Logo";
 import Hamburger from "../icons/Hamburger";
 
 interface HeaderProps {
-  setSelectedCategory: (selectedCategory: string | null) => void;
+  sortBy: FilterSortBy;
   setFilterSortBy: (sortBy: FilterSortBy) => void;
+  selectedCategory: string | null;
+  setSelectedCategory: (selectedCategory: string | null) => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -70,10 +72,21 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   /* -------------------------------------------------------------------- */
 
   render() {
-    const { toggleTheme, openFilter, openAbout, infoOpen } = this.props;
+    const {
+      sortBy,
+      selectedCategory,
+      toggleTheme,
+      openFilter,
+      openAbout,
+      infoOpen
+    } = this.props;
 
     const { menuOpen, showBackToTopButton } = this.state;
     const { toggleMenu, logoClick } = this;
+
+    const sortApplied = sortBy !== FilterSortBy.NewestFirst;
+    const categoryApplied = selectedCategory !== null;
+    const filterApplied = sortApplied || categoryApplied;
 
     return (
       <HeaderWrapper
@@ -113,7 +126,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             </div>
           </LogoWrapper>
           <FilterButtonWrapper>
-            <button onClick={openFilter}>
+            <button
+              onClick={openFilter}
+              className={filterApplied ? "filter-applied" : ""}
+            >
               <span>Filter</span>
             </button>
           </FilterButtonWrapper>
@@ -192,6 +208,13 @@ const FilterButtonWrapper = styled.div`
   button {
     color: ${props => props.theme.accentColor};
 
+    span {
+      border-bottom: 1px solid ${props => props.theme.backgroundColor};
+      transition: border-color ${props => props.theme.transition};
+    }
+  }
+
+  button.filter-applied {
     span {
       border-bottom: 1px solid ${props => props.theme.accentColor};
     }
