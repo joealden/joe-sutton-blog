@@ -87,7 +87,6 @@ const Category = styled.span`
 
 const CategoryTooltip = styled.span`
   position: absolute;
-  padding: 10px 15px;
   top: 0;
   left: 0;
   background-color: ${props => props.theme.foregroundColor};
@@ -97,11 +96,14 @@ const CategoryTooltip = styled.span`
     visibility ${props => props.theme.transition};
 
   font-size: 18px;
+  padding: 10px 15px;
 
   @media screen and (max-width: 2000px) {
     font-size: 16px;
+    padding: 9px 14px;
   }
   @media screen and (max-width: 1300px) {
     font-size: 14px;
+    padding: 8px 13px;
   }
 `;
