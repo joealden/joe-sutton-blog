@@ -53,8 +53,16 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   logoClick = () => {
     const { setSelectedCategory, setFilterSortBy } = this.props;
+
     setSelectedCategory(null);
     setFilterSortBy(FilterSortBy.NewestFirst);
+
+    /* TODO: See what perf looks like when list transition is implemented */
+    window.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: "smooth"
+    });
   };
 
   render() {
