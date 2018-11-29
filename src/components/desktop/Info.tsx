@@ -39,7 +39,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
               rel="noreferrer noopener"
               target="_blank"
             >
-              <Img /* alt={post.title} */ fluid={post.image.fluid} />
+              <Img alt={post.title} fluid={post.image.fluid} />
             </InfoLink>
             <InfoItemContainer>
               <InfoItem>
