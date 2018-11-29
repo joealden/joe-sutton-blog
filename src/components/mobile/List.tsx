@@ -30,7 +30,7 @@ const List: React.FunctionComponent<ListProps> = ({
           <span>{post.title}</span>
           <span>{post.category}</span>
           <span>
-            <Img alt={post.title} fluid={post.image.fluid} />
+            <Img /* alt={post.title} */ fluid={post.image.fluid} />
           </span>
         </li>
       ))

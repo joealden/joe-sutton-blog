@@ -53,7 +53,7 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
       </NameAndCatagoryContainer>
       <ImageContainer>
         <ImageWrapper>
-          <Img alt={title} fluid={image.fluid} />
+          <Img /* alt={title} */ fluid={image.fluid} />
         </ImageWrapper>
       </ImageContainer>
     </a>
