@@ -5642,10 +5642,10 @@ gatsby-source-contentful@^2.0.15:
     lodash "^4.17.10"
     qs "^6.4.0"
 
-gatsby@^2.0.56:
-  version "2.0.56"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.56.tgz#7f4807e73d136571d9c96b68b6af54381168cfb4"
-  integrity sha512-+zDvlAfJ5rqk5FmuBVpR6Mdi7LZ3iJ/O/L9eNhvSVA4K8BIxVKN8rd6oNU/GmJl20ZLnCa9SUmP1pvjNuijBzQ==
+gatsby@^2.0.57:
+  version "2.0.57"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.57.tgz#19202acd1790a29597b129cc9d2e42b5a4737146"
+  integrity sha512-VSJpY2+DszCEE2P/v4SLfdYu8Aoux3Y3n7k8nscN2J0AOrV11VC8bxP33lf2WuWeCEpNibNJiQfmG/LYVCwEVg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -11418,10 +11418,10 @@ style-loader@^0.21.0:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
-styled-components@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.1.1.tgz#943922048fae556e286bcbfdd29da4f1399446bc"
-  integrity sha512-UzT/qyoOyKpYooeLdwKrPHZ85R8KWl8i0fbyH9I3z6B2WT9uGDCV7J4kbfKsBeSWFD9EytBriEODOkybcUFD/Q==
+styled-components@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.1.2.tgz#f8a685e3b2bcd03c5beac7f2c02bb6ad237da9b3"
+  integrity sha512-NdvWatJ2WLqZxAvto+oH0k7GAC/TlAUJTrHoXJddjbCrU6U23EmVbb9LXJBF+d6q6hH+g9nQYOWYPUeX/Vlc2w==
   dependencies:
     "@emotion/is-prop-valid" "^0.6.8"
     "@emotion/unitless" "^0.7.0"
