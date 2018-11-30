@@ -12,8 +12,7 @@ const Overlay: React.FunctionComponent<OverlayProps> = ({
 }) => (
   <OverlayWrapper
     style={{
-      visibility: visible ? "visible" : "hidden",
-      opacity: visible ? 0.5 : 0
+      visibility: visible ? "visible" : "hidden"
     }}
     onClick={handleClick}
   />
@@ -29,7 +28,5 @@ const OverlayWrapper = styled.div`
   right: 0;
   bottom: 0;
   cursor: pointer;
-  background-color: ${props => props.theme.backgroundColor};
-  transition: opacity ${props => props.theme.transition},
-    visibility ${props => props.theme.transition};
+  transition: visibility ${props => props.theme.transition};
 `;

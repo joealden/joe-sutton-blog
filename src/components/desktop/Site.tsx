@@ -74,6 +74,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
     }
   };
 
+  const anySectionIsOpen = info.open || filter.open || aboutOpen;
+
   return (
     <SiteContainer onWheel={handleWheel}>
       <Filter
@@ -96,9 +98,13 @@ const Site: React.FunctionComponent<SiteProps> = ({
           setSelectedCategory={setSelectedCategory}
         />
         <About isOpen={aboutOpen} close={closeAbout} />
-        <HeaderAndListContainer>
+        <HeaderAndListContainer
+          style={{
+            opacity: anySectionIsOpen ? 0.5 : 1
+          }}
+        >
           <Overlay
-            visible={info.open || filter.open || aboutOpen}
+            visible={anySectionIsOpen}
             handleClick={handleOverlayClick}
           />
           <Header
@@ -134,4 +140,6 @@ const HeaderAndListContainer = styled.div`
   min-height: 100vh;
   grid-column-start: 1;
   grid-column-end: 4;
+
+  transition: opacity ${props => props.theme.transition};
 `;
