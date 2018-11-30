@@ -104,7 +104,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
         <About isOpen={aboutOpen} close={closeAbout} />
         <HeaderAndListContainer
           style={{
-            opacity: anySectionIsOpen ? 0.5 : 1
+            opacity: anySectionIsOpen ? 0.5 : 1,
+            filter: anySectionIsOpen ? "blur(2.5px)" : ""
           }}
         >
           <Overlay
