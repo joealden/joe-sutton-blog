@@ -70,7 +70,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
   };
 
-  /* TODO: Remove console.logs when line actually implemented */
   setLineTransitionState = (prevProps: HeaderProps) => {
     const newProps = this.props;
     const { state } = this;
@@ -83,7 +82,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         newProps.selectedTags.length !== 0)
     ) {
       this.setState({ filterLineTransition: FilterLineTransition.Enter });
-      console.log("Line enter");
     } else if (
       state.filterLineTransition === FilterLineTransition.Enter ||
       state.filterLineTransition === FilterLineTransition.Reload1 ||
@@ -95,7 +93,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         newProps.selectedTags.length === 0
       ) {
         this.setState({ filterLineTransition: FilterLineTransition.Leave });
-        console.log("Line leave");
       } else if (
         prevProps.sortBy !== newProps.sortBy ||
         prevProps.selectedCategory !== newProps.selectedCategory ||
@@ -106,11 +103,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         } else {
           this.setState({ filterLineTransition: FilterLineTransition.Reload1 });
         }
-
-        console.log("Line reload");
       }
-    } else {
-      console.log("not state change occured");
     }
   };
 
