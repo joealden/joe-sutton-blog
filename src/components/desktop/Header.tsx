@@ -63,13 +63,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     setSelectedCategory(null);
     setFilterSortBy(FilterSortBy.NewestFirst);
     setSelectedTags([]);
-
-    /* TODO: See what perf looks like when list transition is implemented */
-    window.scrollTo({
-      left: 0,
-      top: 0,
-      behavior: "smooth"
-    });
   };
 
   render() {
