@@ -17,16 +17,17 @@ interface IndexProps {
   data: ContentfulPosts;
   pageContext: {
     categories: Array<string>;
+    tags: Array<string>;
   };
 }
 
 const Index: React.FunctionComponent<IndexProps> = ({ data, pageContext }) => {
   const posts = data.allContentfulPost.edges.map(edge => edge.node);
-  const { categories } = pageContext;
+  const { categories, tags } = pageContext;
 
   return (
     <React.StrictMode>
-      <Listed posts={posts} categories={categories} />
+      <Listed posts={posts} categories={categories} tags={tags} />
     </React.StrictMode>
   );
 };

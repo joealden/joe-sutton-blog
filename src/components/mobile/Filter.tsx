@@ -1,4 +1,5 @@
 import React from "react";
+import Downshift from "downshift";
 import styled from "../../utils/styled-components";
 
 import { FilterSortBy } from "../../utils/types";
@@ -14,40 +15,101 @@ interface FilterProps {
   categories: Array<string>;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
+  tags: Array<string>;
+  selectedTags: Array<string>;
 }
 
-const Filter: React.FunctionComponent<FilterProps> = ({
-  isOpen,
-  close,
-  sortBy,
-  setSortBy,
-  categories,
-  selectedCategory,
-  setSelectedCategory
-}) => (
-  <FilterWrapper
-    style={{
-      transform: isOpen ? "translateY(0)" : "translateY(-100%)"
-    }}
-  >
-    <FilterContents>
-      <div>
-        <h3>Search Tags</h3>
-      </div>
-      <div>
-        <SortByList sortBy={sortBy} setSortBy={setSortBy} />
-      </div>
-      <div>
-        <CategoryList
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      </div>
-    </FilterContents>
-    <BackToResultsButton onClick={close}>Back to Results</BackToResultsButton>
-  </FilterWrapper>
-);
+interface FilterState {
+  searchFocused: boolean;
+}
+
+class Filter extends React.Component<FilterProps, FilterState> {
+  render() {
+    const {
+      isOpen,
+      close,
+      sortBy,
+      setSortBy,
+      categories,
+      selectedCategory,
+      setSelectedCategory,
+      tags,
+      selectedTags
+    } = this.props;
+
+    return (
+      <FilterWrapper
+        style={{
+          transform: isOpen ? "translateY(0)" : "translateY(-100%)"
+        }}
+      >
+        <FilterContents>
+          <div>
+            <Downshift
+              onChange={selection => alert(`You selected ${selection.value}`)}
+              itemToString={item => (item ? item : "")}
+            >
+              {({
+                getInputProps,
+                getItemProps,
+                getMenuProps,
+                isOpen,
+                inputValue,
+                highlightedIndex,
+                selectedItem
+              }) => (
+                <div>
+                  <input {...getInputProps()} />
+                  <ul
+                    {...getMenuProps({
+                      style: {
+                        marginBottom: isOpen ? "30px" : "0"
+                      }
+                    })}
+                  >
+                    {isOpen
+                      ? tags
+                          .filter(
+                            item => !inputValue || item.includes(inputValue)
+                          )
+                          .map((tag, index) => (
+                            <ListItem
+                              {...getItemProps({
+                                key: tag,
+                                index,
+                                item: tag,
+                                style: {
+                                  opacity: highlightedIndex === index ? 0.5 : 1
+                                }
+                              })}
+                            >
+                              {tag}
+                            </ListItem>
+                          ))
+                      : null}
+                  </ul>
+                </div>
+              )}
+            </Downshift>
+          </div>
+          <div>
+            <SortByList sortBy={sortBy} setSortBy={setSortBy} />
+          </div>
+          <div>
+            <CategoryList
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          </div>
+        </FilterContents>
+        <BackToResultsButton onClick={close}>
+          Back to Results
+        </BackToResultsButton>
+      </FilterWrapper>
+    );
+  }
+}
 
 export default Filter;
 
@@ -65,7 +127,7 @@ const FilterWrapper = styled.div`
 
 const FilterContents = styled.div`
   color: #060606;
-  padding: 50px 20px 20px 20px;
+  padding: 20px;
   height: calc(100% - 60px);
   max-height: calc(100% - 60px);
   overflow: auto;
@@ -109,9 +171,40 @@ const FilterContents = styled.div`
     }
   }
 
-  > div:first-child h3 {
-    margin-bottom: 35px;
+  > div:first-child {
+    input {
+      padding: 35px 0;
+      width: 100%;
+      background-color: ${props => props.theme.accentColor};
+      border: none;
+      color: #060606;
+      opacity: 1;
+
+      &::placeholder {
+        color: #060606;
+        opacity: 1;
+        text-transform: uppercase;
+      }
+    }
+
+    ul {
+      max-height: 50vh;
+      overflow: auto;
+
+      li:first-child {
+        padding-top: 0;
+      }
+
+      li:last-child {
+        padding-bottom: 25px;
+      }
+    }
   }
+`;
+
+const ListItem = styled.div`
+  background-color: ${props => props.theme.accentColor};
+  padding: 8px 0;
 `;
 
 const BackToResultsButton = styled.button`

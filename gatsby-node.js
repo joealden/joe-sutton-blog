@@ -1,6 +1,6 @@
-const sortCategoriesAToZ = (categoryA, categoryB) => {
-  if (categoryA > categoryB) return 1;
-  if (categoryA < categoryB) return -1;
+const sortArrayOfStringsAToZ = (stringA, stringB) => {
+  if (stringA > stringB) return 1;
+  if (stringA < stringB) return -1;
   return 0;
 };
 
@@ -46,12 +46,34 @@ exports.onCreatePage = ({ page, actions }) => {
         "Foundries",
         "Studios",
         "Case Studies"
-      ].sort(sortCategoriesAToZ);
+      ].sort(sortArrayOfStringsAToZ);
+
+      const tags = [
+        "Ecommerce",
+        "Fashion",
+        "Minimalist",
+        "Editorial",
+        "Testing1",
+        "Testing2",
+        "Testing3",
+        "Testing4",
+        "Testing5",
+        "Testing6",
+        "Testing7",
+        "Testing8",
+        "Testing9",
+        "Testing10",
+        "Testing11",
+        "Testing12",
+        "Testing13",
+        "Testing14"
+      ].sort(sortArrayOfStringsAToZ);
 
       const newPage = {
         ...page,
         context: {
-          categories
+          categories,
+          tags
         }
       };
 

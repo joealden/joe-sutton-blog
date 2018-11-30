@@ -18,6 +18,7 @@ interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
   categories: Array<string>;
+  tags: Array<string>;
 }
 
 interface SiteState {
@@ -35,7 +36,8 @@ class Site extends React.Component<SiteProps, SiteState> {
     filter: {
       open: false,
       sortBy: FilterSortBy.NewestFirst,
-      selectedCategory: null
+      selectedCategory: null,
+      selectedTags: null
     },
     aboutOpen: false
   };
@@ -92,6 +94,14 @@ class Site extends React.Component<SiteProps, SiteState> {
       }
     }));
 
+  setSelectedTags = (selectedTags: Array<string>) =>
+    this.setState(prevState => ({
+      filter: {
+        ...prevState.filter,
+        selectedTags
+      }
+    }));
+
   /* ----------------- About ---------------- */
 
   openAbout = () => this.setState({ aboutOpen: true });
@@ -111,10 +121,15 @@ class Site extends React.Component<SiteProps, SiteState> {
       closeAbout
     } = this;
 
-    const { toggleTheme, posts, categories } = this.props;
+    const { toggleTheme, posts, categories, tags } = this.props;
     const { info, filter, aboutOpen } = this.state;
 
-    const filteredPosts = memoizedFilterPosts(posts, filter.selectedCategory);
+    const filteredPosts = memoizedFilterPosts(
+      posts,
+      filter.selectedCategory,
+      filter.selectedTags
+    );
+
     const sortedPosts = memoizedSortPosts(filteredPosts, filter.sortBy);
 
     return (
@@ -125,6 +140,7 @@ class Site extends React.Component<SiteProps, SiteState> {
             posts={sortedPosts}
             categories={categories}
             setSelectedCategory={setSelectedCategory}
+            tags={tags}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
@@ -143,6 +159,7 @@ class Site extends React.Component<SiteProps, SiteState> {
             posts={sortedPosts}
             categories={categories}
             setSelectedCategory={setSelectedCategory}
+            tags={tags}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}

@@ -14,6 +14,7 @@ interface SiteProps {
   posts: Array<Post>;
   categories: Array<string>;
   setSelectedCategory: (selectedCategory: string | null) => void;
+  tags: Array<string>;
   openInfo: (post: Post) => void;
   closeInfo: () => void;
   openFilter: () => void;
@@ -31,6 +32,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
   posts,
   categories,
   setSelectedCategory,
+  tags,
   openInfo,
   closeInfo,
   openFilter,
@@ -51,6 +53,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
       categories={categories}
       selectedCategory={filter.selectedCategory}
       setSelectedCategory={setSelectedCategory}
+      tags={tags}
+      selectedTags={filter.selectedTags}
     />
     <Header
       sortBy={filter.sortBy}

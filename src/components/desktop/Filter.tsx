@@ -14,6 +14,8 @@ interface FilterProps {
   categories: Array<string>;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
+  tags: Array<string>;
+  selectedTags: Array<string>;
 }
 
 const Filter: React.FunctionComponent<FilterProps> = ({
@@ -23,7 +25,9 @@ const Filter: React.FunctionComponent<FilterProps> = ({
   setSortBy,
   categories,
   selectedCategory,
-  setSelectedCategory
+  setSelectedCategory,
+  tags,
+  selectedTags
 }) => (
   <>
     <FilterContainer
