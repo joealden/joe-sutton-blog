@@ -63,7 +63,6 @@ const Info: React.FunctionComponent<InfoProps> = ({
           </div>
           <Img alt={post.title} fluid={post.image.fluid} />
         </InfoLink>
-
         <InfoItemContainer>
           <InfoItem>
             <div>Added on</div>
