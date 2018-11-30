@@ -54,10 +54,9 @@ const Info: React.FunctionComponent<InfoProps> = ({
               <InfoItem>
                 <div>Category</div>
                 <InfoCategory
-                  category={post.category}
+                  postCategory={post.category}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
-                  closeInfo={closeInfo}
                 />
               </InfoItem>
               <InfoItem>
@@ -202,14 +201,5 @@ const InfoItem = styled.div`
   div:first-child {
     margin-bottom: 2px;
     color: #838383;
-  }
-`;
-
-const Tag = styled.span`
-  cursor: pointer;
-  transition: color ${props => props.theme.transition};
-
-  &:hover {
-    color: ${props => props.theme.accentColor};
   }
 `;

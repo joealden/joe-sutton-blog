@@ -2,10 +2,9 @@ import React from "react";
 import styled from "../../utils/styled-components";
 
 interface InfoCategoryProps {
-  category: string;
+  postCategory: string;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string) => void;
-  closeInfo: () => void;
 }
 
 interface InfoCategoryState {
@@ -34,20 +33,20 @@ class InfoCategory extends React.Component<
     });
 
   onClick = () => {
-    const { category, setSelectedCategory, closeInfo } = this.props;
-    setSelectedCategory(category);
+    const { postCategory, setSelectedCategory } = this.props;
+    setSelectedCategory(postCategory);
     this.setState({ showTooltip: false });
   };
 
   render() {
-    const { category, selectedCategory } = this.props;
+    const { postCategory, selectedCategory } = this.props;
     const { showTooltip, mouseX, mouseY } = this.state;
     const { onMouseMove, onMouseEnter, onMouseLeave, onClick } = this;
 
     return (
       <>
-        {selectedCategory === category ? (
-          <NoClickCategory>{category}</NoClickCategory>
+        {selectedCategory === postCategory ? (
+          <NoClickCategory>{postCategory}</NoClickCategory>
         ) : (
           <Category
             onMouseEnter={onMouseEnter}
@@ -55,7 +54,7 @@ class InfoCategory extends React.Component<
             onMouseMove={onMouseMove}
             onClick={onClick}
           >
-            {category}
+            {postCategory}
           </Category>
         )}
 
