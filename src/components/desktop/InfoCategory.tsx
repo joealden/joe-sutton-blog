@@ -37,7 +37,6 @@ class InfoCategory extends React.Component<
     const { category, setSelectedCategory, closeInfo } = this.props;
     setSelectedCategory(category);
     this.setState({ showTooltip: false });
-    closeInfo();
   };
 
   render() {
