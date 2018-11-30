@@ -40,5 +40,5 @@ export type FilterType = {
   open: boolean;
   sortBy: FilterSortBy;
   selectedCategory: string | null;
-  selectedTags: Array<string> | null;
+  selectedTags: Array<string>;
 };

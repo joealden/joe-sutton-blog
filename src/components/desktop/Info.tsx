@@ -5,19 +5,24 @@ import Img from "gatsby-image";
 import { Post } from "../../utils/types";
 
 import InfoCategory from "./InfoCategory";
+import InfoTags from "./InfoTags";
 
 interface InfoProps {
   closeInfo: () => void;
   post: Post;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
+  selectedTags: Array<string>;
+  setSelectedTags: (selectedTags: Array<string>) => void;
 }
 
 const Info: React.FunctionComponent<InfoProps> = ({
   closeInfo,
   post,
   selectedCategory,
-  setSelectedCategory
+  setSelectedCategory,
+  selectedTags,
+  setSelectedTags
 }) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
@@ -57,22 +62,11 @@ const Info: React.FunctionComponent<InfoProps> = ({
               </InfoItem>
               <InfoItem>
                 <div>Tags</div>
-                <div>
-                  {post.tags.reduce((acc, currentTag, i) => {
-                    const isLastTag = i === post.tags.length - 1;
-                    const punctuation = isLastTag ? "." : ", ";
-
-                    return [
-                      ...acc,
-                      <React.Fragment key={currentTag}>
-                        <Tag onClick={() => alert("Placeholder")}>
-                          {currentTag}
-                        </Tag>
-                        {punctuation}
-                      </React.Fragment>
-                    ];
-                  }, [])}
-                </div>
+                <InfoTags
+                  postTags={post.tags}
+                  selectedTags={selectedTags}
+                  setSelectedTags={setSelectedTags}
+                />
               </InfoItem>
             </InfoItemContainer>
           </div>

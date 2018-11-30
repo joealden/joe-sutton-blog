@@ -3,16 +3,20 @@ import { Post } from "./types";
 const filterPosts = (
   posts: Array<Post>,
   selectedCategory: string | null,
-  selectedTags: Array<string> | null
+  selectedTags: Array<string>
 ) => {
   const filteredPostsByCategory = filterPostsByCategory(
     posts,
     selectedCategory
   );
+
   const filteredPostsByCategoryAndTags = filterPostsByTags(
     filteredPostsByCategory,
     selectedTags
   );
+
+  console.log({ filteredPostsByCategoryAndTags });
+
   return filteredPostsByCategoryAndTags;
 };
 
@@ -26,12 +30,9 @@ const filterPostsByCategory = (
   return posts.filter(post => post.category === selectedCategory);
 };
 
-const filterPostsByTags = (
-  posts: Array<Post>,
-  selectedTags: Array<string> | null
-) => {
-  if (selectedTags === null) return posts;
+const filterPostsByTags = (posts: Array<Post>, selectedTags: Array<string>) => {
+  if (selectedTags.length === 0) return posts;
   return posts.filter(post =>
-    post.tags.some(tag => selectedTags.includes(tag))
+    selectedTags.every(selectedTag => post.tags.includes(selectedTag))
   );
 };
