@@ -12,6 +12,8 @@ interface HeaderProps {
   setFilterSortBy: (sortBy: FilterSortBy) => void;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
+  selectedTags: Array<string>;
+  setSelectedTags: (selectedTags: Array<string>) => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -40,9 +42,15 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   };
 
   logoClick = () => {
-    const { setSelectedCategory, setFilterSortBy } = this.props;
+    const {
+      setSelectedCategory,
+      setFilterSortBy,
+      setSelectedTags
+    } = this.props;
+
     setSelectedCategory(null);
     setFilterSortBy(FilterSortBy.NewestFirst);
+    setSelectedTags([]);
   };
 
   shouldBackToTopButtonBeShown = () => {
@@ -75,6 +83,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const {
       sortBy,
       selectedCategory,
+      selectedTags,
       toggleTheme,
       openFilter,
       openAbout,
@@ -86,7 +95,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
     const sortApplied = sortBy !== FilterSortBy.NewestFirst;
     const categoryApplied = selectedCategory !== null;
-    const filterApplied = sortApplied || categoryApplied;
+    const tagsApplied = selectedTags.length !== 0;
+
+    const filterApplied = sortApplied || categoryApplied || tagsApplied;
 
     return (
       <HeaderWrapper
@@ -189,6 +200,8 @@ const commonInnerHeaderStyles = css`
 
 const LogoWrapper = styled.div`
   ${commonInnerHeaderStyles};
+
+  cursor: pointer;
 
   display: grid;
   grid-template-columns: 1fr;

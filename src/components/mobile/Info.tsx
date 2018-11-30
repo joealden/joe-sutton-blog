@@ -12,6 +12,8 @@ interface InfoProps {
   close: () => void;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
+  selectedTags: Array<string>;
+  setSelectedTags: (selectedTags: Array<string>) => void;
 }
 
 /**
@@ -26,7 +28,9 @@ const Info: React.FunctionComponent<InfoProps> = ({
   close,
   post,
   selectedCategory,
-  setSelectedCategory
+  setSelectedCategory,
+  selectedTags,
+  setSelectedTags
 }) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
@@ -37,6 +41,10 @@ const Info: React.FunctionComponent<InfoProps> = ({
   const onCategoryClick = () => {
     setSelectedCategory(post.category);
     close();
+  };
+
+  const onTagClick = (tag: string) => {
+    setSelectedTags([...selectedTags, tag]);
   };
 
   return (
@@ -86,7 +94,9 @@ const Info: React.FunctionComponent<InfoProps> = ({
                 return [
                   ...acc,
                   <React.Fragment key={currentTag}>
-                    <Tag onClick={() => alert("Placeholder")}>{currentTag}</Tag>
+                    <Tag onClick={() => onTagClick(currentTag)}>
+                      {currentTag}
+                    </Tag>
                     {punctuation}
                   </React.Fragment>
                 ];

@@ -142,6 +142,7 @@ class Site extends React.Component<SiteProps, SiteState> {
             categories={categories}
             setSelectedCategory={setSelectedCategory}
             tags={tags}
+            setSelectedTags={setSelectedTags}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
