@@ -15,8 +15,6 @@ const filterPosts = (
     selectedTags
   );
 
-  console.log({ filteredPostsByCategoryAndTags });
-
   return filteredPostsByCategoryAndTags;
 };
 
