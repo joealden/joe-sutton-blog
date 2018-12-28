@@ -214,7 +214,7 @@ const BackToResultsButton = styled.button`
   right: 0;
   height: 60px;
   width: 100%;
-  background-color: #060606;
+  background-color: #101010;
   border-radius: 0;
 
   color: ${props => props.theme.accentColor};
