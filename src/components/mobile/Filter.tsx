@@ -208,7 +208,7 @@ const ListItem = styled.div`
 `;
 
 const BackToResultsButton = styled.button`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -216,6 +216,6 @@ const BackToResultsButton = styled.button`
   width: 100%;
   background-color: #101010;
   border-radius: 0;
-
+  z-index: 1;
   color: ${props => props.theme.accentColor};
 `;
