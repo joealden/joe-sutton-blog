@@ -103,9 +103,9 @@ class Filter extends React.Component<FilterProps, FilterState> {
             />
           </div>
         </FilterContents>
-        <BackToResultsButton onClick={close}>
-          Back to Results
-        </BackToResultsButton>
+        <BackToResultsWrapper>
+          <button onClick={close}>Back to Results</button>
+        </BackToResultsWrapper>
       </FilterWrapper>
     );
   }
@@ -207,15 +207,19 @@ const ListItem = styled.div`
   padding: 8px 0;
 `;
 
-const BackToResultsButton = styled.button`
+const BackToResultsWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  width: 100%;
-  background-color: #101010;
-  border-radius: 0;
   z-index: 1;
-  color: ${props => props.theme.accentColor};
+  display: flex;
+  min-height: 60px;
+
+  button {
+    border-radius: 0;
+    background-color: #101010;
+    color: ${props => props.theme.accentColor};
+    width: 100%;
+  }
 `;
