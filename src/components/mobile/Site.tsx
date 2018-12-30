@@ -81,6 +81,9 @@ const Site: React.FunctionComponent<SiteProps> = ({
       selectedTags={filter.selectedTags}
       setSelectedTags={setSelectedTags}
     />
+    <TestingFixedWrapper>
+      <button>test</button>
+    </TestingFixedWrapper>
   </SiteWrapper>
 );
 
@@ -91,5 +94,23 @@ const SiteWrapper = styled.div`
 
   > * {
     -webkit-tap-highlight-color: transparent;
+  }
+`;
+
+const TestingFixedWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  min-height: 40px;
+  background: #fbfafc;
+
+  button {
+    border-radius: 0;
+    background-color: black;
+    color: red;
+    width: 100%;
   }
 `;
