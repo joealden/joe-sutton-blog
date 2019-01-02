@@ -145,7 +145,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             </button>
           </FilterButtonWrapper>
           <MenuIconWrapper>
-            <button onClick={toggleMenu}>
+            <button aria-label="Open Menu" onClick={toggleMenu}>
               <Hamburger />
             </button>
           </MenuIconWrapper>
