@@ -128,7 +128,6 @@ const FilterWrapper = styled.div`
 const FilterContents = styled.div`
   color: #060606;
   padding: 20px;
-  margin-top: 60px;
   height: calc(100% - 60px);
   max-height: calc(100% - 60px);
   overflow: auto;
@@ -210,17 +209,16 @@ const ListItem = styled.div`
 
 const BackToResultsWrapper = styled.div`
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
-  display: flex;
-  min-height: 60px;
 
   button {
     border-radius: 0;
     background-color: #101010;
     color: ${props => props.theme.accentColor};
     width: 100%;
+    height: 60px;
   }
 `;
