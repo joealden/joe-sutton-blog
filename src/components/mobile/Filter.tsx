@@ -43,9 +43,6 @@ class Filter extends React.Component<FilterProps, FilterState> {
           transform: isOpen ? "translateY(0)" : "translateY(-100%)"
         }}
       >
-        <BackToResultsWrapper>
-          <button onClick={close}>Back to Results</button>
-        </BackToResultsWrapper>
         <FilterContents>
           <div>
             <Downshift
@@ -106,6 +103,9 @@ class Filter extends React.Component<FilterProps, FilterState> {
             />
           </div>
         </FilterContents>
+        <BackToResultsWrapper>
+          <button onClick={close}>Back to Results</button>
+        </BackToResultsWrapper>
       </FilterWrapper>
     );
   }
@@ -208,7 +208,7 @@ const ListItem = styled.div`
 `;
 
 const BackToResultsWrapper = styled.div`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
