@@ -123,18 +123,19 @@ const InfoWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 
   > div:first-child {
+    height: 60px;
+
     button {
-      padding: 20px;
+      padding: 18px 20px;
     }
   }
 
   > div:last-child {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 20px;
   }
 `;
 
