@@ -30,7 +30,10 @@ const CategoryList: React.FunctionComponent<CategoryListProps> = ({
           <ActiveSortIndicator active={selectedCategory === null} />
         </li>
         {categories.map(category => (
-          <li onClick={() => setSelectedCategoryIfNotCurrent(category)}>
+          <li
+            key={category}
+            onClick={() => setSelectedCategoryIfNotCurrent(category)}
+          >
             <span>{category}</span>
             <ActiveSortIndicator active={selectedCategory === category} />
           </li>
