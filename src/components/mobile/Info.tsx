@@ -69,7 +69,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
               <span>Visit</span>
             </div>
           </div>
-          <Img alt={post.title} fluid={post.image.fluid} />
+          <Img key={post.id} alt={post.title} fluid={post.image.fluid} />
         </InfoLink>
         <InfoItemContainer>
           <InfoItem>
