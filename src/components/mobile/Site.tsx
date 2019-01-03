@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "../../utils/styled-components";
+import noScroll from "no-scroll";
 
 import { Post, FilterSortBy, InfoType, FilterType } from "../../utils/types";
 
@@ -28,61 +29,105 @@ interface SiteProps {
   aboutOpen: boolean;
 }
 
-const Site: React.FunctionComponent<SiteProps> = ({
-  toggleTheme,
-  posts,
-  categories,
-  setSelectedCategory,
-  tags,
-  setSelectedTags,
-  openInfo,
-  closeInfo,
-  openFilter,
-  closeFilter,
-  setFilterSortBy,
-  openAbout,
-  closeAbout,
-  info,
-  filter,
-  aboutOpen
-}) => (
-  <SiteWrapper>
-    <Filter
-      isOpen={filter.open}
-      close={closeFilter}
-      sortBy={filter.sortBy}
-      setSortBy={setFilterSortBy}
-      categories={categories}
-      selectedCategory={filter.selectedCategory}
-      setSelectedCategory={setSelectedCategory}
-      tags={tags}
-      selectedTags={filter.selectedTags}
-    />
-    <Header
-      sortBy={filter.sortBy}
-      setFilterSortBy={setFilterSortBy}
-      selectedCategory={filter.selectedCategory}
-      setSelectedCategory={setSelectedCategory}
-      selectedTags={filter.selectedTags}
-      setSelectedTags={setSelectedTags}
-      toggleTheme={toggleTheme}
-      openFilter={openFilter}
-      openAbout={openAbout}
-      infoOpen={info.open}
-    />
-    <About isOpen={aboutOpen} close={closeAbout} />
-    <List posts={posts} openInfo={openInfo} infoOpen={info.open} />
-    <Info
-      isOpen={info.open}
-      post={info.post}
-      close={closeInfo}
-      selectedCategory={filter.selectedCategory}
-      setSelectedCategory={setSelectedCategory}
-      selectedTags={filter.selectedTags}
-      setSelectedTags={setSelectedTags}
-    />
-  </SiteWrapper>
-);
+class Site extends React.Component<SiteProps> {
+  render() {
+    const {
+      toggleTheme,
+      posts,
+      categories,
+      setSelectedCategory,
+      tags,
+      setSelectedTags,
+      openInfo,
+      closeInfo,
+      openFilter,
+      closeFilter,
+      setFilterSortBy,
+      openAbout,
+      closeAbout,
+      info,
+      filter,
+      aboutOpen
+    } = this.props;
+
+    /* Lock and unlock scrolling when opening sections */
+
+    const openAboutAndLockScroll = () => {
+      openAbout();
+      noScroll.on();
+    };
+
+    const closeAboutAndUnlockScroll = () => {
+      closeAbout();
+      noScroll.off();
+    };
+
+    const openFilterAndLockScroll = () => {
+      openFilter();
+      noScroll.on();
+    };
+
+    const closeFilterAndUnlockScroll = () => {
+      closeFilter();
+      noScroll.off();
+    };
+
+    const openInfoAndLockScroll = (post: Post) => {
+      openInfo(post);
+      noScroll.on();
+    };
+
+    const closeInfoAndUnlockScroll = () => {
+      closeInfo();
+      noScroll.off();
+    };
+
+    /* ----------------------------------------------- */
+
+    return (
+      <SiteWrapper>
+        <Filter
+          isOpen={filter.open}
+          close={closeFilterAndUnlockScroll}
+          sortBy={filter.sortBy}
+          setSortBy={setFilterSortBy}
+          categories={categories}
+          selectedCategory={filter.selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          tags={tags}
+          selectedTags={filter.selectedTags}
+        />
+        <Header
+          sortBy={filter.sortBy}
+          setFilterSortBy={setFilterSortBy}
+          selectedCategory={filter.selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedTags={filter.selectedTags}
+          setSelectedTags={setSelectedTags}
+          toggleTheme={toggleTheme}
+          openFilter={openFilterAndLockScroll}
+          openAbout={openAboutAndLockScroll}
+          infoOpen={info.open}
+        />
+        <About isOpen={aboutOpen} close={closeAboutAndUnlockScroll} />
+        <List
+          posts={posts}
+          openInfo={openInfoAndLockScroll}
+          infoOpen={info.open}
+        />
+        <Info
+          isOpen={info.open}
+          post={info.post}
+          close={closeInfoAndUnlockScroll}
+          selectedCategory={filter.selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedTags={filter.selectedTags}
+          setSelectedTags={setSelectedTags}
+        />
+      </SiteWrapper>
+    );
+  }
+}
 
 export default Site;
 
