@@ -343,4 +343,5 @@ const AboutAndThemeChangeWrapper = styled.div`
   ${commonFlexHeaderStyles};
   border-left: 1px solid ${props => props.theme.lineColor};
   transition: border-color ${props => props.theme.transition};
+  padding: 0 15px 0 20px;
 `;

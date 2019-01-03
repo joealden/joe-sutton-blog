@@ -24,7 +24,6 @@ export default MainContainer;
 const MainContainerWrapper = styled.div`
   position: relative;
   transition: transform ${props => props.theme.transition};
-  width: 100vw;
 
   display: grid;
   grid-template-columns: 60px 3fr 1fr;
