@@ -41,7 +41,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
   };
 
-  logoClick = () => {
+  resetFilterCriteria = () => {
     const {
       setSelectedCategory,
       setFilterSortBy,
@@ -91,7 +91,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     } = this.props;
 
     const { menuOpen, showBackToTopButton } = this.state;
-    const { toggleMenu, logoClick } = this;
+    const { toggleMenu, resetFilterCriteria } = this;
 
     const sortApplied = sortBy !== FilterSortBy.NewestFirst;
     const categoryApplied = selectedCategory !== null;
@@ -106,7 +106,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         }}
       >
         <InnerHeaderWrapper>
-          <LogoWrapper onClick={logoClick}>
+          <LogoAreaWrapper>
             <div
               style={{
                 opacity: showBackToTopButton ? 1 : 0,
@@ -127,15 +127,20 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               </button>
             </div>
 
-            <div
+            <LogoButtonWrapper
               style={{
                 opacity: showBackToTopButton ? 0 : 1,
                 visibility: showBackToTopButton ? "hidden" : "visible"
               }}
             >
-              <Logo />
-            </div>
-          </LogoWrapper>
+              <button
+                aria-label="Reset Filter Criteria"
+                onClick={resetFilterCriteria}
+              >
+                <Logo />
+              </button>
+            </LogoButtonWrapper>
+          </LogoAreaWrapper>
           <FilterButtonWrapper>
             <button
               onClick={openFilter}
@@ -198,10 +203,8 @@ const commonInnerHeaderStyles = css`
   align-items: center;
 `;
 
-const LogoWrapper = styled.div`
+const LogoAreaWrapper = styled.div`
   ${commonInnerHeaderStyles};
-
-  cursor: pointer;
 
   display: grid;
   grid-template-columns: 1fr;
@@ -211,6 +214,15 @@ const LogoWrapper = styled.div`
     grid-area: left-position;
     transition: opacity ${props => props.theme.transition},
       visibility ${props => props.theme.transition};
+  }
+`;
+
+const LogoButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  button {
+    padding: 0;
   }
 `;
 
