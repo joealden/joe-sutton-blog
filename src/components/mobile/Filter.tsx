@@ -118,7 +118,7 @@ const FilterWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
+  bottom: 0;
 
   background-color: ${props => props.theme.accentColor};
   transition: transform ${props => props.theme.transition};
@@ -208,7 +208,7 @@ const ListItem = styled.div`
 `;
 
 const BackToResultsWrapper = styled.div`
-  position: sticky;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
