@@ -1,14 +1,13 @@
 export default interface ThemeInterface {
-  accentColor: string;
   transition: string;
   backgroundColor: string;
   foregroundColor: string;
   listColor: string;
   lineColor: string;
+  accentColor: string;
 }
 
 const baseTheme = {
-  accentColor: "#19F2BE",
   transition: "0.3s ease"
 };
 
@@ -17,7 +16,8 @@ export const darkTheme: ThemeInterface = {
   backgroundColor: "#111111",
   foregroundColor: "#FFFFFF",
   listColor: "#535353",
-  lineColor: "#2B2B2B"
+  lineColor: "#2B2B2B",
+  accentColor: "#19F2BE"
 };
 
 export const lightTheme: ThemeInterface = {
@@ -25,5 +25,6 @@ export const lightTheme: ThemeInterface = {
   backgroundColor: "#F8F8F8",
   foregroundColor: "#060606",
   listColor: "#C3C3C3",
-  lineColor: "#D6D6D6"
+  lineColor: "#D6D6D6",
+  accentColor: "#34B1FF"
 };
