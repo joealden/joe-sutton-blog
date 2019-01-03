@@ -24,7 +24,7 @@ const AboutWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
+  bottom: 0;
 
   background-color: ${props => props.theme.backgroundColor};
   transition: opacity ${props => props.theme.transition},
