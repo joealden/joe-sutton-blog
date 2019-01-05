@@ -16,7 +16,9 @@ interface SiteProps {
   categories: Array<string>;
   setSelectedCategory: (selectedCategory: string | null) => void;
   tags: Array<string>;
-  setSelectedTags: (selectedTags: Array<string>) => void;
+  addTagToSelectedTags: (tagToAdd: string) => void;
+  removeTagFromSelectedTags: (tagToRemove: string) => void;
+  clearSelectedTags: () => void;
   openInfo: (post: Post) => void;
   closeInfo: () => void;
   openFilter: () => void;
@@ -37,7 +39,9 @@ class Site extends React.Component<SiteProps> {
       categories,
       setSelectedCategory,
       tags,
-      setSelectedTags,
+      addTagToSelectedTags,
+      removeTagFromSelectedTags,
+      clearSelectedTags,
       openInfo,
       closeInfo,
       openFilter,
@@ -94,6 +98,8 @@ class Site extends React.Component<SiteProps> {
           categories={categories}
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          addTagToSelectedTags={addTagToSelectedTags}
+          removeTagFromSelectedTags={removeTagFromSelectedTags}
           tags={tags}
           selectedTags={filter.selectedTags}
         />
@@ -103,7 +109,7 @@ class Site extends React.Component<SiteProps> {
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
           selectedTags={filter.selectedTags}
-          setSelectedTags={setSelectedTags}
+          clearSelectedTags={clearSelectedTags}
           toggleTheme={toggleTheme}
           openFilter={openFilterAndLockScroll}
           openAbout={openAboutAndLockScroll}
@@ -122,7 +128,7 @@ class Site extends React.Component<SiteProps> {
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
           selectedTags={filter.selectedTags}
-          setSelectedTags={setSelectedTags}
+          addTagToSelectedTags={addTagToSelectedTags}
         />
       </SiteWrapper>
     );

@@ -94,11 +94,41 @@ class Site extends React.Component<SiteProps, SiteState> {
       }
     }));
 
-  setSelectedTags = (selectedTags: Array<string>) =>
+  addTagToSelectedTags = (tagToAdd: string) => {
+    const { filter } = this.state;
+    const { selectedTags } = filter;
+
+    if (!selectedTags.includes(tagToAdd)) {
+      this.setState(prevState => ({
+        filter: {
+          ...prevState.filter,
+          selectedTags: [...selectedTags, tagToAdd]
+        }
+      }));
+    }
+  };
+
+  removeTagFromSelectedTags = (tagToRemove: string) => {
+    const { filter } = this.state;
+    const { selectedTags } = filter;
+
+    const selectedTagsWithoutTagToRemove = selectedTags.filter(
+      tag => tag !== tagToRemove
+    );
+
     this.setState(prevState => ({
       filter: {
         ...prevState.filter,
-        selectedTags
+        selectedTags: selectedTagsWithoutTagToRemove
+      }
+    }));
+  };
+
+  clearSelectedTags = () =>
+    this.setState(prevState => ({
+      filter: {
+        ...prevState.filter,
+        selectedTags: []
       }
     }));
 
@@ -117,7 +147,9 @@ class Site extends React.Component<SiteProps, SiteState> {
       closeFilter,
       setFilterSortBy,
       setSelectedCategory,
-      setSelectedTags,
+      addTagToSelectedTags,
+      removeTagFromSelectedTags,
+      clearSelectedTags,
       openAbout,
       closeAbout
     } = this;
@@ -142,7 +174,9 @@ class Site extends React.Component<SiteProps, SiteState> {
             categories={categories}
             setSelectedCategory={setSelectedCategory}
             tags={tags}
-            setSelectedTags={setSelectedTags}
+            addTagToSelectedTags={addTagToSelectedTags}
+            removeTagFromSelectedTags={removeTagFromSelectedTags}
+            clearSelectedTags={clearSelectedTags}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}
@@ -162,7 +196,9 @@ class Site extends React.Component<SiteProps, SiteState> {
             categories={categories}
             setSelectedCategory={setSelectedCategory}
             tags={tags}
-            setSelectedTags={setSelectedTags}
+            addTagToSelectedTags={addTagToSelectedTags}
+            removeTagFromSelectedTags={removeTagFromSelectedTags}
+            clearSelectedTags={clearSelectedTags}
             openInfo={openInfo}
             closeInfo={closeInfo}
             openFilter={openFilter}

@@ -18,7 +18,9 @@ interface SiteProps {
   categories: Array<string>;
   setSelectedCategory: (selectedCategory: string | null) => void;
   tags: Array<string>;
-  setSelectedTags: (selectedTags: Array<string>) => void;
+  addTagToSelectedTags: (tagToAdd: string) => void;
+  removeTagFromSelectedTags: (tagToRemove: string) => void;
+  clearSelectedTags: () => void;
   openInfo: (post: Post) => void;
   closeInfo: () => void;
   openFilter: () => void;
@@ -37,7 +39,9 @@ const Site: React.FunctionComponent<SiteProps> = ({
   categories,
   setSelectedCategory,
   tags,
-  setSelectedTags,
+  addTagToSelectedTags,
+  removeTagFromSelectedTags,
+  clearSelectedTags,
   openInfo,
   closeInfo,
   openFilter,
@@ -99,7 +103,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
           selectedTags={filter.selectedTags}
-          setSelectedTags={setSelectedTags}
+          addTagToSelectedTags={addTagToSelectedTags}
         />
         <About isOpen={aboutOpen} close={closeAbout} />
         <HeaderAndListContainer
@@ -117,7 +121,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
             selectedCategory={filter.selectedCategory}
             setSelectedCategory={setSelectedCategory}
             selectedTags={filter.selectedTags}
-            setSelectedTags={setSelectedTags}
+            clearSelectedTags={clearSelectedTags}
             toggleTheme={toggleTheme}
             openFilter={openFilter}
             openAbout={openAbout}

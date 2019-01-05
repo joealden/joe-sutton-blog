@@ -13,7 +13,7 @@ interface HeaderProps {
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
   selectedTags: Array<string>;
-  setSelectedTags: (selectedTags: Array<string>) => void;
+  clearSelectedTags: () => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -45,12 +45,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const {
       setSelectedCategory,
       setFilterSortBy,
-      setSelectedTags
+      clearSelectedTags
     } = this.props;
 
     setSelectedCategory(null);
     setFilterSortBy(FilterSortBy.NewestFirst);
-    setSelectedTags([]);
+    clearSelectedTags();
   };
 
   shouldBackToTopButtonBeShown = () => {

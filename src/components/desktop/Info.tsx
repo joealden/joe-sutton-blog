@@ -13,7 +13,7 @@ interface InfoProps {
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
   selectedTags: Array<string>;
-  setSelectedTags: (selectedTags: Array<string>) => void;
+  addTagToSelectedTags: (tagToAdd: string) => void;
 }
 
 const Info: React.FunctionComponent<InfoProps> = ({
@@ -22,7 +22,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
   selectedCategory,
   setSelectedCategory,
   selectedTags,
-  setSelectedTags
+  addTagToSelectedTags
 }) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
@@ -64,7 +64,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
                 <InfoTags
                   postTags={post.tags}
                   selectedTags={selectedTags}
-                  setSelectedTags={setSelectedTags}
+                  addTagToSelectedTags={addTagToSelectedTags}
                 />
               </InfoItem>
             </InfoItemContainer>

@@ -4,7 +4,7 @@ import styled from "../../utils/styled-components";
 interface InfoTagsProps {
   postTags: Array<string>;
   selectedTags: Array<string>;
-  setSelectedTags: (selectedTags: Array<string>) => void;
+  addTagToSelectedTags: (tagToAdd: string) => void;
 }
 
 interface InfoTagsState {
@@ -30,8 +30,8 @@ class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
     });
 
   onClick = (tag: string) => {
-    const { selectedTags, setSelectedTags } = this.props;
-    setSelectedTags([...selectedTags, tag]);
+    const { addTagToSelectedTags } = this.props;
+    addTagToSelectedTags(tag);
     this.setState({ showTooltip: false });
   };
 
