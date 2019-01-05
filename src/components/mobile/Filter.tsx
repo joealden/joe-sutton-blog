@@ -31,7 +31,11 @@ class Filter extends React.Component<FilterProps, FilterState> {
     tagSearchOpen: false
   };
 
-  openTagSearch = () => this.setState({ tagSearchOpen: true });
+  openTagSearch = () => {
+    this.setState({ tagSearchOpen: true });
+    /* TODO: Scroll filter back to the top */
+  };
+
   closeTagSearch = () => this.setState({ tagSearchOpen: false });
 
   render() {
