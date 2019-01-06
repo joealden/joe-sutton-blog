@@ -127,6 +127,7 @@ const TagListWrapper = styled.div`
         &::placeholder {
           color: #060606;
           text-transform: uppercase;
+          opacity: 1;
         }
       }
 
