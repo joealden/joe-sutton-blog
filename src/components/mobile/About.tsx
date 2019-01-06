@@ -19,10 +19,10 @@ const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
     <div>
       <h2>About</h2>
       <p>
-        A list of curated design related links. The idea is for it to be a place
-        to search for inspiration when setting a... A list of curated design
-        related links. The idea is for it to be a place to search for
-        inspiration when setting a...
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
       </p>
       <a
         /* An instagram account needs to be created */
@@ -88,8 +88,9 @@ const AboutWrapper = styled.div`
     }
 
     p {
-      margin: 0 20px;
+      margin: 0 25px 0 20px;
       color: #838383;
+      max-width: 450px;
     }
 
     a {
