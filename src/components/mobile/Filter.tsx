@@ -148,7 +148,7 @@ const FilterWrapper = styled.div`
 
 const FilterContents = styled.div`
   color: #060606;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   height: calc(100% - 60px);
   max-height: calc(100% - 60px);
   overflow: auto;
