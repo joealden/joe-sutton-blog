@@ -63,6 +63,13 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
                 placeholder={inputFocused ? "" : "Search Tags..."}
                 onFocus={focusInput}
                 onBlur={blurInput}
+                /**
+                 * TODO:
+                 * Make it so that when the search icon div is pressed,
+                 * it also causes the input box to be focused. This will
+                 * require a ref to the input box to call the `.focus()`
+                 * method.
+                 */
               />
               <div>
                 <SearchIcon />
@@ -71,14 +78,12 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
           </div>
           <ul>
             {filteredTags.map(tag => (
-              <TagListItem key={tag} onClick={() => addTagToSelectedTags(tag)}>
-                <span>{tag}</span>
+              <TagListItem key={tag}>
+                <div onClick={() => addTagToSelectedTags(tag)}>{tag}</div>
                 <div
                   onClick={() => removeTagFromSelectedTags(tag)}
                   style={{
-                    visibility: selectedTags.includes(tag)
-                      ? "visible"
-                      : "hidden"
+                    display: selectedTags.includes(tag) ? "flex" : "none"
                   }}
                 >
                   <CrossIcon />
@@ -105,8 +110,6 @@ const TagSearchWrapper = styled.div`
   bottom: 0;
   background-color: ${props => props.theme.accentColor};
   z-index: 100000;
-
-  padding: 20px;
 `;
 
 const TagListWrapper = styled.div`
@@ -116,7 +119,7 @@ const TagListWrapper = styled.div`
 
       input {
         width: 100%;
-        padding: 35px 0;
+        padding: 55px 0 35px 20px;
         background-color: ${props => props.theme.accentColor};
         border: none;
         outline: none;
@@ -130,6 +133,8 @@ const TagListWrapper = styled.div`
       > div {
         display: flex;
         align-items: center;
+        margin-top: 20px;
+        margin-right: 20px;
 
         svg {
           width: 18px;
@@ -140,9 +145,9 @@ const TagListWrapper = styled.div`
     &:after {
       content: "";
       display: block;
-      margin: 0 0 35px 0;
+      margin: 0 20px 35px 20px;
       height: 1px;
-      width: 100%;
+      width: calc(100% - 40px);
       background-color: #060606;
     }
   }
@@ -154,10 +159,6 @@ const TagListWrapper = styled.div`
     color: #060606;
     overflow: auto;
     max-height: calc(100vh - 240px);
-
-    li {
-      padding: 5px 0;
-    }
   }
 `;
 
@@ -165,13 +166,15 @@ const TagListItem = styled.li`
   display: flex;
   justify-content: space-between;
 
-  span:first-child {
+  div:first-child {
     display: flex;
     align-items: center;
+    flex: 1;
+    padding: 5px 20px;
   }
 
   div:last-child {
-    padding: 5px 10px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
 

@@ -71,7 +71,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
               <div
                 onClick={openTagSearch}
                 style={{
-                  paddingBottom: selectedTags.length === 0 ? "35px" : "25px"
+                  paddingBottom: selectedTags.length === 0 ? "35px" : "20px"
                 }}
               >
                 <h3>Tags</h3>
@@ -80,25 +80,11 @@ class Filter extends React.Component<FilterProps, FilterState> {
                 </div>
               </div>
               <div>
-                <ul
-                  style={{
-                    paddingBottom: selectedTags.length === 0 ? "0" : "25px"
-                  }}
-                >
+                <ul>
                   {selectedTags.map(tag => (
-                    <TagListItem
-                      key={tag}
-                      onClick={() => addTagToSelectedTags(tag)}
-                    >
-                      <span>{tag}</span>
-                      <div
-                        onClick={() => removeTagFromSelectedTags(tag)}
-                        style={{
-                          visibility: selectedTags.includes(tag)
-                            ? "visible"
-                            : "hidden"
-                        }}
-                      >
+                    <TagListItem key={tag}>
+                      <div>{tag}</div>
+                      <div onClick={() => removeTagFromSelectedTags(tag)}>
                         <CrossIcon />
                       </div>
                     </TagListItem>
@@ -151,7 +137,6 @@ const FilterWrapper = styled.div`
 
 const FilterContents = styled.div`
   color: #060606;
-  padding: 20px 20px 0 20px;
   height: calc(100% - 60px);
   max-height: calc(100% - 60px);
   overflow: auto;
@@ -166,9 +151,9 @@ const FilterContents = styled.div`
     &:not(:last-child):after {
       content: "";
       display: block;
-      margin: 0 0 35px 0;
+      margin: 0 20px 35px 20px;
       height: 1px;
-      width: 100%;
+      width: calc(100% - 40px);
       background-color: #060606;
     }
 
@@ -196,11 +181,13 @@ const FilterContents = styled.div`
   }
 
   > div:first-child {
+    /* padding: 20px 20px 0 20px; */
+
     > div:first-child {
       display: flex;
       justify-content: space-between;
 
-      padding: 35px 0;
+      padding: 55px 20px 35px 20px;
 
       > div {
         display: flex;
@@ -215,9 +202,25 @@ const FilterContents = styled.div`
     > div:last-child {
       ul {
         li {
-          padding: 5px 0;
+          padding: 0;
+        }
+
+        li:last-child {
+          padding-bottom: 20px;
         }
       }
+    }
+  }
+
+  > div:nth-child(2),
+  > div:last-child {
+    h3 {
+      padding: 0 20px;
+    }
+
+    li {
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }
 `;
@@ -225,16 +228,15 @@ const FilterContents = styled.div`
 const TagListItem = styled.li`
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
 
-  span:first-child {
-    display: flex;
-    align-items: center;
+  div:first-child {
+    flex: 1;
+    padding-left: 20px;
   }
 
   div:last-child {
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
+    padding: 5px 20px;
 
     svg {
       width: 12px;
