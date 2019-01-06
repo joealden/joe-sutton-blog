@@ -5,7 +5,10 @@ import { FilterSortBy } from "../../utils/types";
 
 import SortByList from "../SortByList";
 import CategoryList from "../CategoryList";
+
 import SearchIcon from "../icons/Search";
+import CrossIcon from "../icons/Cross";
+
 import TagSearch from "./TagSearch";
 
 interface FilterProps {
@@ -71,7 +74,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
                   paddingBottom: selectedTags.length === 0 ? "35px" : "25px"
                 }}
               >
-                <h3>Search Tags...</h3>
+                <h3>Tags</h3>
                 <div>
                   <SearchIcon />
                 </div>
@@ -88,7 +91,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
                       onClick={() => addTagToSelectedTags(tag)}
                     >
                       <span>{tag}</span>
-                      <span
+                      <div
                         onClick={() => removeTagFromSelectedTags(tag)}
                         style={{
                           visibility: selectedTags.includes(tag)
@@ -96,8 +99,8 @@ class Filter extends React.Component<FilterProps, FilterState> {
                             : "hidden"
                         }}
                       >
-                        x
-                      </span>
+                        <CrossIcon />
+                      </div>
                     </TagListItem>
                   ))}
                 </ul>
@@ -228,8 +231,14 @@ const TagListItem = styled.li`
     align-items: center;
   }
 
-  span:last-child {
+  div:last-child {
     padding: 5px 10px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 12px;
+    }
   }
 `;
 

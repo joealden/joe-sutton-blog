@@ -2,6 +2,7 @@ import React from "react";
 import styled from "../../utils/styled-components";
 
 import SearchIcon from "../icons/Search";
+import CrossIcon from "../icons/Cross";
 
 interface TagSearchProps {
   close: () => void;
@@ -13,17 +14,22 @@ interface TagSearchProps {
 
 interface TagSearchState {
   searchValue: string;
+  inputFocused: boolean;
 }
 
 class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
   state = {
-    searchValue: ""
+    searchValue: "",
+    inputFocused: false
   };
 
   updateSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSearchValue = event.target.value;
     this.setState({ searchValue: newSearchValue });
   };
+
+  focusInput = () => this.setState({ inputFocused: true });
+  blurInput = () => this.setState({ inputFocused: false });
 
   render() {
     const {
@@ -34,8 +40,8 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
       removeTagFromSelectedTags
     } = this.props;
 
-    const { searchValue } = this.state;
-    const { updateSearchValue } = this;
+    const { searchValue, inputFocused } = this.state;
+    const { updateSearchValue, focusInput, blurInput } = this;
 
     const filteredTags = tags.filter(tag => {
       const lowercaseTag = tag.toLowerCase();
@@ -54,6 +60,9 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
                 type="text"
                 autoComplete="off"
                 spellCheck={false}
+                placeholder={inputFocused ? "" : "Search Tags..."}
+                onFocus={focusInput}
+                onBlur={blurInput}
               />
               <div>
                 <SearchIcon />
@@ -64,7 +73,7 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
             {filteredTags.map(tag => (
               <TagListItem key={tag} onClick={() => addTagToSelectedTags(tag)}>
                 <span>{tag}</span>
-                <span
+                <div
                   onClick={() => removeTagFromSelectedTags(tag)}
                   style={{
                     visibility: selectedTags.includes(tag)
@@ -72,8 +81,8 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
                       : "hidden"
                   }}
                 >
-                  x
-                </span>
+                  <CrossIcon />
+                </div>
               </TagListItem>
             ))}
           </ul>
@@ -111,6 +120,11 @@ const TagListWrapper = styled.div`
         background-color: ${props => props.theme.accentColor};
         border: none;
         outline: none;
+
+        &::placeholder {
+          color: #060606;
+          text-transform: uppercase;
+        }
       }
 
       > div {
@@ -156,8 +170,14 @@ const TagListItem = styled.li`
     align-items: center;
   }
 
-  span:last-child {
+  div:last-child {
     padding: 5px 10px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 12px;
+    }
   }
 `;
 
