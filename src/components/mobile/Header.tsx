@@ -3,6 +3,8 @@ import styled, { css } from "../../utils/styled-components";
 
 import { FilterSortBy } from "../../utils/types";
 
+import FilterButton from "../FilterButton";
+
 import BackToTop from "../icons/BackToTop";
 import Logo from "../icons/Logo";
 import Hamburger from "../icons/Hamburger";
@@ -142,12 +144,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             </LogoButtonWrapper>
           </LogoAreaWrapper>
           <FilterButtonWrapper>
-            <button
-              onClick={openFilter}
-              className={filterApplied ? "filter-applied" : ""}
-            >
-              <span>Filter</span>
-            </button>
+            <FilterButton
+              openFilter={openFilter}
+              sortBy={sortBy}
+              selectedCategory={selectedCategory}
+              selectedTags={selectedTags}
+            />
           </FilterButtonWrapper>
           <MenuIconWrapper>
             <button aria-label="Open Menu" onClick={toggleMenu}>
@@ -232,17 +234,6 @@ const FilterButtonWrapper = styled.div`
 
   button {
     color: ${props => props.theme.accentColor};
-
-    span {
-      border-bottom: 1px solid ${props => props.theme.backgroundColor};
-      transition: border-color ${props => props.theme.transition};
-    }
-  }
-
-  button.filter-applied {
-    span {
-      border-bottom: 1px solid ${props => props.theme.accentColor};
-    }
   }
 `;
 
