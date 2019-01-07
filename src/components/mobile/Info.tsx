@@ -39,12 +39,15 @@ const Info: React.FunctionComponent<InfoProps> = ({
   const dateString = `${date}/${month}/${year}`;
 
   const onCategoryClick = () => {
-    setSelectedCategory(post.category);
-    close();
+    if (post.category !== selectedCategory) {
+      setSelectedCategory(post.category);
+    }
   };
 
   const onTagClick = (tag: string) => {
-    addTagToSelectedTags(tag);
+    if (!selectedTags.includes(tag)) {
+      addTagToSelectedTags(tag);
+    }
   };
 
   return (
@@ -78,11 +81,14 @@ const Info: React.FunctionComponent<InfoProps> = ({
           </InfoItem>
           <InfoItem>
             <div>Category</div>
-            {selectedCategory === post.category ? (
-              <NoClickCategory>{post.category}</NoClickCategory>
-            ) : (
-              <Category onClick={onCategoryClick}>{post.category}</Category>
-            )}
+            <Category
+              onClick={onCategoryClick}
+              className={
+                post.category === selectedCategory ? "selected-category" : ""
+              }
+            >
+              {post.category}
+            </Category>
           </InfoItem>
           <InfoItem>
             <div>Tags</div>
@@ -94,7 +100,12 @@ const Info: React.FunctionComponent<InfoProps> = ({
                 return [
                   ...acc,
                   <React.Fragment key={currentTag}>
-                    <Tag onClick={() => onTagClick(currentTag)}>
+                    <Tag
+                      onClick={() => onTagClick(currentTag)}
+                      className={
+                        selectedTags.includes(currentTag) ? "selected-tag" : ""
+                      }
+                    >
                       {currentTag}
                     </Tag>
                     {punctuation}
@@ -210,24 +221,20 @@ const InfoItem = styled.div`
   }
 `;
 
-const Tag = styled.span`
-  cursor: pointer;
-  transition: color ${props => props.theme.transition};
-
-  &:hover {
-    color: ${props => props.theme.accentColor};
-  }
-`;
-
 const Category = styled.span`
   cursor: pointer;
   transition: color ${props => props.theme.transition};
 
-  &:hover {
+  &.selected-category {
     color: ${props => props.theme.accentColor};
   }
 `;
 
-const NoClickCategory = styled.span``;
+const Tag = styled.span`
+  cursor: pointer;
+  transition: color ${props => props.theme.transition};
 
-/* ------------------------------------------------------------ */
+  &.selected-tag {
+    color: ${props => props.theme.accentColor};
+  }
+`;
