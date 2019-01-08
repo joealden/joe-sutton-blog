@@ -1,8 +1,11 @@
 module.exports = {
+  pathPrefix: "/",
+
   siteMetadata: {
     title: "Listed",
     siteUrl: "https://listed.design"
   },
+
   plugins: [
     {
       resolve: "gatsby-source-contentful",

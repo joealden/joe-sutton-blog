@@ -1,4 +1,5 @@
 import React from "react";
+import { withPrefix } from "gatsby";
 
 interface HTMLProps {
   htmlAttributes: Object;
@@ -41,7 +42,7 @@ class HTML extends React.Component<HTMLProps> {
              * version. This would be completely pointless.
              */
             rel="preload"
-            href="static/SuisseIntl-Regular.woff2"
+            href={withPrefix("SuisseIntl-Regular.woff2")}
             as="font"
             /* type="font/woff2" */
           />
