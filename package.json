@@ -29,7 +29,7 @@
     "@types/lodash.shuffle": "^4.2.4",
     "@types/memoize-one": "^4.1.0",
     "@types/react": "^16.7.18",
-    "@types/styled-components": "^4.1.4",
+    "@types/styled-components": "^4.1.5",
     "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.0.85",
     "gatsby-plugin-manifest": "^2.0.13",
