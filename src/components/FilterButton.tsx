@@ -105,81 +105,36 @@ class FilterButton extends React.Component<
 
 export default FilterButton;
 
-/** ----------------------------------- /
- * NOTE:
- * This is horrible hacky code, please
- * replace with JavaScript animations.
- */
-
 const lineAnimationEnter = keyframes`
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to   { width: 100%; }
 `;
 
 const lineAnimationLeave = keyframes`
-  from {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  to {
-    width: 0;
-    margin-left: 100%;
-  }
+  from { width: 100%; margin-left: 0; }
+  to   { width: 0;    margin-left: 100%; }
 `;
 
 const lineAnimationReload1 = keyframes`
-  0% {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  50% {
-    width: 0;
-    margin-left: 100%;
-  }
-
-  51% {
-    margin-left: 0;
-  }
-
-  100% {
-    width: 100%;
-    margin-left: 0;
-  }
+  0%   { width: 100%; margin-left: 0; }
+  50%  { width: 0;    margin-left: 100%; }
+  51%  {              margin-left: 0; }
+  100% { width: 100%; margin-left: 0; }
 `;
 
-/* 'from' and 'to' used to trigger animation to reload */
+/**
+ * 'from' and 'to' keywords used instead of '0%' and '100%'
+ * so that the reload animation actually replays correctly.
+ */
 const lineAnimationReload2 = keyframes`
-  from {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  50% {
-    width: 0;
-    margin-left: 100%;
-  }
-
-  51% {
-    margin-left: 0;
-  }
-
-  to {
-    width: 100%;
-    margin-left: 0;
-  }
+  from { width: 100%; margin-left: 0; }
+  50%  { width: 0;    margin-left: 100%; }
+  51%  {              margin-left: 0; }
+  to   { width: 100%; margin-left: 0; }
 `;
-
-/** ----------------------------------- */
 
 const StyledFilterButton = styled.button`
-  /* NOTE: This offsets the bottom border height */
+  /* This offsets the underline height */
   margin-top: 1px;
 
   span:after {
