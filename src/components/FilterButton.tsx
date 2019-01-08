@@ -49,9 +49,9 @@ class FilterButton extends React.Component<FilterButtonProps> {
         setlineTransition(FilterLineTransition.Leaving);
         setTimeout(() => setlineTransition(FilterLineTransition.Initial), 300);
       } else if (
-        prevProps.sortBy !== newProps.sortBy ||
-        prevProps.selectedCategory !== newProps.selectedCategory ||
-        prevProps.selectedTags !== newProps.selectedTags
+        newProps.sortBy !== prevProps.sortBy ||
+        newProps.selectedCategory !== prevProps.selectedCategory ||
+        newProps.selectedTags !== prevProps.selectedTags
       ) {
         setlineTransition(FilterLineTransition.Reloading);
         setTimeout(() => setlineTransition(FilterLineTransition.Entered), 600);
