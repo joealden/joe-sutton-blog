@@ -25,6 +25,26 @@ class HTML extends React.Component<HTMLProps> {
             name="description"
             content="Listed - A curated list of inspirational design"
           />
+          <link
+            /**
+             * NOTE:
+             * Only preload woff2 version of font as browsers that
+             * support the preload hint also support the woff2 font
+             * format. See the following links for the browser support
+             * for these features:
+             *
+             * https://caniuse.com/#feat=link-rel-preload
+             * https://caniuse.com/#feat=woff2
+             *
+             * Also, if we preloaded the woff version of the font, the
+             * browsers that support woff2 would also download the woff
+             * version. This would be completely pointless.
+             */
+            rel="preload"
+            href="static/SuisseIntl-Regular.woff2"
+            as="font"
+            /* type="font/woff2" */
+          />
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>
