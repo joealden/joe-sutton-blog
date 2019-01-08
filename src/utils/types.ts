@@ -42,3 +42,11 @@ export type FilterType = {
   selectedCategory: string | null;
   selectedTags: Array<string>;
 };
+
+export enum FilterLineTransition {
+  Initial,
+  Entering,
+  Entered,
+  Leaving,
+  Reloading
+}

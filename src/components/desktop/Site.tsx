@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-import { Post, FilterSortBy, InfoType, FilterType } from "../../utils/types";
+import {
+  Post,
+  FilterSortBy,
+  InfoType,
+  FilterType,
+  FilterLineTransition
+} from "../../utils/types";
 
 import Filter from "./Filter";
 import MainContainer from "./MainContainer";
@@ -31,6 +37,8 @@ interface SiteProps {
   info: InfoType;
   filter: FilterType;
   aboutOpen: boolean;
+  filterLineTransition: FilterLineTransition;
+  setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
 }
 
 const Site: React.FunctionComponent<SiteProps> = ({
@@ -51,7 +59,9 @@ const Site: React.FunctionComponent<SiteProps> = ({
   closeAbout,
   info,
   filter,
-  aboutOpen
+  aboutOpen,
+  filterLineTransition,
+  setFilterLineTransition
 }) => {
   const handleOverlayClick = () => {
     if (info.open) {
@@ -125,6 +135,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
             toggleTheme={toggleTheme}
             openFilter={openFilter}
             openAbout={openAbout}
+            filterLineTransition={filterLineTransition}
+            setFilterLineTransition={setFilterLineTransition}
           />
           <List
             openInfo={openInfo}

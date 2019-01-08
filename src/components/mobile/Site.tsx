@@ -2,7 +2,13 @@ import React from "react";
 import styled from "../../utils/styled-components";
 import noScroll from "no-scroll";
 
-import { Post, FilterSortBy, InfoType, FilterType } from "../../utils/types";
+import {
+  Post,
+  FilterSortBy,
+  InfoType,
+  FilterType,
+  FilterLineTransition
+} from "../../utils/types";
 
 import Header from "./Header";
 import Filter from "./Filter";
@@ -29,6 +35,8 @@ interface SiteProps {
   info: InfoType;
   filter: FilterType;
   aboutOpen: boolean;
+  filterLineTransition: FilterLineTransition;
+  setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
 }
 
 class Site extends React.Component<SiteProps> {
@@ -51,7 +59,9 @@ class Site extends React.Component<SiteProps> {
       closeAbout,
       info,
       filter,
-      aboutOpen
+      aboutOpen,
+      filterLineTransition,
+      setFilterLineTransition
     } = this.props;
 
     /* Lock and unlock scrolling when opening sections */
@@ -114,6 +124,8 @@ class Site extends React.Component<SiteProps> {
           openFilter={openFilterAndLockScroll}
           openAbout={openAboutAndLockScroll}
           infoOpen={info.open}
+          filterLineTransition={filterLineTransition}
+          setFilterLineTransition={setFilterLineTransition}
         />
         <About isOpen={aboutOpen} close={closeAboutAndUnlockScroll} />
         <List

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "../../utils/styled-components";
 
-import { FilterSortBy } from "../../utils/types";
+import { FilterSortBy, FilterLineTransition } from "../../utils/types";
 
 import FilterButton from "../FilterButton";
 
@@ -20,6 +20,8 @@ interface HeaderProps {
   openFilter: () => void;
   openAbout: () => void;
   infoOpen: boolean;
+  filterLineTransition: FilterLineTransition;
+  setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
 }
 
 interface HeaderState {
@@ -89,7 +91,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       toggleTheme,
       openFilter,
       openAbout,
-      infoOpen
+      infoOpen,
+      filterLineTransition,
+      setFilterLineTransition
     } = this.props;
 
     const { menuOpen, showBackToTopButton } = this.state;
@@ -149,6 +153,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               sortBy={sortBy}
               selectedCategory={selectedCategory}
               selectedTags={selectedTags}
+              lineTransition={filterLineTransition}
+              setlineTransition={setFilterLineTransition}
             />
           </FilterButtonWrapper>
           <MenuIconWrapper>

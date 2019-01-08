@@ -1,85 +1,60 @@
 import React from "react";
 import styled, { keyframes } from "../utils/styled-components";
 
-import { FilterSortBy } from "../utils/types";
+import { FilterSortBy, FilterLineTransition } from "../utils/types";
 
-enum LineTransition {
-  Initial,
-  Enter,
-  Leave,
-  /* Two different state so that reload is actually triggered */
-  Reload1,
-  Reload2
-}
-
-const calculateLineTransitionClass = (lineTransition: LineTransition) => {
+const calculateLineTransitionClass = (lineTransition: FilterLineTransition) => {
   switch (lineTransition) {
-    case LineTransition.Initial:
+    case FilterLineTransition.Initial:
       return "";
-    case LineTransition.Enter:
-      return "filter-line-enter";
-    case LineTransition.Leave:
-      return "filter-line-leave";
-    case LineTransition.Reload1:
-      return "filter-line-reload-1";
-    case LineTransition.Reload2:
-      return "filter-line-reload-2";
+    case FilterLineTransition.Entering:
+      return "filter-line-entering";
+    case FilterLineTransition.Entered:
+      return "filter-line-entered";
+    case FilterLineTransition.Leaving:
+      return "filter-line-leaving";
+    case FilterLineTransition.Reloading:
+      return "filter-line-reloading";
   }
 };
 
 interface FilterButtonProps {
   openFilter: () => void;
+  lineTransition: FilterLineTransition;
+  setlineTransition: (lineTransition: FilterLineTransition) => void;
   /* ----------------------- */
   sortBy: FilterSortBy;
   selectedCategory: string | null;
   selectedTags: Array<string>;
 }
 
-interface FilterButtonState {
-  lineTransition: LineTransition;
-}
-
-class FilterButton extends React.Component<
-  FilterButtonProps,
-  FilterButtonState
-> {
-  state = {
-    lineTransition: LineTransition.Initial
-  };
-
+class FilterButton extends React.Component<FilterButtonProps> {
   setLineTransitionState = (prevProps: FilterButtonProps) => {
-    const newProps = this.props;
-    const { lineTransition } = this.state;
+    const { lineTransition, setlineTransition, ...newProps } = this.props;
 
     if (
-      (lineTransition === LineTransition.Initial ||
-        lineTransition === LineTransition.Leave) &&
+      lineTransition === FilterLineTransition.Initial &&
       (newProps.sortBy !== FilterSortBy.NewestFirst ||
         newProps.selectedCategory !== null ||
         newProps.selectedTags.length !== 0)
     ) {
-      this.setState({ lineTransition: LineTransition.Enter });
-    } else if (
-      lineTransition === LineTransition.Enter ||
-      lineTransition === LineTransition.Reload1 ||
-      lineTransition === LineTransition.Reload2
-    ) {
+      setlineTransition(FilterLineTransition.Entering);
+      setTimeout(() => setlineTransition(FilterLineTransition.Entered), 300);
+    } else if (lineTransition === FilterLineTransition.Entered) {
       if (
         newProps.sortBy === FilterSortBy.NewestFirst &&
         newProps.selectedCategory === null &&
         newProps.selectedTags.length === 0
       ) {
-        this.setState({ lineTransition: LineTransition.Leave });
+        setlineTransition(FilterLineTransition.Leaving);
+        setTimeout(() => setlineTransition(FilterLineTransition.Initial), 300);
       } else if (
         prevProps.sortBy !== newProps.sortBy ||
         prevProps.selectedCategory !== newProps.selectedCategory ||
         prevProps.selectedTags !== newProps.selectedTags
       ) {
-        if (lineTransition === LineTransition.Reload1) {
-          this.setState({ lineTransition: LineTransition.Reload2 });
-        } else {
-          this.setState({ lineTransition: LineTransition.Reload1 });
-        }
+        setlineTransition(FilterLineTransition.Reloading);
+        setTimeout(() => setlineTransition(FilterLineTransition.Entered), 600);
       }
     }
   };
@@ -89,8 +64,7 @@ class FilterButton extends React.Component<
   }
 
   render() {
-    const { openFilter } = this.props;
-    const { lineTransition } = this.state;
+    const { openFilter, lineTransition } = this.props;
 
     return (
       <StyledFilterButton
@@ -122,17 +96,6 @@ const lineAnimationReload1 = keyframes`
   100% { width: 100%; margin-left: 0; }
 `;
 
-/**
- * 'from' and 'to' keywords used instead of '0%' and '100%'
- * so that the reload animation actually replays correctly.
- */
-const lineAnimationReload2 = keyframes`
-  from { width: 100%; margin-left: 0; }
-  50%  { width: 0;    margin-left: 100%; }
-  51%  {              margin-left: 0; }
-  to   { width: 100%; margin-left: 0; }
-`;
-
 const StyledFilterButton = styled.button`
   /* This offsets the underline height */
   margin-top: 1px;
@@ -145,19 +108,19 @@ const StyledFilterButton = styled.button`
     background-color: ${props => props.theme.accentColor};
   }
 
-  &.filter-line-enter span:after {
+  &.filter-line-entered span:after {
+    width: 100%;
+  }
+
+  &.filter-line-entering span:after {
     animation: ${lineAnimationEnter} 0.3s ease forwards;
   }
 
-  &.filter-line-leave span:after {
+  &.filter-line-leaving span:after {
     animation: ${lineAnimationLeave} 0.3s ease forwards;
   }
 
-  &.filter-line-reload-1 span:after {
+  &.filter-line-reloading span:after {
     animation: ${lineAnimationReload1} 0.6s ease forwards;
-  }
-
-  &.filter-line-reload-2 span:after {
-    animation: ${lineAnimationReload2} 0.6s ease forwards;
   }
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "../../utils/styled-components";
 
-import { FilterSortBy } from "../../utils/types";
+import { FilterSortBy, FilterLineTransition } from "../../utils/types";
 
 import FilterButton from "../FilterButton";
 
@@ -19,6 +19,8 @@ interface HeaderProps {
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
+  filterLineTransition: FilterLineTransition;
+  setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
 }
 
 interface HeaderState {
@@ -74,7 +76,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       openAbout,
       sortBy,
       selectedCategory,
-      selectedTags
+      selectedTags,
+      filterLineTransition,
+      setFilterLineTransition
     } = this.props;
 
     const { showBackToTopButton } = this.state;
@@ -91,6 +95,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             sortBy={sortBy}
             selectedCategory={selectedCategory}
             selectedTags={selectedTags}
+            lineTransition={filterLineTransition}
+            setlineTransition={setFilterLineTransition}
           />
           <button
             aria-label="Back To Top"

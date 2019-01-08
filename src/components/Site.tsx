@@ -2,7 +2,13 @@ import React from "react";
 import memoize from "memoize-one";
 import MediaQuery from "react-responsive";
 
-import { Post, FilterSortBy, InfoType, FilterType } from "../utils/types";
+import {
+  Post,
+  FilterSortBy,
+  InfoType,
+  FilterType,
+  FilterLineTransition
+} from "../utils/types";
 
 import MobileSite from "./mobile/Site";
 import DesktopSite from "./desktop/Site";
@@ -25,6 +31,7 @@ interface SiteState {
   info: InfoType;
   filter: FilterType;
   aboutOpen: boolean;
+  filterLineTransition: FilterLineTransition;
 }
 
 class Site extends React.Component<SiteProps, SiteState> {
@@ -39,7 +46,8 @@ class Site extends React.Component<SiteProps, SiteState> {
       selectedCategory: null,
       selectedTags: []
     },
-    aboutOpen: false
+    aboutOpen: false,
+    filterLineTransition: FilterLineTransition.Initial
   };
 
   /* ----------------- Info ----------------- */
@@ -137,6 +145,12 @@ class Site extends React.Component<SiteProps, SiteState> {
   openAbout = () => this.setState({ aboutOpen: true });
   closeAbout = () => this.setState({ aboutOpen: false });
 
+  /* -------- Filter Line Transition -------- */
+
+  setFilterLineTransition = (filterLineTransition: FilterLineTransition) => {
+    this.setState({ filterLineTransition });
+  };
+
   /* ---------------------------------------- */
 
   render() {
@@ -151,11 +165,12 @@ class Site extends React.Component<SiteProps, SiteState> {
       removeTagFromSelectedTags,
       clearSelectedTags,
       openAbout,
-      closeAbout
+      closeAbout,
+      setFilterLineTransition
     } = this;
 
     const { toggleTheme, posts, categories, tags } = this.props;
-    const { info, filter, aboutOpen } = this.state;
+    const { info, filter, aboutOpen, filterLineTransition } = this.state;
 
     const filteredPosts = memoizedFilterPosts(
       posts,
@@ -187,6 +202,8 @@ class Site extends React.Component<SiteProps, SiteState> {
             info={info}
             filter={filter}
             aboutOpen={aboutOpen}
+            filterLineTransition={filterLineTransition}
+            setFilterLineTransition={setFilterLineTransition}
           />
         </MediaQuery>
         <MediaQuery minWidth={1024}>
@@ -209,6 +226,8 @@ class Site extends React.Component<SiteProps, SiteState> {
             info={info}
             filter={filter}
             aboutOpen={aboutOpen}
+            filterLineTransition={filterLineTransition}
+            setFilterLineTransition={setFilterLineTransition}
           />
         </MediaQuery>
         <GlobalStyles />
