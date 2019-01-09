@@ -1,0 +1,12 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["esnext", "dom"],
+    "rootDir": "src",
+    "jsx": "react",
+    "noEmit": true
+  }
+}
