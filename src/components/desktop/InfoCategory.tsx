@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-interface InfoCategoryProps {
+type InfoCategoryProps = {
   postCategory: string;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string) => void;
-}
+};
 
-interface InfoCategoryState {
+type InfoCategoryState = {
   showTooltip: boolean;
   mouseX: number;
   mouseY: number;
-}
+};
 
 class InfoCategory extends React.Component<
   InfoCategoryProps,

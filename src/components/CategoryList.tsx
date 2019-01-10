@@ -2,11 +2,11 @@ import React from "react";
 
 import ActiveSortIndicator from "./ActiveSortIndicator";
 
-interface CategoryListProps {
+type CategoryListProps = {
   categories: Array<string>;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
-}
+};
 
 const CategoryList: React.FunctionComponent<CategoryListProps> = ({
   categories,

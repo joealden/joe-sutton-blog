@@ -4,18 +4,18 @@ import styled from "../../utils/styled-components";
 import SearchIcon from "../icons/Search";
 import CrossIcon from "../icons/Cross";
 
-interface TagSearchProps {
+type TagSearchProps = {
   close: () => void;
   tags: Array<string>;
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
   removeTagFromSelectedTags: (tagToRemove: string) => void;
-}
+};
 
-interface TagSearchState {
+type TagSearchState = {
   searchValue: string;
   inputFocused: boolean;
-}
+};
 
 class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
   state = {

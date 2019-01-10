@@ -6,7 +6,7 @@ import { FilterSortBy } from "../../utils/types";
 import SortByList from "../SortByList";
 import CategoryList from "../CategoryList";
 
-interface FilterProps {
+type FilterProps = {
   isOpen: boolean;
   close: () => void;
   sortBy: FilterSortBy;
@@ -16,7 +16,7 @@ interface FilterProps {
   setSelectedCategory: (selectedCategory: string | null) => void;
   tags: Array<string>;
   selectedTags: Array<string>;
-}
+};
 
 const Filter: React.FunctionComponent<FilterProps> = ({
   isOpen,

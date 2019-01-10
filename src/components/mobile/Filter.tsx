@@ -11,7 +11,7 @@ import CrossIcon from "../icons/Cross";
 
 import TagSearch from "./TagSearch";
 
-interface FilterProps {
+type FilterProps = {
   isOpen: boolean;
   close: () => void;
   sortBy: FilterSortBy;
@@ -23,11 +23,11 @@ interface FilterProps {
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
   removeTagFromSelectedTags: (tagToRemove: string) => void;
-}
+};
 
-interface FilterState {
+type FilterState = {
   tagSearchOpen: boolean;
-}
+};
 
 class Filter extends React.Component<FilterProps, FilterState> {
   state = {

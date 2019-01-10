@@ -38,19 +38,19 @@ const dummyPost: Post = {
   }
 };
 
-interface SiteProps {
+type SiteProps = {
   toggleTheme: () => void;
   posts: Array<Post>;
   categories: Array<string>;
   tags: Array<string>;
-}
+};
 
-interface SiteState {
+type SiteState = {
   info: InfoType;
   filter: FilterType;
   aboutOpen: boolean;
   filterLineTransition: FilterLineTransition;
-}
+};
 
 class Site extends React.Component<SiteProps, SiteState> {
   state = {

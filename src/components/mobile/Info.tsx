@@ -6,7 +6,7 @@ import { Post } from "../../utils/types";
 
 import Arrow from "../icons/Arrow";
 
-interface InfoProps {
+type InfoProps = {
   isOpen: boolean;
   post: Post;
   close: () => void;
@@ -14,7 +14,7 @@ interface InfoProps {
   setSelectedCategory: (selectedCategory: string | null) => void;
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
-}
+};
 
 /**
  * TODO:

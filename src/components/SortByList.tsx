@@ -4,10 +4,10 @@ import { FilterSortBy } from "../utils/types";
 
 import ActiveSortIndicator from "./ActiveSortIndicator";
 
-interface SortByListProps {
+type SortByListProps = {
   sortBy: FilterSortBy;
   setSortBy: (sortBy: FilterSortBy) => void;
-}
+};
 
 const SortByList: React.FunctionComponent<SortByListProps> = ({
   sortBy,

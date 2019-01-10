@@ -18,7 +18,7 @@ import Overlay from "./Overlay";
 import Header from "./Header";
 import List from "./List";
 
-interface SiteProps {
+type SiteProps = {
   toggleTheme: () => void;
   posts: Array<Post>;
   categories: Array<string>;
@@ -39,7 +39,7 @@ interface SiteProps {
   aboutOpen: boolean;
   filterLineTransition: FilterLineTransition;
   setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
-}
+};
 
 const Site: React.FunctionComponent<SiteProps> = ({
   toggleTheme,

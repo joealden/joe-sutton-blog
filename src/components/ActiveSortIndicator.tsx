@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "../utils/styled-components";
 
-interface ASIProps {
+type ASIProps = {
   active: boolean;
-}
+};
 
 const ActiveSortIndicator: React.FunctionComponent<ASIProps> = ({ active }) => (
   <ASIWrapper>

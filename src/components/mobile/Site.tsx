@@ -16,7 +16,7 @@ import About from "./About";
 import List from "./List";
 import Info from "./Info";
 
-interface SiteProps {
+type SiteProps = {
   toggleTheme: () => void;
   posts: Array<Post>;
   categories: Array<string>;
@@ -37,7 +37,7 @@ interface SiteProps {
   aboutOpen: boolean;
   filterLineTransition: FilterLineTransition;
   setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
-}
+};
 
 class Site extends React.Component<SiteProps> {
   render() {

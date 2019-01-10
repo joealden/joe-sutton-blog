@@ -9,7 +9,7 @@ import Circle from "../icons/Circle";
 import Logo from "../icons/Logo";
 import BackToTop from "../icons/BackToTop";
 
-interface HeaderProps {
+type HeaderProps = {
   sortBy: FilterSortBy;
   setFilterSortBy: (sortBy: FilterSortBy) => void;
   selectedCategory: string | null;
@@ -21,11 +21,11 @@ interface HeaderProps {
   openAbout: () => void;
   filterLineTransition: FilterLineTransition;
   setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
-}
+};
 
-interface HeaderState {
+type HeaderState = {
   showBackToTopButton: boolean;
-}
+};
 
 class Header extends React.Component<HeaderProps, HeaderState> {
   state = {

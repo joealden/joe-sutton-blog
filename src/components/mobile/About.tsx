@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-interface AboutProps {
+type AboutProps = {
   isOpen: boolean;
   close: () => void;
-}
+};
 
 const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
   <AboutWrapper

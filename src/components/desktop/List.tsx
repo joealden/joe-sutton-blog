@@ -5,16 +5,16 @@ import { Post, FilterSortBy } from "../../utils/types";
 
 import { ListItem, PaddingListItem } from "./ListItem";
 
-interface ListProps {
+type ListProps = {
   openInfo: (post: Post) => void;
   posts: Array<Post>;
   sortBy: FilterSortBy;
   selectedCategory: string | null;
-}
+};
 
-interface ListState {
+type ListState = {
   activeItemId: string | null;
-}
+};
 
 class List extends React.Component<ListProps, ListState> {
   state = {

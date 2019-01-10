@@ -9,7 +9,7 @@ import MenuButton from "./MenuButton";
 import BackToTop from "../icons/BackToTop";
 import Logo from "../icons/Logo";
 
-interface HeaderProps {
+type HeaderProps = {
   sortBy: FilterSortBy;
   setFilterSortBy: (sortBy: FilterSortBy) => void;
   selectedCategory: string | null;
@@ -22,12 +22,12 @@ interface HeaderProps {
   infoOpen: boolean;
   filterLineTransition: FilterLineTransition;
   setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
-}
+};
 
-interface HeaderState {
+type HeaderState = {
   menuOpen: boolean;
   showBackToTopButton: boolean;
-}
+};
 
 class Header extends React.Component<HeaderProps, HeaderState> {
   state = {

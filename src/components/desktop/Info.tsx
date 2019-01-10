@@ -7,14 +7,14 @@ import { Post } from "../../utils/types";
 import InfoCategory from "./InfoCategory";
 import InfoTags from "./InfoTags";
 
-interface InfoProps {
+type InfoProps = {
   closeInfo: () => void;
   post: Post;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
-}
+};
 
 const Info: React.FunctionComponent<InfoProps> = ({
   closeInfo,

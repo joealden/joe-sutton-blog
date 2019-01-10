@@ -18,15 +18,15 @@ const calculateLineTransitionClass = (lineTransition: FilterLineTransition) => {
   }
 };
 
-interface FilterButtonProps {
+type FilterButtonProps = {
   openFilter: () => void;
   lineTransition: FilterLineTransition;
   setlineTransition: (lineTransition: FilterLineTransition) => void;
-  /* ----------------------- */
+
   sortBy: FilterSortBy;
   selectedCategory: string | null;
   selectedTags: Array<string>;
-}
+};
 
 class FilterButton extends React.Component<FilterButtonProps> {
   setLineTransitionState = (prevProps: FilterButtonProps) => {

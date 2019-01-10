@@ -13,13 +13,13 @@ type ContentfulPosts = {
   };
 };
 
-interface IndexProps {
+type IndexProps = {
   data: ContentfulPosts;
   pageContext: {
     categories: Array<string>;
     tags: Array<string>;
   };
-}
+};
 
 const Index: React.FunctionComponent<IndexProps> = ({ data, pageContext }) => {
   const posts = data.allContentfulPost.edges.map(edge => edge.node);

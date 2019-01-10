@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-interface InfoTagsProps {
+type InfoTagsProps = {
   postTags: Array<string>;
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
-}
+};
 
-interface InfoTagsState {
+type InfoTagsState = {
   showTooltip: boolean;
   mouseX: number;
   mouseY: number;
-}
+};
 
 class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
   state = {

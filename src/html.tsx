@@ -2,14 +2,14 @@ import React from "react";
 
 import font from "./fonts/SuisseIntl-Regular.woff2";
 
-interface HTMLProps {
+type HTMLProps = {
   htmlAttributes: Object;
   headComponents: Array<any>;
   bodyAttributes: Object;
   preBodyComponents: Array<any>;
   body: string;
   postBodyComponents: Array<any>;
-}
+};
 
 class HTML extends React.Component<HTMLProps> {
   render() {

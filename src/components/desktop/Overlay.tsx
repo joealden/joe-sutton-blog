@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 
-interface OverlayProps {
+type OverlayProps = {
   visible: boolean;
   handleClick: () => void;
-}
+};
 
 const Overlay: React.FunctionComponent<OverlayProps> = ({
   visible,

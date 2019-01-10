@@ -6,15 +6,15 @@ import { Post } from "../utils/types";
 
 import Site from "./Site";
 
-interface ListedProps {
+type ListedProps = {
   posts: Array<Post>;
   categories: Array<string>;
   tags: Array<string>;
-}
+};
 
-interface ListedState {
+type ListedState = {
   currentTheme: ThemeInterface;
-}
+};
 
 class Listed extends React.Component<ListedProps, ListedState> {
   state = {

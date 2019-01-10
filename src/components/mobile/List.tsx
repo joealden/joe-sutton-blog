@@ -4,11 +4,11 @@ import Img from "gatsby-image";
 
 import { Post } from "../../utils/types";
 
-interface ListProps {
+type ListProps = {
   posts: Array<Post>;
   openInfo: (post: Post) => void;
   infoOpen: boolean;
-}
+};
 
 const List: React.FunctionComponent<ListProps> = ({
   posts,

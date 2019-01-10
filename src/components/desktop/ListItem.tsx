@@ -6,7 +6,7 @@ import { Image } from "../../utils/types";
 
 import Arrow from "../icons/Arrow";
 
-interface ListItemProps {
+type ListItemProps = {
   openInfo: () => void;
   setCurrentlyActiveItem: (id: string) => void;
   className: string;
@@ -15,7 +15,7 @@ interface ListItemProps {
   link: string;
   id: string;
   image: Image;
-}
+};
 
 export const ListItem: React.FunctionComponent<ListItemProps> = ({
   openInfo,
