@@ -4,6 +4,7 @@ import styled, { css } from "../../utils/styled-components";
 import { FilterSortBy, FilterLineTransition } from "../../utils/types";
 
 import FilterButton from "../FilterButton";
+import MenuButton from "./MenuButton";
 
 import BackToTop from "../icons/BackToTop";
 import Logo from "../icons/Logo";
@@ -150,18 +151,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               setlineTransition={setFilterLineTransition}
             />
           </FilterButtonWrapper>
-          <MenuIconWrapper>
-            <button aria-label="Open Menu" onClick={toggleMenu}>
-              <div className={menuOpen ? "menu-open" : ""}>
-                <div>
-                  <div />
-                </div>
-                <div>
-                  <div />
-                </div>
-              </div>
-            </button>
-          </MenuIconWrapper>
+          <MenuButtonWrapper>
+            <MenuButton toggleMenu={toggleMenu} menuOpen={menuOpen} />
+          </MenuButtonWrapper>
         </InnerHeaderWrapper>
         <Menu
           style={{
@@ -243,73 +235,9 @@ const FilterButtonWrapper = styled.div`
   }
 `;
 
-const MenuIconWrapper = styled.div`
+const MenuButtonWrapper = styled.div`
   ${commonInnerHeaderStyles};
   justify-content: flex-end;
-
-  button {
-    padding-right: 10px;
-
-    > div {
-      position: relative;
-      width: 24px;
-      height: 24px;
-
-      > div {
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        transition: transform 0.15s ease;
-
-        > div {
-          position: absolute;
-          left: 0;
-          top: 11px;
-          display: inline-block;
-          width: 24px;
-          height: 2px;
-          transition: background-color ${props => props.theme.transition},
-            transform 0.15s ease;
-          transition-delay: 0.15s;
-          background-color: ${props => props.theme.foregroundColor};
-        }
-
-        &:first-child {
-          > div {
-            transform: translateY(-5px);
-          }
-        }
-
-        &:last-child {
-          > div {
-            transform: translateY(5px);
-          }
-        }
-      }
-
-      &.menu-open {
-        > div {
-          transition-delay: 0.15s;
-
-          &:first-child {
-            transform: rotate(45deg);
-          }
-
-          &:last-child {
-            transform: rotate(-45deg);
-          }
-
-          > div {
-            transform: none;
-            transition-delay: 0s;
-          }
-        }
-      }
-    }
-  }
 `;
 
 const Menu = styled.div`
