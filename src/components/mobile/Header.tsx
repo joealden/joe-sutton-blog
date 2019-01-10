@@ -7,7 +7,6 @@ import FilterButton from "../FilterButton";
 
 import BackToTop from "../icons/BackToTop";
 import Logo from "../icons/Logo";
-import Hamburger from "../icons/Hamburger";
 
 interface HeaderProps {
   sortBy: FilterSortBy;
@@ -98,12 +97,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
     const { menuOpen, showBackToTopButton } = this.state;
     const { toggleMenu, resetFilterCriteria } = this;
-
-    const sortApplied = sortBy !== FilterSortBy.NewestFirst;
-    const categoryApplied = selectedCategory !== null;
-    const tagsApplied = selectedTags.length !== 0;
-
-    const filterApplied = sortApplied || categoryApplied || tagsApplied;
 
     return (
       <HeaderWrapper
