@@ -1,4 +1,5 @@
 import React from "react";
+
 import font from "./fonts/SuisseIntl-Regular.woff2";
 
 interface HTMLProps {
