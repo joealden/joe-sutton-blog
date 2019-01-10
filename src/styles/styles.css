@@ -74,12 +74,18 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-/**
- * This maintains backwards compatibility with browsers that do no
- * support `:focus-visible`, as the selector will just be equivalent
- * to `button:focus`. This means that a11y for browsers that do not
- * support this selector will not be as good.
- */
-button:focus:not(:focus-visible) {
+button:focus {
   outline: none;
 }
+
+/* Uncomment when `selector` works inside support queries:
+   https://developer.mozilla.org/en-US/docs/Web/CSS/@supports#Testing_for_the_support_of_a_selector
+
+-----------------------------------------------------------------
+
+@supports selector(:focus-visible) {
+  button:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+*/
