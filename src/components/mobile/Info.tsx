@@ -162,7 +162,6 @@ const InfoLink = styled.a`
 
     h2 {
       margin: 0;
-      font-weight: normal;
       display: flex;
 
       span:first-child {

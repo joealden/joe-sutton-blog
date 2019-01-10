@@ -83,7 +83,6 @@ const AboutWrapper = styled.div`
   > div:nth-child(2) {
     h2 {
       margin: 100px 20px 35px 20px;
-      font-weight: normal;
       font-size: 32px;
     }
 

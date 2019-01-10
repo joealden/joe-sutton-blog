@@ -89,7 +89,6 @@ const InnerFilter = styled.div`
 
   h3 {
     text-transform: uppercase;
-    font-weight: normal;
     margin: 0 0 15px 0;
 
     &:after {
@@ -161,7 +160,6 @@ const FilterTitle = styled.div`
   writing-mode: vertical-rl;
 
   h2 {
-    font-weight: normal;
     font-size: 5vw;
     margin: 0 60px 0 0;
     line-height: 80%;

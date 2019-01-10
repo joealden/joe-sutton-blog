@@ -144,7 +144,6 @@ const FilterContents = styled.div`
   > div {
     h3 {
       text-transform: uppercase;
-      font-weight: normal;
       margin: 0;
     }
 
