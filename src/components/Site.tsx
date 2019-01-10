@@ -20,6 +20,24 @@ import filterPosts from "../utils/filterPosts";
 const memoizedSortPosts = memoize(sortPosts);
 const memoizedFilterPosts = memoize(filterPosts);
 
+const dummyPost: Post = {
+  id: "",
+  title: "",
+  link: "",
+  category: "",
+  tags: [""],
+  createdAt: "",
+  image: {
+    fluid: {
+      base64: "",
+      aspectRatio: 1,
+      src: "",
+      srcSet: "",
+      sizes: ""
+    }
+  }
+};
+
 interface SiteProps {
   toggleTheme: () => void;
   posts: Array<Post>;
@@ -38,7 +56,7 @@ class Site extends React.Component<SiteProps, SiteState> {
   state = {
     info: {
       open: false,
-      post: this.props.posts[0]
+      post: dummyPost
     },
     filter: {
       open: false,
