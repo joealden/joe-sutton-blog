@@ -1,6 +1,4 @@
 /**
- * NOTE:
- *
  * This font face declaration was extracted from the
  * GlobalStyles styled-components component because it
  * was causing rendering issues where the pages component
@@ -13,15 +11,12 @@
  * for the text to flash / change font when state was
  * in the main page component.
  */
-
 @font-face {
   font-family: "SuisseIntl";
   src: url("../fonts/SuisseIntl-Regular.woff2") format("woff2"),
     url("../fonts/SuisseIntl-Regular.woff2") format("woff");
   font-display: swap;
 }
-
-/* All non-dynamic styles have been moved from GlobalStyles to here */
 
 * {
   box-sizing: border-box;
@@ -52,22 +47,30 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+}
+
 button {
   border: none;
   background: none;
   font-weight: normal;
   padding: 10px;
   cursor: pointer;
-  /* Chrome needs explicit setting of this property */
-  font-size: inherit;
-  /* Think about a11y */
-  outline: none;
+  font-size: inherit; /* Chrome needs explicit setting of this */
 }
 
+/* Disables the focus outline that is only present on Firefox */
 button::-moz-focus-inner {
   border: 0;
 }
 
-a {
-  text-decoration: none;
+/**
+ * This maintains backwards compatibility with browsers that do no
+ * support `:focus-visible`, as the selector will just be equivalent
+ * to `button:focus`. This means that a11y for browsers that do not
+ * support this selector will not be as good.
+ */
+button:focus:not(:focus-visible) {
+  outline: none;
 }
