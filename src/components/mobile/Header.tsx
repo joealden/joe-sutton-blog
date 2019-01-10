@@ -269,7 +269,7 @@ const MenuIconWrapper = styled.div`
         display: inline-block;
         width: 24px;
         height: 24px;
-        transition: transform ${props => props.theme.transition};
+        transition: transform 0.15s ease;
 
         > div {
           position: absolute;
@@ -279,7 +279,7 @@ const MenuIconWrapper = styled.div`
           width: 24px;
           height: 2px;
           transition: background-color ${props => props.theme.transition},
-            transform ${props => props.theme.transition};
+            transform 0.15s ease;
           transition-delay: 0.15s;
           background-color: ${props => props.theme.foregroundColor};
         }
