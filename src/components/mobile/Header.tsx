@@ -159,7 +159,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           </FilterButtonWrapper>
           <MenuIconWrapper>
             <button aria-label="Open Menu" onClick={toggleMenu}>
-              <Hamburger />
+              <div className={menuOpen ? "menu-open" : ""}>
+                <div>
+                  <div />
+                </div>
+                <div>
+                  <div />
+                </div>
+              </div>
             </button>
           </MenuIconWrapper>
         </InnerHeaderWrapper>
@@ -246,6 +253,70 @@ const FilterButtonWrapper = styled.div`
 const MenuIconWrapper = styled.div`
   ${commonInnerHeaderStyles};
   justify-content: flex-end;
+
+  button {
+    padding-right: 10px;
+
+    > div {
+      position: relative;
+      width: 24px;
+      height: 24px;
+
+      > div {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        transition: transform ${props => props.theme.transition};
+
+        > div {
+          position: absolute;
+          left: 0;
+          top: 11px;
+          display: inline-block;
+          width: 24px;
+          height: 2px;
+          transition: background-color ${props => props.theme.transition},
+            transform ${props => props.theme.transition};
+          transition-delay: 0.15s;
+          background-color: ${props => props.theme.foregroundColor};
+        }
+
+        &:first-child {
+          > div {
+            transform: translateY(-5px);
+          }
+        }
+
+        &:last-child {
+          > div {
+            transform: translateY(5px);
+          }
+        }
+      }
+
+      &.menu-open {
+        > div {
+          transition-delay: 0.15s;
+
+          &:first-child {
+            transform: rotate(45deg);
+          }
+
+          &:last-child {
+            transform: rotate(-45deg);
+          }
+
+          > div {
+            transform: none;
+            transition-delay: 0s;
+          }
+        }
+      }
+    }
+  }
 `;
 
 const Menu = styled.div`
