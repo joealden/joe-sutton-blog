@@ -31,8 +31,7 @@ module.exports = {
         icon: "src/images/listed-icon.png"
       }
     },
-    "gatsby-plugin-offline",
-    /* "gatsby-plugin-remove-serviceworker" */
+    "gatsby-plugin-remove-serviceworker",
     "gatsby-plugin-netlify"
   ]
 };
