@@ -22,7 +22,6 @@
   box-sizing: border-box;
   font-family: inherit;
   font-size: inherit;
-  user-select: none;
 }
 
 html {
@@ -71,8 +70,7 @@ button {
 }
 
 /* Disables the focus outline that is only present on Firefox */
-button::-moz-focus-inner,
-a::-moz-focus-inner {
+button::-moz-focus-inner {
   border: 0;
 }
 

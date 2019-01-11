@@ -153,6 +153,7 @@ const InfoWrapper = styled.div`
 
 const InfoLink = styled.a`
   color: ${props => props.theme.foregroundColor};
+  outline: none;
 
   > div:first-child {
     display: flex;
@@ -196,9 +197,6 @@ const InfoLink = styled.a`
         color: ${props => props.theme.accentColor};
       }
     }
-  }
-
-  > div:last-child {
   }
 `;
 
