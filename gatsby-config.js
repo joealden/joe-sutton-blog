@@ -31,7 +31,6 @@ module.exports = {
         icon: "src/images/listed-icon.png"
       }
     },
-    "gatsby-plugin-remove-serviceworker",
     "gatsby-plugin-netlify"
   ]
 };
