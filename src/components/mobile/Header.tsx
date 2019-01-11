@@ -211,6 +211,7 @@ const InnerHeaderWrapper = styled.div`
 const commonInnerHeaderStyles = css`
   display: flex;
   align-items: center;
+  user-select: none;
 `;
 
 const LogoAreaWrapper = styled.div`
