@@ -39,7 +39,25 @@ type SiteProps = {
   setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
 };
 
-class Site extends React.Component<SiteProps> {
+type SiteState = {
+  menuOpen: boolean;
+};
+
+class Site extends React.Component<SiteProps, SiteState> {
+  state = {
+    menuOpen: false
+  };
+
+  toggleMenu = () => {
+    const { menuOpen } = this.state;
+
+    if (menuOpen) {
+      this.setState({ menuOpen: false });
+    } else {
+      this.setState({ menuOpen: true });
+    }
+  };
+
   render() {
     const {
       toggleTheme,
@@ -63,6 +81,9 @@ class Site extends React.Component<SiteProps> {
       filterLineTransition,
       setFilterLineTransition
     } = this.props;
+
+    const { menuOpen } = this.state;
+    const { toggleMenu } = this;
 
     /* Lock and unlock scrolling when opening sections */
 
@@ -126,12 +147,16 @@ class Site extends React.Component<SiteProps> {
           infoOpen={info.open}
           filterLineTransition={filterLineTransition}
           setFilterLineTransition={setFilterLineTransition}
+          menuOpen={menuOpen}
+          toggleMenu={toggleMenu}
         />
         <About isOpen={aboutOpen} close={closeAboutAndUnlockScroll} />
         <List
           posts={posts}
           openInfo={openInfoAndLockScroll}
           infoOpen={info.open}
+          menuOpen={menuOpen}
+          toggleMenu={toggleMenu}
         />
         <Info
           isOpen={info.open}

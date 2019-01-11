@@ -8,12 +8,16 @@ type ListProps = {
   posts: Array<Post>;
   openInfo: (post: Post) => void;
   infoOpen: boolean;
+  menuOpen: boolean;
+  toggleMenu: () => void;
 };
 
 const List: React.FunctionComponent<ListProps> = ({
   posts,
   openInfo,
-  infoOpen
+  infoOpen,
+  menuOpen,
+  toggleMenu
 }) => (
   <ListWrapper
     style={{
@@ -60,7 +64,17 @@ const List: React.FunctionComponent<ListProps> = ({
        * --------------------------------------------------------------
        */
       posts.map(post => (
-        <ListItem key={post.id} onClick={() => openInfo(post)}>
+        <ListItem
+          key={post.id}
+          onClick={() => {
+            openInfo(post);
+            if (menuOpen) {
+              setTimeout(() => {
+                toggleMenu();
+              }, 300);
+            }
+          }}
+        >
           <span>{post.title}</span>
           <span>{post.category}</span>
           <span>

@@ -22,27 +22,17 @@ type HeaderProps = {
   infoOpen: boolean;
   filterLineTransition: FilterLineTransition;
   setFilterLineTransition: (filterLineTransition: FilterLineTransition) => void;
+  menuOpen: boolean;
+  toggleMenu: () => void;
 };
 
 type HeaderState = {
-  menuOpen: boolean;
   showBackToTopButton: boolean;
 };
 
 class Header extends React.Component<HeaderProps, HeaderState> {
   state = {
-    menuOpen: false,
     showBackToTopButton: false
-  };
-
-  toggleMenu = () => {
-    const { menuOpen } = this.state;
-
-    if (menuOpen) {
-      this.setState({ menuOpen: false });
-    } else {
-      this.setState({ menuOpen: true });
-    }
   };
 
   resetFilterCriteria = () => {
@@ -93,11 +83,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       openAbout,
       infoOpen,
       filterLineTransition,
-      setFilterLineTransition
+      setFilterLineTransition,
+      menuOpen,
+      toggleMenu
     } = this.props;
 
-    const { menuOpen, showBackToTopButton } = this.state;
-    const { toggleMenu, resetFilterCriteria } = this;
+    const { showBackToTopButton } = this.state;
+    const { resetFilterCriteria } = this;
 
     return (
       <HeaderWrapper
@@ -143,7 +135,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           </LogoAreaWrapper>
           <FilterButtonWrapper>
             <FilterButton
-              openFilter={openFilter}
+              openFilter={() => {
+                openFilter();
+                if (menuOpen) {
+                  setTimeout(() => {
+                    toggleMenu();
+                  }, 300);
+                }
+              }}
               sortBy={sortBy}
               selectedCategory={selectedCategory}
               selectedTags={selectedTags}
@@ -161,7 +160,18 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           }}
         >
           <div>
-            <button onClick={openAbout}>About</button>
+            <button
+              onClick={() => {
+                openAbout();
+                if (menuOpen) {
+                  setTimeout(() => {
+                    toggleMenu();
+                  }, 300);
+                }
+              }}
+            >
+              About
+            </button>
           </div>
           <div>
             <button onClick={toggleTheme}>Switch Theme</button>
