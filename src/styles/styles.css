@@ -67,6 +67,7 @@ button {
   padding: 10px;
   cursor: pointer;
   font-size: inherit; /* Chrome needs explicit setting of this */
+  user-select: none;
 }
 
 /* Disables the focus outline that is only present on Firefox */
