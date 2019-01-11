@@ -26,7 +26,7 @@ module.exports = {
         short_name: "Listed",
         start_url: "/",
         background_color: "#FFFFFF",
-        theme_color: "#000000",
+        theme_color: "#111111",
         display: "minimal-ui",
         icon: "src/images/listed-icon.png"
       }
