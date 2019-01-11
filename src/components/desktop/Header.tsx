@@ -91,12 +91,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         </LogoWrapper>
         <FilterAndBackToTopWrapper>
           <FilterButton
-            openFilter={openFilter}
+            onClick={openFilter}
+            buttonText="Filter"
+            lineTransition={filterLineTransition}
+            setLineTransition={setFilterLineTransition}
             sortBy={sortBy}
             selectedCategory={selectedCategory}
             selectedTags={selectedTags}
-            lineTransition={filterLineTransition}
-            setlineTransition={setFilterLineTransition}
           />
           <button
             aria-label="Back To Top"

@@ -166,6 +166,9 @@ class Site extends React.Component<SiteProps, SiteState> {
           setSelectedCategory={setSelectedCategory}
           selectedTags={filter.selectedTags}
           addTagToSelectedTags={addTagToSelectedTags}
+          filterLineTransition={filterLineTransition}
+          setFilterLineTransition={setFilterLineTransition}
+          sortBy={filter.sortBy}
         />
       </SiteWrapper>
     );

@@ -135,7 +135,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           </LogoAreaWrapper>
           <FilterButtonWrapper>
             <FilterButton
-              openFilter={() => {
+              onClick={() => {
                 openFilter();
                 if (menuOpen) {
                   setTimeout(() => {
@@ -143,11 +143,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                   }, 300);
                 }
               }}
+              buttonText="Filter"
+              lineTransition={filterLineTransition}
+              setLineTransition={setFilterLineTransition}
               sortBy={sortBy}
               selectedCategory={selectedCategory}
               selectedTags={selectedTags}
-              lineTransition={filterLineTransition}
-              setlineTransition={setFilterLineTransition}
             />
           </FilterButtonWrapper>
           <MenuButtonWrapper>

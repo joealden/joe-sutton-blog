@@ -19,9 +19,10 @@ const calculateLineTransitionClass = (lineTransition: FilterLineTransition) => {
 };
 
 type FilterButtonProps = {
-  openFilter: () => void;
+  onClick: () => void;
+  buttonText: string;
   lineTransition: FilterLineTransition;
-  setlineTransition: (lineTransition: FilterLineTransition) => void;
+  setLineTransition: (lineTransition: FilterLineTransition) => void;
 
   sortBy: FilterSortBy;
   selectedCategory: string | null;
@@ -30,7 +31,7 @@ type FilterButtonProps = {
 
 class FilterButton extends React.Component<FilterButtonProps> {
   setLineTransitionState = (prevProps: FilterButtonProps) => {
-    const { lineTransition, setlineTransition, ...newProps } = this.props;
+    const { lineTransition, setLineTransition, ...newProps } = this.props;
 
     if (
       lineTransition === FilterLineTransition.Initial &&
@@ -38,23 +39,23 @@ class FilterButton extends React.Component<FilterButtonProps> {
         newProps.selectedCategory !== null ||
         newProps.selectedTags.length !== 0)
     ) {
-      setlineTransition(FilterLineTransition.Entering);
-      setTimeout(() => setlineTransition(FilterLineTransition.Entered), 300);
+      setLineTransition(FilterLineTransition.Entering);
+      setTimeout(() => setLineTransition(FilterLineTransition.Entered), 300);
     } else if (lineTransition === FilterLineTransition.Entered) {
       if (
         newProps.sortBy === FilterSortBy.NewestFirst &&
         newProps.selectedCategory === null &&
         newProps.selectedTags.length === 0
       ) {
-        setlineTransition(FilterLineTransition.Leaving);
-        setTimeout(() => setlineTransition(FilterLineTransition.Initial), 300);
+        setLineTransition(FilterLineTransition.Leaving);
+        setTimeout(() => setLineTransition(FilterLineTransition.Initial), 300);
       } else if (
         newProps.sortBy !== prevProps.sortBy ||
         newProps.selectedCategory !== prevProps.selectedCategory ||
         newProps.selectedTags !== prevProps.selectedTags
       ) {
-        setlineTransition(FilterLineTransition.Reloading);
-        setTimeout(() => setlineTransition(FilterLineTransition.Entered), 600);
+        setLineTransition(FilterLineTransition.Reloading);
+        setTimeout(() => setLineTransition(FilterLineTransition.Entered), 600);
       }
     }
   };
@@ -64,14 +65,14 @@ class FilterButton extends React.Component<FilterButtonProps> {
   }
 
   render() {
-    const { openFilter, lineTransition } = this.props;
+    const { onClick, buttonText, lineTransition } = this.props;
 
     return (
       <StyledFilterButton
-        onClick={openFilter}
+        onClick={onClick}
         className={calculateLineTransitionClass(lineTransition)}
       >
-        <span>Filter</span>
+        <span>{buttonText}</span>
       </StyledFilterButton>
     );
   }

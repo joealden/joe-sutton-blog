@@ -2,8 +2,9 @@ import React from "react";
 import styled from "../../utils/styled-components";
 import Img from "gatsby-image";
 
-import { Post } from "../../utils/types";
+import { Post, FilterLineTransition, FilterSortBy } from "../../utils/types";
 
+import FilterButton from "../FilterButton";
 import Arrow from "../icons/Arrow";
 
 type InfoProps = {
@@ -14,6 +15,10 @@ type InfoProps = {
   setSelectedCategory: (selectedCategory: string | null) => void;
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
+
+  filterLineTransition: FilterLineTransition;
+  setFilterLineTransition: (lineTransition: FilterLineTransition) => void;
+  sortBy: FilterSortBy;
 };
 
 /**
@@ -30,7 +35,10 @@ const Info: React.FunctionComponent<InfoProps> = ({
   selectedCategory,
   setSelectedCategory,
   selectedTags,
-  addTagToSelectedTags
+  addTagToSelectedTags,
+  filterLineTransition,
+  setFilterLineTransition,
+  sortBy
 }) => {
   const createdAt = new Date(post.createdAt);
   const date = createdAt.getDate();
@@ -57,7 +65,15 @@ const Info: React.FunctionComponent<InfoProps> = ({
       }}
     >
       <div>
-        <button onClick={close}>Back</button>
+        <FilterButton
+          onClick={close}
+          buttonText="Back"
+          lineTransition={filterLineTransition}
+          setLineTransition={setFilterLineTransition}
+          sortBy={sortBy}
+          selectedCategory={selectedCategory}
+          selectedTags={selectedTags}
+        />
       </div>
       <div>
         <InfoLink href={post.link} rel="noreferrer noopener" target="_blank">
@@ -139,6 +155,11 @@ const InfoWrapper = styled.div`
 
   > div:first-child {
     height: 60px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: ${props => props.theme.backgroundColor};
+    z-index: 1000000000;
 
     button {
       padding: 18px 20px;
