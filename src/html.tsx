@@ -52,6 +52,9 @@ class HTML extends React.Component<HTMLProps> {
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
+          <noscript>
+            Sorry, you need to enable JavaScript to run this site.
+          </noscript>
           <div
             key={`body`}
             id="___gatsby"
