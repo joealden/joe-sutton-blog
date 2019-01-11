@@ -166,6 +166,7 @@ const TagListWrapper = styled.div`
 const TagListItem = styled.li`
   display: flex;
   justify-content: space-between;
+  user-select: none;
 
   div:first-child {
     display: flex;
