@@ -46,7 +46,17 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
     const filteredTags = tags.filter(tag => {
       const lowercaseTag = tag.toLowerCase();
       const lowercaseSearchValue = searchValue.toLowerCase();
-      return lowercaseTag.includes(lowercaseSearchValue);
+
+      /**
+       * Matches the start of words, for example:
+       *
+       * 'ha'/'ne' matches 'Neue Haas'.
+       * 'est' does not match "Testing".
+       */
+      return (
+        lowercaseTag.startsWith(lowercaseSearchValue) ||
+        lowercaseTag.includes(` ${lowercaseSearchValue}`)
+      );
     });
 
     return (
