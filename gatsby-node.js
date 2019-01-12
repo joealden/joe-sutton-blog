@@ -53,6 +53,7 @@ exports.onCreatePage = ({ page, actions }) => {
         "Fashion",
         "Minimalist",
         "Editorial",
+        "Neue Haas",
         "Testing1",
         "Testing2",
         "Testing3",
