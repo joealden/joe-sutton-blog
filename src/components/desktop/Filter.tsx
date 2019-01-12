@@ -21,6 +21,7 @@ type FilterProps = {
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
   removeTagFromSelectedTags: (tagToRemove: string) => void;
+  clearSelectedTags: () => void;
 };
 
 type FilterState = {
@@ -54,7 +55,8 @@ class Filter extends React.Component<FilterProps, FilterState> {
       tags,
       selectedTags,
       addTagToSelectedTags,
-      removeTagFromSelectedTags
+      removeTagFromSelectedTags,
+      clearSelectedTags
     } = this.props;
 
     const { searchValue, inputFocused } = this.state;
@@ -115,11 +117,20 @@ class Filter extends React.Component<FilterProps, FilterState> {
               <div>
                 <div>
                   <ul>
-                    <li>Selected 1</li>
-                    <li>Selected 2</li>
-                    <li>Selected 3</li>
-                    <li>Selected 4</li>
+                    {selectedTags.map(tag => (
+                      <SelectedTagsListItem key={tag}>
+                        <div>{tag}</div>
+                        <div onClick={() => removeTagFromSelectedTags(tag)}>
+                          <CrossIcon />
+                        </div>
+                      </SelectedTagsListItem>
+                    ))}
                   </ul>
+                  {selectedTags.length === 0 ? null : (
+                    <div>
+                      <button onClick={clearSelectedTags}>Clear all</button>
+                    </div>
+                  )}
                 </div>
                 <div>
                   {filteredTags.length === 0 ? (
@@ -128,7 +139,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
                     <div>
                       <ul>
                         {filteredTags.map(tag => (
-                          <TagListItem key={tag}>
+                          <FilteredTagsListItem key={tag}>
                             <span onClick={() => addTagToSelectedTags(tag)}>
                               {tag}
                             </span>
@@ -142,7 +153,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
                             >
                               <CrossIcon />
                             </div>
-                          </TagListItem>
+                          </FilteredTagsListItem>
                         ))}
                       </ul>
                     </div>
@@ -304,10 +315,24 @@ const SearchTags = styled.div`
     flex: 1;
 
     > div:first-child {
+      ul {
+        margin-top: 15px;
+      }
+
+      > div {
+        margin-top: 15px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          padding: 0;
+          color: #060606;
+        }
+      }
     }
 
     > div:last-child {
-      /* display: none; */
+      display: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -367,7 +392,19 @@ const SearchTags = styled.div`
   }
 `;
 
-const TagListItem = styled.li`
+const SelectedTagsListItem = styled.li`
+  span:first-child {
+    flex: 1;
+  }
+
+  div:last-child {
+    svg {
+      width: 12px;
+    }
+  }
+`;
+
+const FilteredTagsListItem = styled.li`
   span:first-child {
     flex: 1;
   }

@@ -106,6 +106,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
         selectedTags={filter.selectedTags}
         addTagToSelectedTags={addTagToSelectedTags}
         removeTagFromSelectedTags={removeTagFromSelectedTags}
+        clearSelectedTags={clearSelectedTags}
       />
       <MainContainer infoOpen={info.open}>
         <Underlay />
