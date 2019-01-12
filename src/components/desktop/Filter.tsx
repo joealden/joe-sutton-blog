@@ -27,12 +27,14 @@ type FilterProps = {
 type FilterState = {
   searchValue: string;
   inputFocused: boolean;
+  showSearchList: boolean;
 };
 
 class Filter extends React.Component<FilterProps, FilterState> {
   state = {
     searchValue: "",
-    inputFocused: false
+    inputFocused: false,
+    showSearchList: false
   };
 
   updateSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,8 +42,24 @@ class Filter extends React.Component<FilterProps, FilterState> {
     this.setState({ searchValue: newSearchValue });
   };
 
-  focusInput = () => this.setState({ inputFocused: true });
+  focusInput = () =>
+    this.setState({
+      inputFocused: true,
+      showSearchList: true
+    });
+
   blurInput = () => this.setState({ inputFocused: false });
+
+  hideSearchList = () =>
+    this.setState({
+      searchValue: "",
+      inputFocused: false,
+      showSearchList: false
+    });
+
+  preventHideSearchList = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
 
   render() {
     const {
@@ -59,8 +77,15 @@ class Filter extends React.Component<FilterProps, FilterState> {
       clearSelectedTags
     } = this.props;
 
-    const { searchValue, inputFocused } = this.state;
-    const { updateSearchValue, focusInput, blurInput } = this;
+    const { searchValue, inputFocused, showSearchList } = this.state;
+
+    const {
+      updateSearchValue,
+      focusInput,
+      blurInput,
+      hideSearchList,
+      preventHideSearchList
+    } = this;
 
     const filteredTags = tags.filter(tag => {
       const lowercaseTag = tag.toLowerCase();
@@ -81,6 +106,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
     return (
       <>
         <FilterContainer
+          onClick={hideSearchList}
           style={{
             transform: isOpen ? "translateY(0)" : "translateY(-100%)"
           }}
@@ -98,7 +124,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
             </Categories>
             <SearchTags>
               <div>
-                <div>
+                <div onClick={preventHideSearchList}>
                   <input
                     value={searchValue}
                     onChange={updateSearchValue}
@@ -132,12 +158,18 @@ class Filter extends React.Component<FilterProps, FilterState> {
                     </div>
                   )}
                 </div>
-                <div>
+                <div
+                  style={{
+                    display: showSearchList ? "" : "none"
+                  }}
+                >
                   {filteredTags.length === 0 ? (
-                    <span>No tags match your search.</span>
+                    <span onClick={preventHideSearchList}>
+                      No tags match your search.
+                    </span>
                   ) : (
                     <div>
-                      <ul>
+                      <ul onClick={preventHideSearchList}>
                         {filteredTags.map(tag => (
                           <FilteredTagsListItem key={tag}>
                             <span onClick={() => addTagToSelectedTags(tag)}>
@@ -332,7 +364,6 @@ const SearchTags = styled.div`
     }
 
     > div:last-child {
-      display: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -343,7 +374,8 @@ const SearchTags = styled.div`
 
       > span {
         display: block;
-        margin-top: 15px;
+        margin: 15px 0;
+        padding: 1px 0;
       }
 
       > div {
@@ -393,6 +425,8 @@ const SearchTags = styled.div`
 `;
 
 const SelectedTagsListItem = styled.li`
+  padding: 1px 0;
+
   span:first-child {
     flex: 1;
   }
