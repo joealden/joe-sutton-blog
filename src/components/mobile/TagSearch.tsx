@@ -86,21 +86,25 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
               </div>
             </div>
           </div>
-          <ul>
-            {filteredTags.map(tag => (
-              <TagListItem key={tag}>
-                <div onClick={() => addTagToSelectedTags(tag)}>{tag}</div>
-                <div
-                  onClick={() => removeTagFromSelectedTags(tag)}
-                  style={{
-                    display: selectedTags.includes(tag) ? "flex" : "none"
-                  }}
-                >
-                  <CrossIcon />
-                </div>
-              </TagListItem>
-            ))}
-          </ul>
+          {filteredTags.length === 0 ? (
+            <span>No tags match your search.</span>
+          ) : (
+            <ul>
+              {filteredTags.map(tag => (
+                <TagListItem key={tag}>
+                  <div onClick={() => addTagToSelectedTags(tag)}>{tag}</div>
+                  <div
+                    onClick={() => removeTagFromSelectedTags(tag)}
+                    style={{
+                      display: selectedTags.includes(tag) ? "flex" : "none"
+                    }}
+                  >
+                    <CrossIcon />
+                  </div>
+                </TagListItem>
+              ))}
+            </ul>
+          )}
         </TagListWrapper>
         <CloseTagSearchWrapper>
           <button onClick={close}>Back to Filter</button>
@@ -161,6 +165,12 @@ const TagListWrapper = styled.div`
       width: calc(100% - 40px);
       background-color: #060606;
     }
+  }
+
+  span {
+    color: #060606;
+    display: flex;
+    justify-content: center;
   }
 
   ul {
