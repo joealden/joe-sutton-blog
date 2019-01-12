@@ -112,23 +112,31 @@ class Filter extends React.Component<FilterProps, FilterState> {
                   </ul>
                 </div>
                 <div>
-                  <ul>
-                    {filteredTags.map(tag => (
-                      <TagListItem key={tag}>
-                        <span onClick={() => addTagToSelectedTags(tag)}>
-                          {tag}
-                        </span>
-                        <div
-                          onClick={() => removeTagFromSelectedTags(tag)}
-                          style={{
-                            display: selectedTags.includes(tag) ? "" : "none"
-                          }}
-                        >
-                          <CrossIcon />
-                        </div>
-                      </TagListItem>
-                    ))}
-                  </ul>
+                  {filteredTags.length === 0 ? (
+                    <span>No tags match your search.</span>
+                  ) : (
+                    <div>
+                      <ul>
+                        {filteredTags.map(tag => (
+                          <TagListItem key={tag}>
+                            <span onClick={() => addTagToSelectedTags(tag)}>
+                              {tag}
+                            </span>
+                            <div
+                              onClick={() => removeTagFromSelectedTags(tag)}
+                              style={{
+                                display: selectedTags.includes(tag)
+                                  ? ""
+                                  : "none"
+                              }}
+                            >
+                              <CrossIcon />
+                            </div>
+                          </TagListItem>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </SearchTags>
@@ -298,42 +306,51 @@ const SearchTags = styled.div`
       background-color: ${props => props.theme.accentColor};
       z-index: 100000;
 
-      &:after {
-        content: "";
+      > span {
         display: block;
-        height: 1px;
-        width: 100%;
-        background-color: #060606;
+        margin-top: 15px;
       }
 
-      ul {
+      > div {
         height: 100%;
-        overflow: auto;
 
-        li:first-child {
-          margin-top: 15px;
-        }
-
-        li:last-child {
-          margin-bottom: 15px;
-        }
-
-        /* Scrollbar CSS for Firefox */
-        scrollbar-width: thin;
-        scrollbar-color: #060606 ${props => props.theme.accentColor};
-
-        /* Scrollbar CSS for Chrome and Safari */
-        &::-webkit-scrollbar {
-          width: 1px;
-          background-color: ${props => props.theme.accentColor};
-        }
-
-        &::-webkit-scrollbar-thumb {
+        &:after {
+          content: "";
+          display: block;
+          height: 1px;
+          width: 100%;
           background-color: #060606;
         }
 
-        &::-webkit-scrollbar-track {
-          margin: 15px 0;
+        ul {
+          max-height: 100%;
+          overflow: auto;
+
+          li:first-child {
+            margin-top: 15px;
+          }
+
+          li:last-child {
+            margin-bottom: 15px;
+          }
+
+          /* Scrollbar CSS for Firefox */
+          scrollbar-width: thin;
+          scrollbar-color: #060606 ${props => props.theme.accentColor};
+
+          /* Scrollbar CSS for Chrome and Safari */
+          &::-webkit-scrollbar {
+            width: 1px;
+            background-color: ${props => props.theme.accentColor};
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: #060606;
+          }
+
+          &::-webkit-scrollbar-track {
+            margin: 15px 0;
+          }
         }
       }
     }
