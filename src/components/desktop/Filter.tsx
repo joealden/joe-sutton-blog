@@ -6,6 +6,9 @@ import { FilterSortBy } from "../../utils/types";
 import SortByList from "../SortByList";
 import CategoryList from "../CategoryList";
 
+import SearchIcon from "../icons/Search";
+import CrossIcon from "../icons/Cross";
+
 type FilterProps = {
   isOpen: boolean;
   close: () => void;
@@ -16,50 +19,132 @@ type FilterProps = {
   setSelectedCategory: (selectedCategory: string | null) => void;
   tags: Array<string>;
   selectedTags: Array<string>;
+  addTagToSelectedTags: (tagToAdd: string) => void;
+  removeTagFromSelectedTags: (tagToRemove: string) => void;
 };
 
-const Filter: React.FunctionComponent<FilterProps> = ({
-  isOpen,
-  close,
-  sortBy,
-  setSortBy,
-  categories,
-  selectedCategory,
-  setSelectedCategory,
-  tags,
-  selectedTags
-}) => (
-  <>
-    <FilterContainer
-      style={{
-        transform: isOpen ? "translateY(0)" : "translateY(-100%)"
-      }}
-    >
-      <InnerFilter>
-        <SortBy>
-          <SortByList sortBy={sortBy} setSortBy={setSortBy} />
-        </SortBy>
-        <Categories>
-          <CategoryList
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
-        </Categories>
-        <SearchTags>
-          <h3>Search Tags</h3>
-        </SearchTags>
-        <FilterTitle>
-          <h2>Filter</h2>
-        </FilterTitle>
-      </InnerFilter>
-      <CloseButtonContainer>
-        <button onClick={close}>Close</button>
-      </CloseButtonContainer>
-    </FilterContainer>
-    <FilterCover />
-  </>
-);
+type FilterState = {
+  searchValue: string;
+  inputFocused: boolean;
+};
+
+class Filter extends React.Component<FilterProps, FilterState> {
+  state = {
+    searchValue: "",
+    inputFocused: false
+  };
+
+  updateSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newSearchValue = event.target.value;
+    this.setState({ searchValue: newSearchValue });
+  };
+
+  focusInput = () => this.setState({ inputFocused: true });
+  blurInput = () => this.setState({ inputFocused: false });
+
+  render() {
+    const {
+      isOpen,
+      close,
+      sortBy,
+      setSortBy,
+      categories,
+      selectedCategory,
+      setSelectedCategory,
+      tags,
+      selectedTags,
+      addTagToSelectedTags,
+      removeTagFromSelectedTags
+    } = this.props;
+
+    const { searchValue, inputFocused } = this.state;
+    const { updateSearchValue, focusInput, blurInput } = this;
+
+    const filteredTags = tags.filter(tag => {
+      const lowercaseTag = tag.toLowerCase();
+      const lowercaseSearchValue = searchValue.toLowerCase();
+      return lowercaseTag.includes(lowercaseSearchValue);
+    });
+
+    return (
+      <>
+        <FilterContainer
+          style={{
+            transform: isOpen ? "translateY(0)" : "translateY(-100%)"
+          }}
+        >
+          <InnerFilter>
+            <SortBy>
+              <SortByList sortBy={sortBy} setSortBy={setSortBy} />
+            </SortBy>
+            <Categories>
+              <CategoryList
+                categories={categories}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            </Categories>
+            <SearchTags>
+              <div>
+                <div>
+                  <input
+                    value={searchValue}
+                    onChange={updateSearchValue}
+                    type="text"
+                    autoComplete="off"
+                    spellCheck={false}
+                    placeholder={inputFocused ? "" : "Search Tags"}
+                    onFocus={focusInput}
+                    onBlur={blurInput}
+                  />
+                  <div>
+                    <SearchIcon />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <ul>
+                    <li>Selected 1</li>
+                    <li>Selected 2</li>
+                    <li>Selected 3</li>
+                    <li>Selected 4</li>
+                  </ul>
+                </div>
+                <div>
+                  <ul>
+                    {filteredTags.map(tag => (
+                      <TagListItem key={tag}>
+                        <span onClick={() => addTagToSelectedTags(tag)}>
+                          {tag}
+                        </span>
+                        <div
+                          onClick={() => removeTagFromSelectedTags(tag)}
+                          style={{
+                            display: selectedTags.includes(tag) ? "" : "none"
+                          }}
+                        >
+                          <CrossIcon />
+                        </div>
+                      </TagListItem>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </SearchTags>
+            <FilterTitle>
+              <h2>Filter</h2>
+            </FilterTitle>
+          </InnerFilter>
+          <CloseButtonContainer>
+            <button onClick={close}>Close</button>
+          </CloseButtonContainer>
+        </FilterContainer>
+        <FilterCover />
+      </>
+    );
+  }
+}
 
 export default Filter;
 
@@ -104,7 +189,7 @@ const InnerFilter = styled.div`
   ul {
     list-style: none;
     padding: 0;
-    margin: 15px 0;
+    margin: 0;
 
     li {
       display: flex;
@@ -153,6 +238,120 @@ const Categories = styled.div`
 
 const SearchTags = styled.div`
   grid-area: search-tags;
+  display: flex;
+  flex-direction: column;
+
+  > div:first-child {
+    > div {
+      display: flex;
+
+      input {
+        width: 100%;
+        background-color: ${props => props.theme.accentColor};
+        border: none;
+        outline: none;
+        /* NOTE: Was 15px, but for some reason was 1px off */
+        padding-bottom: 14px;
+
+        &::placeholder {
+          color: #060606;
+          text-transform: uppercase;
+          opacity: 1;
+        }
+      }
+
+      > div {
+        display: flex;
+        align-items: center;
+        /* NOTE: Was 15px, but for some reason was 1px off */
+        padding-bottom: 14px;
+
+        svg {
+          width: 18px;
+        }
+      }
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 100%;
+      background-color: #060606;
+    }
+  }
+
+  > div:last-child {
+    position: relative;
+    flex: 1;
+
+    > div:first-child {
+    }
+
+    > div:last-child {
+      /* display: none; */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: ${props => props.theme.accentColor};
+      z-index: 100000;
+
+      &:after {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: #060606;
+      }
+
+      ul {
+        height: 100%;
+        overflow: auto;
+
+        li:first-child {
+          margin-top: 15px;
+        }
+
+        li:last-child {
+          margin-bottom: 15px;
+        }
+
+        /* Scrollbar CSS for Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: #060606 ${props => props.theme.accentColor};
+
+        /* Scrollbar CSS for Chrome and Safari */
+        &::-webkit-scrollbar {
+          width: 1px;
+          background-color: ${props => props.theme.accentColor};
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #060606;
+        }
+
+        &::-webkit-scrollbar-track {
+          margin: 15px 0;
+        }
+      }
+    }
+  }
+`;
+
+const TagListItem = styled.li`
+  span:first-child {
+    flex: 1;
+  }
+
+  div:last-child {
+    padding: 0 15px;
+
+    svg {
+      width: 12px;
+    }
+  }
 `;
 
 const FilterTitle = styled.div`

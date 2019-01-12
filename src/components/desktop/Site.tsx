@@ -93,7 +93,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
   const anySectionIsOpen = info.open || filter.open || aboutOpen;
 
   return (
-    <SiteContainer onWheel={handleWheel}>
+    <SiteContainer /* onWheel={handleWheel} */>
       <Filter
         isOpen={filter.open}
         close={closeFilter}
@@ -104,6 +104,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
         setSelectedCategory={setSelectedCategory}
         tags={tags}
         selectedTags={filter.selectedTags}
+        addTagToSelectedTags={addTagToSelectedTags}
+        removeTagFromSelectedTags={removeTagFromSelectedTags}
       />
       <MainContainer infoOpen={info.open}>
         <Underlay />
