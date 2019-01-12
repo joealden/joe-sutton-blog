@@ -146,6 +146,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
             posts={posts}
             sortBy={filter.sortBy}
             selectedCategory={filter.selectedCategory}
+            selectedTags={filter.selectedTags}
           />
         </HeaderAndListContainer>
       </MainContainer>

@@ -10,6 +10,7 @@ type ListProps = {
   posts: Array<Post>;
   sortBy: FilterSortBy;
   selectedCategory: string | null;
+  selectedTags: string[];
 };
 
 type ListState = {
@@ -33,14 +34,28 @@ class List extends React.Component<ListProps, ListState> {
    * desired behaviour.
    */
   componentDidUpdate(prevProps: ListProps) {
-    const { posts, sortBy, selectedCategory } = this.props;
+    const { posts, sortBy, selectedCategory, selectedTags } = this.props;
 
     const sortByChanged = sortBy !== prevProps.sortBy;
     const selectedCategoryChanged =
       selectedCategory !== prevProps.selectedCategory;
+
+    /**
+     * NOTE:
+     * I was considering doing a second check with `Array.every()`, but I
+     * decided it wasn't needed. This is because if the user adds a tag,
+     * removes a tag, or clears all the tags from the search criteria,
+     * the length of the `selectedTags` will always be different.
+     */
+    const selectedTagsChanged =
+      selectedTags.length !== prevProps.selectedTags.length;
+
     const postsIsNotEmpty = posts.length !== 0;
 
-    if ((sortByChanged || selectedCategoryChanged) && postsIsNotEmpty) {
+    if (
+      (sortByChanged || selectedCategoryChanged || selectedTagsChanged) &&
+      postsIsNotEmpty
+    ) {
       this.setCurrentlyActiveItem(posts[0].id);
     }
   }
