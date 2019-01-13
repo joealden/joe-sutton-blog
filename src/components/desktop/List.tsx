@@ -57,6 +57,16 @@ class List extends React.Component<ListProps, ListState> {
       postsIsNotEmpty
     ) {
       this.setCurrentlyActiveItem(posts[0].id);
+
+      /**
+       * TODO:
+       * Improve UX of scroll to top somehow,
+       * as it currently feels a bit jarring.
+       */
+      window.scrollTo({
+        left: 0,
+        top: 0
+      });
     }
   }
 
