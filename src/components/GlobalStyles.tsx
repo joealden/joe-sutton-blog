@@ -1,8 +1,18 @@
 import { createGlobalStyle } from "../utils/styled-components";
 
-/* All non-dynamic styles have been moved from here to styles.css */
-
 const GlobalStyles = createGlobalStyle`
+  /**
+   * TODO:
+   * Play around with custom scrollbars for
+   * both Firefox and Webkit based browsers.
+   *
+   * | * {
+   * |   scrollbar-width: none;
+   * |   scrollbar-color: ${props => props.theme.accentColor} #838383;
+   * |   transition: scrollbar-color ${props => props.theme.transition};
+  * | }
+  */
+
   body {
     background-color: ${props => props.theme.backgroundColor};
     color: ${props => props.theme.foregroundColor};
