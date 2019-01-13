@@ -454,9 +454,11 @@ const FilteredTagsListItem = styled.li`
 
 const FilterTitle = styled.div`
   grid-area: filter-title;
-  writing-mode: vertical-rl;
+  display: flex;
+  justify-content: flex-end;
 
   h2 {
+    writing-mode: vertical-rl;
     font-size: 5vw;
     margin: 0 60px 0 0;
     line-height: 80%;
