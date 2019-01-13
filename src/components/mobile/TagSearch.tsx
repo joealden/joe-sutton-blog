@@ -28,6 +28,8 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
     this.setState({ searchValue: newSearchValue });
   };
 
+  clearSearchValue = () => this.setState({ searchValue: "" });
+
   focusInput = () => this.setState({ inputFocused: true });
   blurInput = () => this.setState({ inputFocused: false });
 
@@ -41,7 +43,7 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
     } = this.props;
 
     const { searchValue, inputFocused } = this.state;
-    const { updateSearchValue, focusInput, blurInput } = this;
+    const { updateSearchValue, clearSearchValue, focusInput, blurInput } = this;
 
     const filteredTags = tags.filter(tag => {
       const lowercaseTag = tag.toLowerCase();
@@ -82,7 +84,15 @@ class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
                  */
               />
               <div>
-                <SearchIcon />
+                {searchValue === "" ? (
+                  <div>
+                    <SearchIcon />
+                  </div>
+                ) : (
+                  <button onClick={clearSearchValue}>
+                    <CrossIcon />
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -149,10 +159,16 @@ const TagListWrapper = styled.div`
         display: flex;
         align-items: center;
         margin-top: 20px;
-        margin-right: 20px;
 
         svg {
           width: 18px;
+        }
+
+        > div,
+        > button {
+          padding: 20px;
+          display: flex;
+          align-items: center;
         }
       }
     }

@@ -42,6 +42,8 @@ class Filter extends React.Component<FilterProps, FilterState> {
     this.setState({ searchValue: newSearchValue });
   };
 
+  clearSearchValue = () => this.setState({ searchValue: "" });
+
   focusInput = () =>
     this.setState({
       inputFocused: true,
@@ -81,6 +83,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 
     const {
       updateSearchValue,
+      clearSearchValue,
       focusInput,
       blurInput,
       hideSearchList,
@@ -136,7 +139,13 @@ class Filter extends React.Component<FilterProps, FilterState> {
                     onBlur={blurInput}
                   />
                   <div>
-                    <SearchIcon />
+                    {searchValue === "" ? (
+                      <SearchIcon />
+                    ) : (
+                      <button onClick={clearSearchValue}>
+                        <CrossIcon />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -329,6 +338,12 @@ const SearchTags = styled.div`
 
         svg {
           width: 18px;
+        }
+
+        > button {
+          padding: 0;
+          display: flex;
+          align-items: center;
         }
       }
     }
