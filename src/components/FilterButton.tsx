@@ -107,6 +107,7 @@ const StyledFilterButton = styled.button`
     width: 0;
     height: 1px;
     background-color: ${props => props.theme.accentColor};
+    transition: background-color ${props => props.theme.transition};
   }
 
   &.filter-line-entered span:after {
