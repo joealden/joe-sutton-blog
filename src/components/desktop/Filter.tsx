@@ -441,12 +441,14 @@ const SearchTags = styled.div`
 
 const SelectedTagsListItem = styled.li`
   padding: 1px 0;
+  user-select: none;
 
-  span:first-child {
-    flex: 1;
-  }
+  /* Do as I say, not as I do (I was being lazy). */
+  cursor: default !important;
 
   div:last-child {
+    cursor: pointer;
+
     svg {
       width: 12px;
     }
