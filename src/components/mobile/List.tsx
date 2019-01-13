@@ -122,117 +122,25 @@ class List extends React.Component<ListProps> {
            * |                                                            |
            * --------------------------------------------------------------
            */
-          <>
-            {posts.map(post => (
-              <ListItem
-                key={post.id}
-                onClick={() => {
-                  openInfo(post);
-                  if (menuOpen) {
-                    setTimeout(() => {
-                      toggleMenu();
-                    }, 300);
-                  }
-                }}
-              >
-                <span>{post.title}</span>
-                <span>{post.category}</span>
-                <span>
-                  <Img alt={post.title} fluid={post.image.fluid} />
-                </span>
-              </ListItem>
-            ))}
-            <ListItem key="0" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
+          posts.map(post => (
+            <ListItem
+              key={post.id}
+              onClick={() => {
+                openInfo(post);
+                if (menuOpen) {
+                  setTimeout(() => {
+                    toggleMenu();
+                  }, 300);
+                }
+              }}
+            >
+              <span>{post.title}</span>
+              <span>{post.category}</span>
+              <span>
+                <Img alt={post.title} fluid={post.image.fluid} />
+              </span>
             </ListItem>
-            <ListItem key="1" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="2" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="3" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="4" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="5" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="6" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="7" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="8" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="9" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="10" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="11" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="12" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="13" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="14" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="15" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="16" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-            <ListItem key="17" onClick={() => {}}>
-              <span>Test Title</span>
-              <span>Test Category</span>
-              <span />
-            </ListItem>
-          </>
+          ))
         )}
       </ListWrapper>
     );
