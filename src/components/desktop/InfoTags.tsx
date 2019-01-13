@@ -51,13 +51,14 @@ class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
               ...acc,
               <React.Fragment key={currentTag}>
                 {selectedTags.includes(currentTag) ? (
-                  <NoClickTag>{currentTag}</NoClickTag>
+                  <Tag className="selected">{currentTag}</Tag>
                 ) : (
                   <Tag
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
                     onMouseMove={onMouseMove}
                     onClick={() => onClick(currentTag)}
+                    className="not-selected"
                   >
                     {currentTag}
                   </Tag>
@@ -84,14 +85,19 @@ class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
 
 export default InfoTags;
 
-const NoClickTag = styled.span``;
-
 const Tag = styled.span`
-  cursor: pointer;
   transition: color ${props => props.theme.transition};
 
-  &:hover {
+  &.selected {
     color: ${props => props.theme.accentColor};
+  }
+
+  &.not-selected {
+    cursor: pointer;
+
+    &:hover {
+      color: ${props => props.theme.accentColor};
+    }
   }
 `;
 

@@ -46,13 +46,14 @@ class InfoCategory extends React.Component<
     return (
       <>
         {selectedCategory === postCategory ? (
-          <NoClickCategory>{postCategory}</NoClickCategory>
+          <Category className="selected">{postCategory}</Category>
         ) : (
           <Category
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onMouseMove={onMouseMove}
             onClick={onClick}
+            className="not-selected"
           >
             {postCategory}
           </Category>
@@ -74,14 +75,19 @@ class InfoCategory extends React.Component<
 
 export default InfoCategory;
 
-const NoClickCategory = styled.span``;
-
 const Category = styled.span`
-  cursor: pointer;
   transition: color ${props => props.theme.transition};
 
-  &:hover {
+  &.selected {
     color: ${props => props.theme.accentColor};
+  }
+
+  &.not-selected {
+    cursor: pointer;
+
+    &:hover {
+      color: ${props => props.theme.accentColor};
+    }
   }
 `;
 
