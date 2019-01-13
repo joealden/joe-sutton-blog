@@ -155,8 +155,12 @@ class Site extends React.Component<SiteProps, SiteState> {
           posts={posts}
           openInfo={openInfoAndLockScroll}
           infoOpen={info.open}
+          filterOpen={filter.open}
           menuOpen={menuOpen}
           toggleMenu={toggleMenu}
+          sortBy={filter.sortBy}
+          selectedCategory={filter.selectedCategory}
+          selectedTags={filter.selectedTags}
         />
         <Info
           isOpen={info.open}
