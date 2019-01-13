@@ -95,6 +95,7 @@ const InfoContainer = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 
   height: 100vh;
   position: sticky;
@@ -108,6 +109,12 @@ const CloseButtonContainer = styled.div`
   height: 60px;
   min-height: 60px;
   padding: 0 20px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  background-color: ${props => props.theme.backgroundColor};
 
   button {
     transition: color ${props => props.theme.transition};
@@ -119,15 +126,15 @@ const CloseButtonContainer = styled.div`
 `;
 
 const DetailsContainer = styled.div`
-  padding: 0 30px;
+  padding: 0 30px 25px 30px;
 
   /* Figure out a better way to align this */
-  margin-top: calc(12.91vw - calc(20px * 1.5));
+  padding-top: calc(12.91vw - calc(20px * 1.5));
   @media screen and (max-width: 2000px) {
-    margin-top: calc(12.91vw - calc(18px * 1.5));
+    padding-top: calc(12.91vw - calc(18px * 1.5));
   }
   @media screen and (max-width: 1300px) {
-    margin-top: calc(12.91vw - calc(16px * 1.5));
+    padding-top: calc(12.91vw - calc(16px * 1.5));
   }
 
   div {

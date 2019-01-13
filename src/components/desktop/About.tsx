@@ -94,6 +94,7 @@ const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
 
   height: 100vh;
   position: sticky;
@@ -118,6 +119,12 @@ const CloseButtonContainer = styled.div`
   min-height: 60px;
   display: flex;
   padding: 0 20px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: ${props => props.theme.backgroundColor};
+  z-index: 1000000;
 `;
 
 const AboutDetails = styled.div`
@@ -141,7 +148,7 @@ const Description = styled.div`
 `;
 
 const InstagramLink = styled.div`
-  margin-top: 90px;
+  margin: 90px 0;
 `;
 
 const CreditLinks = styled.div`
