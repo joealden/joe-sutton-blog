@@ -71,6 +71,22 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     window.removeEventListener("scroll", this.shouldBackToTopButtonBeShown);
   }
 
+  /**
+   * NOTE:
+   * This is required because of an issue where on mobile Firefox, the
+   * "Back to Top" button was showing when it shouldn't. This was likely
+   * due to Firefox not firing the above scroll event registered in
+   * componentDidMount when the list was shortened to take up less space
+   * than the viewport height.
+   *
+   * See this github issue for more info:
+   *
+   * https://github.com/joealden/listed/issues/34
+   */
+  componentDidUpdate() {
+    this.shouldBackToTopButtonBeShown();
+  }
+
   /* -------------------------------------------------------------------- */
 
   render() {
