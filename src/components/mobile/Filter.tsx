@@ -59,7 +59,6 @@ class Filter extends React.Component<FilterProps, FilterState> {
   render() {
     const {
       isOpen,
-      close,
       sortBy,
       setSortBy,
       categories,
