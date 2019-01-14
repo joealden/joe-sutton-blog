@@ -34,12 +34,27 @@ class Filter extends React.Component<FilterProps, FilterState> {
     tagSearchOpen: false
   };
 
+  filterContentsRef: React.RefObject<HTMLDivElement> = React.createRef();
+
   openTagSearch = () => {
     this.setState({ tagSearchOpen: true });
     /* TODO: Scroll filter back to the top */
   };
 
   closeTagSearch = () => this.setState({ tagSearchOpen: false });
+
+  closeFilter = () => {
+    const { close } = this.props;
+    const { filterContentsRef } = this;
+
+    close();
+    setTimeout(() => {
+      filterContentsRef.current.scrollTo({
+        top: 0,
+        left: 0
+      });
+    }, 300);
+  };
 
   render() {
     const {
@@ -57,7 +72,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
     } = this.props;
 
     const { tagSearchOpen } = this.state;
-    const { openTagSearch, closeTagSearch } = this;
+    const { openTagSearch, closeTagSearch, closeFilter } = this;
 
     return (
       <>
@@ -66,7 +81,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
             transform: isOpen ? "translateY(0)" : "translateY(-100%)"
           }}
         >
-          <FilterContents>
+          <FilterContents ref={this.filterContentsRef}>
             <div>
               <div
                 onClick={openTagSearch}
@@ -104,7 +119,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
             </div>
           </FilterContents>
           <BackToResultsWrapper>
-            <button onClick={close}>Back to Results</button>
+            <button onClick={closeFilter}>Back to Results</button>
           </BackToResultsWrapper>
         </FilterWrapper>
         {tagSearchOpen ? (
