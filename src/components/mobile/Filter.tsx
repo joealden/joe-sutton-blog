@@ -37,8 +37,13 @@ class Filter extends React.Component<FilterProps, FilterState> {
   filterContentsRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   openTagSearch = () => {
+    const { filterContentsRef } = this;
+
     this.setState({ tagSearchOpen: true });
-    /* TODO: Scroll filter back to the top */
+    filterContentsRef.current.scrollTo({
+      top: 0,
+      left: 0
+    });
   };
 
   closeTagSearch = () => this.setState({ tagSearchOpen: false });
