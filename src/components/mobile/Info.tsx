@@ -21,120 +21,138 @@ type InfoProps = {
   sortBy: FilterSortBy;
 };
 
-/**
- * TODO:
- * Deduplicate the following between the desktop and mobile components:
- * - The date string calcuation (extract out into a function).
- * - All of the stuff inside the `InfoItemContainer` component.
- */
+class Info extends React.Component<InfoProps> {
+  infoWrapperRef: React.RefObject<HTMLDivElement> = React.createRef();
 
-const Info: React.FunctionComponent<InfoProps> = ({
-  isOpen,
-  close,
-  post,
-  selectedCategory,
-  setSelectedCategory,
-  selectedTags,
-  addTagToSelectedTags,
-  filterLineTransition,
-  setFilterLineTransition,
-  sortBy
-}) => {
-  const createdAt = new Date(post.createdAt);
-  const date = createdAt.getDate();
-  const month = createdAt.getMonth();
-  const year = createdAt.getFullYear();
-  const dateString = `${date}/${month}/${year}`;
+  onCloseButtonClick = () => {
+    const { close } = this.props;
+    const { infoWrapperRef } = this;
 
-  const onCategoryClick = () => {
+    close();
+    setTimeout(() => {
+      infoWrapperRef.current.scrollTo({
+        top: 0,
+        left: 0
+      });
+    }, 300);
+  };
+
+  onCategoryClick = () => {
+    const { post, selectedCategory, setSelectedCategory } = this.props;
+
     if (post.category !== selectedCategory) {
       setSelectedCategory(post.category);
     }
   };
 
-  const onTagClick = (tag: string) => {
+  onTagClick = (tag: string) => {
+    const { selectedTags, addTagToSelectedTags } = this.props;
+
     if (!selectedTags.includes(tag)) {
       addTagToSelectedTags(tag);
     }
   };
 
-  return (
-    <InfoWrapper
-      style={{
-        transform: isOpen ? "translateX(0)" : "translateX(100%)"
-      }}
-    >
-      <div>
-        <FilterButton
-          onClick={close}
-          buttonText="Back"
-          lineTransition={filterLineTransition}
-          setLineTransition={setFilterLineTransition}
-          sortBy={sortBy}
-          selectedCategory={selectedCategory}
-          selectedTags={selectedTags}
-        />
-      </div>
-      <div>
-        <InfoLink href={post.link} rel="noreferrer noopener" target="_blank">
-          <div>
-            <h2>
-              <span>{post.title}</span>
-              <span>
-                <Arrow />
-              </span>
-            </h2>
-            <div>
-              <span>Visit</span>
-            </div>
-          </div>
-          <Img key={post.id} alt={post.title} fluid={post.image.fluid} />
-        </InfoLink>
-        <InfoItemContainer>
-          <InfoItem>
-            <div>Added on</div>
-            <div>{dateString}</div>
-          </InfoItem>
-          <InfoItem>
-            <div>Category</div>
-            <Category
-              onClick={onCategoryClick}
-              className={
-                post.category === selectedCategory ? "selected-category" : ""
-              }
-            >
-              {post.category}
-            </Category>
-          </InfoItem>
-          <InfoItem>
-            <div>Tags</div>
-            <div>
-              {post.tags.reduce((acc, currentTag, i) => {
-                const isLastTag = i === post.tags.length - 1;
-                const punctuation = isLastTag ? "." : ", ";
+  render() {
+    const {
+      isOpen,
+      post,
+      selectedCategory,
+      selectedTags,
+      filterLineTransition,
+      setFilterLineTransition,
+      sortBy
+    } = this.props;
 
-                return [
-                  ...acc,
-                  <React.Fragment key={currentTag}>
-                    <Tag
-                      onClick={() => onTagClick(currentTag)}
-                      className={
-                        selectedTags.includes(currentTag) ? "selected-tag" : ""
-                      }
-                    >
-                      {currentTag}
-                    </Tag>
-                    {punctuation}
-                  </React.Fragment>
-                ];
-              }, [])}
+    const { onCloseButtonClick, onCategoryClick, onTagClick } = this;
+
+    const createdAt = new Date(post.createdAt);
+    const date = createdAt.getDate();
+    const month = createdAt.getMonth();
+    const year = createdAt.getFullYear();
+    const dateString = `${date}/${month}/${year}`;
+
+    return (
+      <InfoWrapper
+        ref={this.infoWrapperRef}
+        style={{
+          transform: isOpen ? "translateX(0)" : "translateX(100%)"
+        }}
+      >
+        <div>
+          <FilterButton
+            onClick={onCloseButtonClick}
+            buttonText="Back"
+            lineTransition={filterLineTransition}
+            setLineTransition={setFilterLineTransition}
+            sortBy={sortBy}
+            selectedCategory={selectedCategory}
+            selectedTags={selectedTags}
+          />
+        </div>
+        <div>
+          <InfoLink href={post.link} rel="noreferrer noopener" target="_blank">
+            <div>
+              <h2>
+                <span>{post.title}</span>
+                <span>
+                  <Arrow />
+                </span>
+              </h2>
+              <div>
+                <span>Visit</span>
+              </div>
             </div>
-          </InfoItem>
-        </InfoItemContainer>
-      </div>
-    </InfoWrapper>
-  );
-};
+            <Img key={post.id} alt={post.title} fluid={post.image.fluid} />
+          </InfoLink>
+          <InfoItemContainer>
+            <InfoItem>
+              <div>Added on</div>
+              <div>{dateString}</div>
+            </InfoItem>
+            <InfoItem>
+              <div>Category</div>
+              <Category
+                onClick={onCategoryClick}
+                className={
+                  post.category === selectedCategory ? "selected-category" : ""
+                }
+              >
+                {post.category}
+              </Category>
+            </InfoItem>
+            <InfoItem>
+              <div>Tags</div>
+              <div>
+                {post.tags.reduce((acc, currentTag, i) => {
+                  const isLastTag = i === post.tags.length - 1;
+                  const punctuation = isLastTag ? "." : ", ";
+
+                  return [
+                    ...acc,
+                    <React.Fragment key={currentTag}>
+                      <Tag
+                        onClick={() => onTagClick(currentTag)}
+                        className={
+                          selectedTags.includes(currentTag)
+                            ? "selected-tag"
+                            : ""
+                        }
+                      >
+                        {currentTag}
+                      </Tag>
+                      {punctuation}
+                    </React.Fragment>
+                  ];
+                }, [])}
+              </div>
+            </InfoItem>
+          </InfoItemContainer>
+        </div>
+      </InfoWrapper>
+    );
+  }
+}
 
 export default Info;
 
