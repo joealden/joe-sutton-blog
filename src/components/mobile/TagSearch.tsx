@@ -137,6 +137,10 @@ const TagSearchWrapper = styled.div`
 `;
 
 const TagListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 60px);
+
   > div {
     > div {
       display: flex;
@@ -190,12 +194,13 @@ const TagListWrapper = styled.div`
   }
 
   ul {
+    flex: 1;
     list-style: none;
     margin: 0;
     padding: 0;
     color: #060606;
     overflow: auto;
-    max-height: calc(100vh - 240px);
+    margin-bottom: 20px;
   }
 `;
 
