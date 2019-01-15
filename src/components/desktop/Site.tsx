@@ -14,7 +14,6 @@ import MainContainer from "./MainContainer";
 import Info from "./Info";
 import About from "./About";
 import Underlay from "./Underlay";
-import Overlay from "./Overlay";
 import Header from "./Header";
 import List from "./List";
 
@@ -63,18 +62,6 @@ const Site: React.FunctionComponent<SiteProps> = ({
   filterLineTransition,
   setFilterLineTransition
 }) => {
-  const handleOverlayClick = () => {
-    if (info.open) {
-      closeInfo();
-    }
-    if (filter.open) {
-      closeFilter();
-    }
-    if (aboutOpen) {
-      closeAbout();
-    }
-  };
-
   /**
    * TODO:
    * This stops scrolling with the mousewheel, but
@@ -111,7 +98,8 @@ const Site: React.FunctionComponent<SiteProps> = ({
       <MainContainer infoOpen={info.open}>
         <Underlay />
         <Info
-          closeInfo={closeInfo}
+          close={closeInfo}
+          isOpen={info.open}
           post={info.post}
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -124,10 +112,6 @@ const Site: React.FunctionComponent<SiteProps> = ({
             opacity: anySectionIsOpen ? 0.3 : 1
           }}
         >
-          <Overlay
-            visible={anySectionIsOpen}
-            handleClick={handleOverlayClick}
-          />
           <Header
             sortBy={filter.sortBy}
             setFilterSortBy={setFilterSortBy}

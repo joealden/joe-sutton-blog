@@ -63,10 +63,32 @@ class Filter extends React.Component<FilterProps, FilterState> {
     event.stopPropagation();
   };
 
+  closeFilter = (event: React.MouseEvent) => {
+    const { close } = this.props;
+    const { preventHideSearchList, hideSearchList } = this;
+
+    /*
+     * This is so that the click handler
+     * on `FilterContainer` doesn't trigger.
+     */
+    preventHideSearchList(event);
+
+    close();
+
+    /*
+     * This delay is so that the search list is
+     * only hidden once the filter has gone out
+     * of view. Without this delay, closing the
+     * filter like this didn't look right.
+     */
+    setTimeout(() => {
+      hideSearchList();
+    }, 300);
+  };
+
   render() {
     const {
       isOpen,
-      close,
       sortBy,
       setSortBy,
       categories,
@@ -87,7 +109,8 @@ class Filter extends React.Component<FilterProps, FilterState> {
       focusInput,
       blurInput,
       hideSearchList,
-      preventHideSearchList
+      preventHideSearchList,
+      closeFilter
     } = this;
 
     const filteredTags = tags.filter(tag => {
@@ -207,10 +230,16 @@ class Filter extends React.Component<FilterProps, FilterState> {
             </FilterTitle>
           </InnerFilter>
           <CloseButtonContainer>
-            <button onClick={close}>Close</button>
+            <button onClick={closeFilter}>Close</button>
           </CloseButtonContainer>
         </FilterContainer>
         <FilterCover />
+        <FilterOverlay
+          style={{
+            visibility: isOpen ? "visible" : "hidden"
+          }}
+          onClick={closeFilter}
+        />
       </>
     );
   }
@@ -504,4 +533,15 @@ const FilterCover = styled.div`
   background-color: ${props => props.theme.backgroundColor};
   transition: background-color ${props => props.theme.transition};
   transform: translateY(-100%);
+`;
+
+const FilterOverlay = styled.div`
+  z-index: 9000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  transition: visibility ${props => props.theme.transition};
 `;

@@ -7,68 +7,76 @@ type AboutProps = {
 };
 
 const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
-  <AboutContainer
-    style={{
-      visibility: isOpen ? "visible" : "hidden",
-      opacity: isOpen ? 1 : 0
-    }}
-  >
-    <InnerContainer>
-      <TopContainer>
-        <CloseButtonContainer>
-          <button onClick={close}>Close</button>
-        </CloseButtonContainer>
-        <AboutDetails>
-          <Description>
-            <p>
-              A list of curated design related links. The idea is for it to be a
-              place to search for inspiration when setting a... A list of
-              curated design related links. The idea is for it to be a place to
-              search for inspiration when setting a...
-            </p>
-          </Description>
-          <InstagramLink>
-            <a
-              /* An instagram account needs to be created */
-              href="https://www.instagram.com/listeddesign/"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              Follow our Instagram
-            </a>
-          </InstagramLink>
-        </AboutDetails>
-      </TopContainer>
-      <BottomContainer>
-        <CreditLinks>
-          <div>
-            <span>Design: </span>
-            <span>
+  <>
+    <AboutContainer
+      style={{
+        visibility: isOpen ? "visible" : "hidden",
+        opacity: isOpen ? 1 : 0
+      }}
+    >
+      <InnerContainer>
+        <TopContainer>
+          <CloseButtonContainer>
+            <button onClick={close}>Close</button>
+          </CloseButtonContainer>
+          <AboutDetails>
+            <Description>
+              <p>
+                A list of curated design related links. The idea is for it to be
+                a place to search for inspiration when setting a... A list of
+                curated design related links. The idea is for it to be a place
+                to search for inspiration when setting a...
+              </p>
+            </Description>
+            <InstagramLink>
               <a
-                href="https://joesutton.co"
+                /* An instagram account needs to be created */
+                href="https://www.instagram.com/listeddesign/"
                 rel="noreferrer noopener"
                 target="_blank"
               >
-                Joe Sutton
+                Follow our Instagram
               </a>
-            </span>
-          </div>
-          <div>
-            <span>Dev: </span>
-            <span>
-              <a
-                href="https://joealden.com"
-                rel="noreferrer noopener"
-                target="_blank"
-              >
-                Joe Alden
-              </a>
-            </span>
-          </div>
-        </CreditLinks>
-      </BottomContainer>
-    </InnerContainer>
-  </AboutContainer>
+            </InstagramLink>
+          </AboutDetails>
+        </TopContainer>
+        <BottomContainer>
+          <CreditLinks>
+            <div>
+              <span>Design: </span>
+              <span>
+                <a
+                  href="https://joesutton.co"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  Joe Sutton
+                </a>
+              </span>
+            </div>
+            <div>
+              <span>Dev: </span>
+              <span>
+                <a
+                  href="https://joealden.com"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  Joe Alden
+                </a>
+              </span>
+            </div>
+          </CreditLinks>
+        </BottomContainer>
+      </InnerContainer>
+    </AboutContainer>
+    <AboutOverlay
+      style={{
+        visibility: isOpen ? "visible" : "hidden"
+      }}
+      onClick={close}
+    />
+  </>
 );
 
 export default About;
@@ -163,4 +171,15 @@ const CreditLinks = styled.div`
   div:first-child {
     margin-bottom: 5px;
   }
+`;
+
+const AboutOverlay = styled.div`
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  transition: visibility ${props => props.theme.transition};
 `;

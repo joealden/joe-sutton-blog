@@ -8,7 +8,8 @@ import InfoCategory from "./InfoCategory";
 import InfoTags from "./InfoTags";
 
 type InfoProps = {
-  closeInfo: () => void;
+  close: () => void;
+  isOpen: boolean;
   post: Post;
   selectedCategory: string | null;
   setSelectedCategory: (selectedCategory: string | null) => void;
@@ -17,7 +18,8 @@ type InfoProps = {
 };
 
 const Info: React.FunctionComponent<InfoProps> = ({
-  closeInfo,
+  close,
+  isOpen,
   post,
   selectedCategory,
   setSelectedCategory,
@@ -31,47 +33,55 @@ const Info: React.FunctionComponent<InfoProps> = ({
   const dateString = `${date}/${month}/${year}`;
 
   return (
-    <InfoContainer>
-      <InnerContainer>
-        <CloseButtonContainer>
-          <button onClick={closeInfo}>Close</button>
-        </CloseButtonContainer>
-        <DetailsContainer>
-          <div>
-            <InfoTitle>{post.title}</InfoTitle>
-            <InfoLink
-              href={post.link}
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              <Img key={post.id} alt={post.title} fluid={post.image.fluid} />
-            </InfoLink>
-            <InfoItemContainer>
-              <InfoItem>
-                <div>Added on</div>
-                <div>{dateString}</div>
-              </InfoItem>
-              <InfoItem>
-                <div>Category</div>
-                <InfoCategory
-                  postCategory={post.category}
-                  selectedCategory={selectedCategory}
-                  setSelectedCategory={setSelectedCategory}
-                />
-              </InfoItem>
-              <InfoItem>
-                <div>Tags</div>
-                <InfoTags
-                  postTags={post.tags}
-                  selectedTags={selectedTags}
-                  addTagToSelectedTags={addTagToSelectedTags}
-                />
-              </InfoItem>
-            </InfoItemContainer>
-          </div>
-        </DetailsContainer>
-      </InnerContainer>
-    </InfoContainer>
+    <>
+      <InfoContainer>
+        <InnerContainer>
+          <CloseButtonContainer>
+            <button onClick={close}>Close</button>
+          </CloseButtonContainer>
+          <DetailsContainer>
+            <div>
+              <InfoTitle>{post.title}</InfoTitle>
+              <InfoLink
+                href={post.link}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <Img key={post.id} alt={post.title} fluid={post.image.fluid} />
+              </InfoLink>
+              <InfoItemContainer>
+                <InfoItem>
+                  <div>Added on</div>
+                  <div>{dateString}</div>
+                </InfoItem>
+                <InfoItem>
+                  <div>Category</div>
+                  <InfoCategory
+                    postCategory={post.category}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                </InfoItem>
+                <InfoItem>
+                  <div>Tags</div>
+                  <InfoTags
+                    postTags={post.tags}
+                    selectedTags={selectedTags}
+                    addTagToSelectedTags={addTagToSelectedTags}
+                  />
+                </InfoItem>
+              </InfoItemContainer>
+            </div>
+          </DetailsContainer>
+        </InnerContainer>
+      </InfoContainer>
+      <InfoOverlay
+        style={{
+          visibility: isOpen ? "visible" : "hidden"
+        }}
+        onClick={close}
+      />
+    </>
   );
 };
 
@@ -210,4 +220,15 @@ const InfoItem = styled.div`
     margin-bottom: 2px;
     color: #838383;
   }
+`;
+
+const InfoOverlay = styled.div`
+  z-index: 900;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  transition: visibility ${props => props.theme.transition};
 `;
