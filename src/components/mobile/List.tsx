@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "../../utils/styled-components";
 import Img from "gatsby-image";
-import noScroll from "no-scroll";
+import disableScrolling from "../../utils/disableScrolling";
 
 import { Post, FilterSortBy } from "../../utils/types";
 
@@ -45,32 +45,34 @@ class List extends React.Component<ListProps> {
      * NOTE:
      * This is pretty hacky, but it seems to work fine.
      *
-     * Due to how the `no-scroll` library works, calling `window.scrollTo()`
-     * doesn't do anything. This is because `no-scroll` disables scrolling
-     * of the page while maintaining the scroll position for when you want
-     * to re-enable scrolling.
+     * Due to how the `disableScrolling` util works, calling
+     * `window.scrollTo()` doesn't do anything. This is because
+     * `disableScrolling.on()` disables scrolling of the page while
+     * maintaining the scroll position for when you want to re-enable
+     * scrolling.
      *
      * We want to scroll the page back to the top when the filter criteria
-     * changes. So to achieve this while using the `no-scroll` library, we
-     * must disable noScroll, then perform the scroll, then turn it back on
-     * again (if it was on before, this is why we check for `infoOpen` or
-     * `filterOpen` to be true).
+     * changes. So to achieve this while using the `disableScrolling` util,
+     * we must disable scrolling with `disableScrolling.off()`, then perform
+     * the scroll, then turn it back on again with `disableScrolling.on()`
+     * (only if `disableScrolling` was on before, this is why we check for
+     * `infoOpen` or `filterOpen` to be true).
      *
      * Code wise, this is pretty disgusting as theoretically there is a
-     * time where the user could scroll the page when they shouldn't be able
-     * to (in between the `no-scroll` calls), which annoys me a bit. However,
-     * in reality, from my testing, this isn't an issue.
+     * time where the user could scroll the page when they shouldn't be
+     * able to (in between the `disableScrolling` calls), which annoys me a
+     * bit. However, in reality, from my testing, this isn't an issue.
      */
     if (
       (sortByChanged || selectedCategoryChanged || selectedTagsChanged) &&
       (infoOpen || filterOpen)
     ) {
-      noScroll.off();
+      disableScrolling.off();
       window.scrollTo({
         top: 0,
         left: 0
       });
-      noScroll.on();
+      disableScrolling.on();
     }
   }
 

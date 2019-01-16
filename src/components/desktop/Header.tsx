@@ -10,12 +10,10 @@ import Logo from "../icons/Logo";
 import BackToTop from "../icons/BackToTop";
 
 type HeaderProps = {
+  anySectionOpen: boolean;
   sortBy: FilterSortBy;
-  setFilterSortBy: (sortBy: FilterSortBy) => void;
   selectedCategory: string | null;
-  setSelectedCategory: (selectedCategory: string | null) => void;
   selectedTags: Array<string>;
-  clearSelectedTags: () => void;
   toggleTheme: () => void;
   openFilter: () => void;
   openAbout: () => void;
@@ -57,20 +55,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     window.removeEventListener("scroll", this.shouldBackToTopButtonBeShown);
   }
 
-  logoClick = () => {
-    const {
-      setSelectedCategory,
-      setFilterSortBy,
-      clearSelectedTags
-    } = this.props;
-
-    setSelectedCategory(null);
-    setFilterSortBy(FilterSortBy.NewestFirst);
-    clearSelectedTags();
-  };
-
   render() {
     const {
+      anySectionOpen,
       toggleTheme,
       openFilter,
       openAbout,
@@ -82,11 +69,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     } = this.props;
 
     const { showBackToTopButton } = this.state;
-    const { logoClick } = this;
 
     return (
-      <HeaderWrapper>
-        <LogoWrapper onClick={logoClick}>
+      <HeaderWrapper
+        style={{
+          top: anySectionOpen ? `${window.pageYOffset}px` : "0"
+        }}
+      >
+        <LogoWrapper>
           <Logo />
         </LogoWrapper>
         <FilterAndBackToTopWrapper>
@@ -145,7 +135,6 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `;
 
 const commonFlexHeaderStyles = css`

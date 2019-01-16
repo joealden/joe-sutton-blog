@@ -18,7 +18,6 @@
     "gatsby-image": "^2.0.26",
     "lodash.shuffle": "^4.2.0",
     "memoize-one": "^5.0.0",
-    "no-scroll": "^2.1.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-responsive": "^6.0.1",

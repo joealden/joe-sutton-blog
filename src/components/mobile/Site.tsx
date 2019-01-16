@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "../../utils/styled-components";
-import noScroll from "no-scroll";
+import disableScrolling from "../../utils/disableScrolling";
 
 import {
   Post,
@@ -89,32 +89,32 @@ class Site extends React.Component<SiteProps, SiteState> {
 
     const openAboutAndLockScroll = () => {
       openAbout();
-      noScroll.on();
+      disableScrolling.on();
     };
 
     const closeAboutAndUnlockScroll = () => {
       closeAbout();
-      noScroll.off();
+      disableScrolling.off();
     };
 
     const openFilterAndLockScroll = () => {
       openFilter();
-      noScroll.on();
+      disableScrolling.on();
     };
 
     const closeFilterAndUnlockScroll = () => {
       closeFilter();
-      noScroll.off();
+      disableScrolling.off();
     };
 
     const openInfoAndLockScroll = (post: Post) => {
       openInfo(post);
-      noScroll.on();
+      disableScrolling.on();
     };
 
     const closeInfoAndUnlockScroll = () => {
       closeInfo();
-      noScroll.off();
+      disableScrolling.off();
     };
 
     /* ----------------------------------------------- */

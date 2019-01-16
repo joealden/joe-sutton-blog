@@ -7,6 +7,8 @@ import { Image } from "../../utils/types";
 import Arrow from "../icons/Arrow";
 
 type ListItemProps = {
+  filterOpen: boolean;
+  infoOpen: boolean;
   openInfo: () => void;
   setCurrentlyActiveItem: (id: string) => void;
   className: string;
@@ -18,6 +20,8 @@ type ListItemProps = {
 };
 
 export const ListItem: React.FunctionComponent<ListItemProps> = ({
+  filterOpen,
+  infoOpen,
   openInfo,
   setCurrentlyActiveItem,
   className,
@@ -33,6 +37,7 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
   >
     <a href={link} rel="noreferrer noopener" target="_blank">
       <InfoContainer
+        className={filterOpen || infoOpen ? "disable-transitions" : ""}
         onClick={event => {
           event.preventDefault();
           openInfo();
@@ -41,18 +46,24 @@ export const ListItem: React.FunctionComponent<ListItemProps> = ({
         <span>Info</span>
       </InfoContainer>
       <NameAndCatagoryContainer>
-        <NameContainer>
+        <NameContainer
+          className={filterOpen || infoOpen ? "disable-transitions" : ""}
+        >
           <span>{title}</span>
           <span>
             <Arrow />
           </span>
         </NameContainer>
-        <CatagoryContainer>
+        <CatagoryContainer
+          className={filterOpen || infoOpen ? "disable-transitions" : ""}
+        >
           <span>{catagory}</span>
         </CatagoryContainer>
       </NameAndCatagoryContainer>
       <ImageContainer>
-        <ImageWrapper>
+        <ImageWrapper
+          className={filterOpen || infoOpen ? "disable-transitions" : ""}
+        >
           <Img alt={title} fluid={image.fluid} />
         </ImageWrapper>
       </ImageContainer>
@@ -100,6 +111,14 @@ const InfoContainer = styled.div`
       color: ${props => props.theme.accentColor};
     }
   }
+
+  &.disable-transitions {
+    transition: none;
+
+    span {
+      transition: none;
+    }
+  }
 `;
 
 const NameAndCatagoryContainer = styled.div`
@@ -141,6 +160,13 @@ const NameContainer = styled.div`
       }
     }
   }
+
+  &.disable-transitions {
+    span:first-child,
+    span:last-child svg polygon {
+      transition: none;
+    }
+  }
 `;
 
 const CatagoryContainer = styled.div`
@@ -158,6 +184,12 @@ const CatagoryContainer = styled.div`
       visibility ${props => props.theme.transition},
       color ${props => props.theme.transition};
   }
+
+  &.disable-transitions {
+    span {
+      transition: none;
+    }
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -172,8 +204,13 @@ const ImageWrapper = styled.div`
   right: 0;
   opacity: 0;
   visibility: hidden;
+
   transition: opacity ${props => props.theme.transition},
     visibility ${props => props.theme.transition};
+
+  &.disable-transitions {
+    transition: none;
+  }
 `;
 
 export const PaddingListItem: React.FunctionComponent = () => (

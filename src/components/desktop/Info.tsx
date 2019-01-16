@@ -34,7 +34,11 @@ const Info: React.FunctionComponent<InfoProps> = ({
 
   return (
     <>
-      <InfoContainer>
+      <InfoContainer
+        style={{
+          top: isOpen ? `${window.pageYOffset}px` : "0"
+        }}
+      >
         <InnerContainer>
           <CloseButtonContainer>
             <button onClick={close}>Close</button>

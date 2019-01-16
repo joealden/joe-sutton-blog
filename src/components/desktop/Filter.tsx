@@ -134,6 +134,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
         <FilterContainer
           onClick={hideSearchList}
           style={{
+            overflowY: isOpen ? "scroll" : "auto",
             transform: isOpen ? "translateY(0)" : "translateY(-100%)"
           }}
         >

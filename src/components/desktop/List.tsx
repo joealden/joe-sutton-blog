@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "../../utils/styled-components";
+import disableScrolling from "../../utils/disableScrolling";
 
 import { Post, FilterSortBy } from "../../utils/types";
 
@@ -11,6 +12,8 @@ type ListProps = {
   sortBy: FilterSortBy;
   selectedCategory: string | null;
   selectedTags: string[];
+  infoOpen: boolean;
+  filterOpen: boolean;
 };
 
 type ListState = {
@@ -34,7 +37,14 @@ class List extends React.Component<ListProps, ListState> {
    * desired behaviour.
    */
   componentDidUpdate(prevProps: ListProps) {
-    const { posts, sortBy, selectedCategory, selectedTags } = this.props;
+    const {
+      posts,
+      sortBy,
+      selectedCategory,
+      selectedTags,
+      infoOpen,
+      filterOpen
+    } = this.props;
 
     const sortByChanged = sortBy !== prevProps.sortBy;
     const selectedCategoryChanged =
@@ -58,20 +68,23 @@ class List extends React.Component<ListProps, ListState> {
     ) {
       this.setCurrentlyActiveItem(posts[0].id);
 
-      /**
-       * TODO:
-       * Improve UX of scroll to top somehow,
-       * as it currently feels a bit jarring.
-       */
+      if (infoOpen || filterOpen) {
+        disableScrolling.off();
+      }
+
       window.scrollTo({
         left: 0,
         top: 0
       });
+
+      if (infoOpen || filterOpen) {
+        disableScrolling.on();
+      }
     }
   }
 
   render() {
-    const { openInfo, posts } = this.props;
+    const { posts, filterOpen, infoOpen, openInfo } = this.props;
     const { activeItemId } = this.state;
 
     return (
@@ -93,6 +106,8 @@ class List extends React.Component<ListProps, ListState> {
 
               return (
                 <ListItem
+                  filterOpen={filterOpen}
+                  infoOpen={infoOpen}
                   openInfo={() => openInfo(post)}
                   setCurrentlyActiveItem={this.setCurrentlyActiveItem}
                   className={className}

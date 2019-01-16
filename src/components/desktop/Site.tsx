@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "../../utils/styled-components";
+import disableScrolling from "../../utils/disableScrolling";
 
 import {
   Post,
@@ -62,28 +63,19 @@ const Site: React.FunctionComponent<SiteProps> = ({
   filterLineTransition,
   setFilterLineTransition
 }) => {
-  /**
-   * TODO:
-   * This stops scrolling with the mousewheel, but
-   * scrolling also needs to be stopped when the user
-   * uses either the arrow buttons or the actual scroll
-   * bar.
-   *
-   * Find solutions to these problem scenarios.
-   */
-  const handleWheel = (event: React.WheelEvent<HTMLElement>) => {
-    if (info.open || filter.open || aboutOpen) {
-      event.preventDefault();
-    }
-  };
-
   const anySectionIsOpen = info.open || filter.open || aboutOpen;
 
+  const lockWindowScroll = () => disableScrolling.on();
+  const unlockWindowScroll = () => disableScrolling.off();
+
   return (
-    <SiteContainer /* onWheel={handleWheel} */>
+    <SiteContainer>
       <Filter
         isOpen={filter.open}
-        close={closeFilter}
+        close={() => {
+          closeFilter();
+          unlockWindowScroll();
+        }}
         sortBy={filter.sortBy}
         setSortBy={setFilterSortBy}
         categories={categories}
@@ -98,7 +90,10 @@ const Site: React.FunctionComponent<SiteProps> = ({
       <MainContainer infoOpen={info.open}>
         <Underlay />
         <Info
-          close={closeInfo}
+          close={() => {
+            closeInfo();
+            unlockWindowScroll();
+          }}
           isOpen={info.open}
           post={info.post}
           selectedCategory={filter.selectedCategory}
@@ -106,31 +101,46 @@ const Site: React.FunctionComponent<SiteProps> = ({
           selectedTags={filter.selectedTags}
           addTagToSelectedTags={addTagToSelectedTags}
         />
-        <About isOpen={aboutOpen} close={closeAbout} />
+        <About
+          isOpen={aboutOpen}
+          close={() => {
+            closeAbout();
+            unlockWindowScroll();
+          }}
+        />
         <HeaderAndListContainer
           style={{
             opacity: anySectionIsOpen ? 0.3 : 1
           }}
         >
           <Header
+            anySectionOpen={anySectionIsOpen}
             sortBy={filter.sortBy}
-            setFilterSortBy={setFilterSortBy}
             selectedCategory={filter.selectedCategory}
-            setSelectedCategory={setSelectedCategory}
             selectedTags={filter.selectedTags}
-            clearSelectedTags={clearSelectedTags}
             toggleTheme={toggleTheme}
-            openFilter={openFilter}
-            openAbout={openAbout}
+            openFilter={() => {
+              openFilter();
+              lockWindowScroll();
+            }}
+            openAbout={() => {
+              openAbout();
+              lockWindowScroll();
+            }}
             filterLineTransition={filterLineTransition}
             setFilterLineTransition={setFilterLineTransition}
           />
           <List
-            openInfo={openInfo}
+            openInfo={(post: Post) => {
+              openInfo(post);
+              lockWindowScroll();
+            }}
             posts={posts}
             sortBy={filter.sortBy}
             selectedCategory={filter.selectedCategory}
             selectedTags={filter.selectedTags}
+            infoOpen={info.open}
+            filterOpen={filter.open}
           />
         </HeaderAndListContainer>
       </MainContainer>

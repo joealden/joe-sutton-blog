@@ -10,6 +10,7 @@ const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
   <>
     <AboutContainer
       style={{
+        top: isOpen ? `${window.pageYOffset}px` : "0",
         visibility: isOpen ? "visible" : "hidden",
         opacity: isOpen ? 1 : 0
       }}
