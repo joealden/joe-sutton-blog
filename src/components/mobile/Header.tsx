@@ -50,7 +50,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   shouldBackToTopButtonBeShown = () => {
     const { showBackToTopButton } = this.state;
 
-    if (window.pageYOffset > 100) {
+    if (window.pageYOffset > 60) {
       if (showBackToTopButton === false) {
         this.setState({ showBackToTopButton: true });
       }
