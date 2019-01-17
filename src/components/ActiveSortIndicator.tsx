@@ -6,7 +6,7 @@ type ASIProps = {
 };
 
 const ActiveSortIndicator: React.FunctionComponent<ASIProps> = ({ active }) => (
-  <ASIWrapper>
+  <div>
     <div
       style={{
         opacity: active ? 1 : 0,
@@ -15,17 +15,10 @@ const ActiveSortIndicator: React.FunctionComponent<ASIProps> = ({ active }) => (
     >
       <Circle />
     </div>
-  </ASIWrapper>
+  </div>
 );
 
 export default ActiveSortIndicator;
-
-const ASIWrapper = styled.div`
-  /* div {
-    transition: opacity ${props => props.theme.transition},
-      visibility ${props => props.theme.transition};
-  } */
-`;
 
 const Circle: React.FunctionComponent = () => (
   <StyledSVG height="12" width="12">
