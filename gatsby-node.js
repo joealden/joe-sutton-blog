@@ -1,3 +1,5 @@
+// @ts-check
+
 const path = require("path");
 const flatten = require("lodash.flatten");
 
