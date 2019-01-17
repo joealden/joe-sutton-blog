@@ -538,7 +538,7 @@ const FilterCover = styled.div`
 
 const FilterOverlay = styled.div`
   z-index: 9000;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
