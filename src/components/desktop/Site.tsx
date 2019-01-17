@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "../../utils/styled-components";
-import disableScrolling from "../../utils/disableScrolling";
 
 import {
   Post,
@@ -65,17 +64,11 @@ const Site: React.FunctionComponent<SiteProps> = ({
 }) => {
   const anySectionIsOpen = info.open || filter.open || aboutOpen;
 
-  const lockWindowScroll = () => disableScrolling.on();
-  const unlockWindowScroll = () => disableScrolling.off();
-
   return (
     <SiteContainer>
       <Filter
         isOpen={filter.open}
-        close={() => {
-          closeFilter();
-          unlockWindowScroll();
-        }}
+        close={closeFilter}
         sortBy={filter.sortBy}
         setSortBy={setFilterSortBy}
         categories={categories}
@@ -90,10 +83,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
       <MainContainer infoOpen={info.open}>
         <Underlay />
         <Info
-          close={() => {
-            closeInfo();
-            unlockWindowScroll();
-          }}
+          close={closeInfo}
           isOpen={info.open}
           post={info.post}
           selectedCategory={filter.selectedCategory}
@@ -101,13 +91,7 @@ const Site: React.FunctionComponent<SiteProps> = ({
           selectedTags={filter.selectedTags}
           addTagToSelectedTags={addTagToSelectedTags}
         />
-        <About
-          isOpen={aboutOpen}
-          close={() => {
-            closeAbout();
-            unlockWindowScroll();
-          }}
-        />
+        <About isOpen={aboutOpen} close={closeAbout} />
         <HeaderAndListContainer
           style={{
             opacity: anySectionIsOpen ? 0.3 : 1
@@ -119,22 +103,13 @@ const Site: React.FunctionComponent<SiteProps> = ({
             selectedCategory={filter.selectedCategory}
             selectedTags={filter.selectedTags}
             toggleTheme={toggleTheme}
-            openFilter={() => {
-              openFilter();
-              lockWindowScroll();
-            }}
-            openAbout={() => {
-              openAbout();
-              lockWindowScroll();
-            }}
+            openFilter={openFilter}
+            openAbout={openAbout}
             filterLineTransition={filterLineTransition}
             setFilterLineTransition={setFilterLineTransition}
           />
           <List
-            openInfo={(post: Post) => {
-              openInfo(post);
-              lockWindowScroll();
-            }}
+            openInfo={openInfo}
             posts={posts}
             sortBy={filter.sortBy}
             selectedCategory={filter.selectedCategory}

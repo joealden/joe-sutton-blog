@@ -85,45 +85,11 @@ class Site extends React.Component<SiteProps, SiteState> {
     const { menuOpen } = this.state;
     const { toggleMenu } = this;
 
-    /* Lock and unlock scrolling when opening sections */
-
-    const openAboutAndLockScroll = () => {
-      openAbout();
-      disableScrolling.on();
-    };
-
-    const closeAboutAndUnlockScroll = () => {
-      closeAbout();
-      disableScrolling.off();
-    };
-
-    const openFilterAndLockScroll = () => {
-      openFilter();
-      disableScrolling.on();
-    };
-
-    const closeFilterAndUnlockScroll = () => {
-      closeFilter();
-      disableScrolling.off();
-    };
-
-    const openInfoAndLockScroll = (post: Post) => {
-      openInfo(post);
-      disableScrolling.on();
-    };
-
-    const closeInfoAndUnlockScroll = () => {
-      closeInfo();
-      disableScrolling.off();
-    };
-
-    /* ----------------------------------------------- */
-
     return (
       <SiteWrapper>
         <Filter
           isOpen={filter.open}
-          close={closeFilterAndUnlockScroll}
+          close={closeFilter}
           sortBy={filter.sortBy}
           setSortBy={setFilterSortBy}
           categories={categories}
@@ -142,18 +108,18 @@ class Site extends React.Component<SiteProps, SiteState> {
           selectedTags={filter.selectedTags}
           clearSelectedTags={clearSelectedTags}
           toggleTheme={toggleTheme}
-          openFilter={openFilterAndLockScroll}
-          openAbout={openAboutAndLockScroll}
+          openFilter={openFilter}
+          openAbout={openAbout}
           infoOpen={info.open}
           filterLineTransition={filterLineTransition}
           setFilterLineTransition={setFilterLineTransition}
           menuOpen={menuOpen}
           toggleMenu={toggleMenu}
         />
-        <About isOpen={aboutOpen} close={closeAboutAndUnlockScroll} />
+        <About isOpen={aboutOpen} close={closeAbout} />
         <List
           posts={posts}
-          openInfo={openInfoAndLockScroll}
+          openInfo={openInfo}
           infoOpen={info.open}
           filterOpen={filter.open}
           menuOpen={menuOpen}
@@ -165,7 +131,7 @@ class Site extends React.Component<SiteProps, SiteState> {
         <Info
           isOpen={info.open}
           post={info.post}
-          close={closeInfoAndUnlockScroll}
+          close={closeInfo}
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
           selectedTags={filter.selectedTags}

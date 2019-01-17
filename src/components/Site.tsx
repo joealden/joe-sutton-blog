@@ -10,6 +10,8 @@ import {
   FilterLineTransition
 } from "../utils/types";
 
+import disableScrolling from "../utils/disableScrolling";
+
 import MobileSite from "./mobile/Site";
 import DesktopSite from "./desktop/Site";
 import GlobalStyles from "./GlobalStyles";
@@ -70,39 +72,47 @@ class Site extends React.Component<SiteProps, SiteState> {
 
   /* ----------------- Info ----------------- */
 
-  openInfo = (post: Post) =>
+  openInfo = (post: Post) => {
+    disableScrolling.on();
     this.setState({
       info: {
         open: true,
         post
       }
     });
+  };
 
-  closeInfo = () =>
+  closeInfo = () => {
+    disableScrolling.off();
     this.setState(prevState => ({
       info: {
         ...prevState.info,
         open: false
       }
     }));
+  };
 
   /* ---------------- Filter ---------------- */
 
-  openFilter = () =>
+  openFilter = () => {
+    disableScrolling.on();
     this.setState(prevState => ({
       filter: {
         ...prevState.filter,
         open: true
       }
     }));
+  };
 
-  closeFilter = () =>
+  closeFilter = () => {
+    disableScrolling.off();
     this.setState(prevState => ({
       filter: {
         ...prevState.filter,
         open: false
       }
     }));
+  };
 
   setFilterSortBy = (sortBy: FilterSortBy) =>
     this.setState(prevState => ({
@@ -160,8 +170,15 @@ class Site extends React.Component<SiteProps, SiteState> {
 
   /* ----------------- About ---------------- */
 
-  openAbout = () => this.setState({ aboutOpen: true });
-  closeAbout = () => this.setState({ aboutOpen: false });
+  openAbout = () => {
+    disableScrolling.on();
+    this.setState({ aboutOpen: true });
+  };
+
+  closeAbout = () => {
+    disableScrolling.off();
+    this.setState({ aboutOpen: false });
+  };
 
   /* -------- Filter Line Transition -------- */
 
