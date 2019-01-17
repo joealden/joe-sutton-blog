@@ -16,6 +16,12 @@ import About from "./About";
 import List from "./List";
 import Info from "./Info";
 
+enum SectionOpen {
+  None,
+  Info,
+  About
+}
+
 type SiteProps = {
   toggleTheme: () => void;
   posts: Array<Post>;
@@ -48,6 +54,29 @@ class Site extends React.Component<SiteProps, SiteState> {
     menuOpen: false
   };
 
+  historyPopStateHandler = (event: PopStateEvent) => {
+    if (event.state === SectionOpen.None) {
+      if (this.props.info.open) {
+        this.props.closeInfo();
+      } else if (this.props.aboutOpen) {
+        this.props.closeAbout();
+      }
+    } else if (event.state === SectionOpen.Info) {
+      this.props.openInfo(this.props.info.post);
+    } else if (event.state === SectionOpen.About) {
+      this.props.openAbout();
+    }
+  };
+
+  componentDidMount() {
+    history.replaceState(SectionOpen.None, "");
+    window.addEventListener("popstate", this.historyPopStateHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("popstate", this.historyPopStateHandler);
+  }
+
   toggleMenu = () => {
     const { menuOpen } = this.state;
 
@@ -69,12 +98,10 @@ class Site extends React.Component<SiteProps, SiteState> {
       removeTagFromSelectedTags,
       clearSelectedTags,
       openInfo,
-      closeInfo,
       openFilter,
       closeFilter,
       setFilterSortBy,
       openAbout,
-      closeAbout,
       info,
       filter,
       aboutOpen,
@@ -109,17 +136,23 @@ class Site extends React.Component<SiteProps, SiteState> {
           clearSelectedTags={clearSelectedTags}
           toggleTheme={toggleTheme}
           openFilter={openFilter}
-          openAbout={openAbout}
+          openAbout={() => {
+            openAbout();
+            history.pushState(SectionOpen.About, "");
+          }}
           infoOpen={info.open}
           filterLineTransition={filterLineTransition}
           setFilterLineTransition={setFilterLineTransition}
           menuOpen={menuOpen}
           toggleMenu={toggleMenu}
         />
-        <About isOpen={aboutOpen} close={closeAbout} />
+        <About isOpen={aboutOpen} close={() => history.back()} />
         <List
           posts={posts}
-          openInfo={openInfo}
+          openInfo={(post: Post) => {
+            openInfo(post);
+            history.pushState(SectionOpen.Info, "");
+          }}
           infoOpen={info.open}
           filterOpen={filter.open}
           menuOpen={menuOpen}
@@ -131,7 +164,7 @@ class Site extends React.Component<SiteProps, SiteState> {
         <Info
           isOpen={info.open}
           post={info.post}
-          close={closeInfo}
+          close={() => history.back()}
           selectedCategory={filter.selectedCategory}
           setSelectedCategory={setSelectedCategory}
           selectedTags={filter.selectedTags}
