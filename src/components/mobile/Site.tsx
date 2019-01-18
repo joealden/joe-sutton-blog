@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "../../utils/styled-components";
-import disableScrolling from "../../utils/disableScrolling";
 
 import {
   Post,
