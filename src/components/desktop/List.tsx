@@ -68,6 +68,28 @@ class List extends React.Component<ListProps, ListState> {
     ) {
       this.setCurrentlyActiveItem(posts[0].id);
 
+      /**
+       * NOTE:
+       * This is pretty hacky, but it seems to work fine.
+       *
+       * Due to how the `disableScrolling` util works, calling
+       * `window.scrollTo()` doesn't do anything. This is because
+       * `disableScrolling.on()` disables scrolling of the page while
+       * maintaining the scroll position for when you want to re-enable
+       * scrolling.
+       *
+       * We want to scroll the page back to the top when the filter criteria
+       * changes. So to achieve this while using the `disableScrolling` util,
+       * we must disable scrolling with `disableScrolling.off()`, then perform
+       * the scroll, then turn it back on again with `disableScrolling.on()`
+       * (only if `disableScrolling` was on before, this is why we check for
+       * `infoOpen` or `filterOpen` to be true).
+       *
+       * Code wise, this is pretty disgusting as theoretically there is a
+       * time where the user could scroll the page when they shouldn't be
+       * able to (in between the `disableScrolling` calls), which annoys me a
+       * bit. However, in reality, from my testing, this isn't an issue.
+       */
       if (infoOpen || filterOpen) {
         disableScrolling.off();
       }
