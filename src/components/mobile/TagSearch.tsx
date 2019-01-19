@@ -132,9 +132,11 @@ const TagListWrapper = styled.div`
   > div {
     > div {
       display: flex;
+      justify-content: space-between;
 
       input {
-        width: 100%;
+        flex: 1;
+        min-width: 0;
         padding: 55px 0 35px 20px;
         background-color: ${props => props.theme.accentColor};
         border: none;

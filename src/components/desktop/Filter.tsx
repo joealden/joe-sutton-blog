@@ -332,9 +332,11 @@ const SearchTags = styled.div`
   > div:first-child {
     > div {
       display: flex;
+      justify-content: space-between;
 
       input {
-        width: 100%;
+        flex: 1;
+        min-width: 0;
         background-color: ${props => props.theme.accentColor};
         border: none;
         outline: none;
