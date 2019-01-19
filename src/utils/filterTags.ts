@@ -7,7 +7,7 @@
 export const filterTags = (tags: Array<string>, searchValue: string) =>
   tags.filter(tag => {
     const lowercaseTag = tag.toLowerCase();
-    const lowercaseSearchValue = searchValue.toLowerCase();
+    const lowercaseSearchValue = searchValue.trim().toLowerCase();
 
     /**
      * Matches the start of words, for example:
