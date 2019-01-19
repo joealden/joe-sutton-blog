@@ -9,6 +9,8 @@ import CategoryList from "../CategoryList";
 import SearchIcon from "../icons/Search";
 import CrossIcon from "../icons/Cross";
 
+import { filterTags } from "../../utils/filterTags";
+
 type FilterProps = {
   isOpen: boolean;
   close: () => void;
@@ -113,21 +115,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
       closeFilter
     } = this;
 
-    const filteredTags = tags.filter(tag => {
-      const lowercaseTag = tag.toLowerCase();
-      const lowercaseSearchValue = searchValue.toLowerCase();
-
-      /**
-       * Matches the start of words, for example:
-       *
-       * 'ha'/'ne' matches 'Neue Haas'.
-       * 'est' does not match "Testing".
-       */
-      return (
-        lowercaseTag.startsWith(lowercaseSearchValue) ||
-        lowercaseTag.includes(` ${lowercaseSearchValue}`)
-      );
-    });
+    const filteredTags = filterTags(tags, searchValue);
 
     return (
       <>
