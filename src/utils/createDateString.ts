@@ -17,9 +17,5 @@ export const createDateString = (ISODateString: string) => {
   const month = ISODate.getMonth() + 1;
   const year = ISODate.getFullYear();
 
-  if (Number.isNaN(date) || Number.isNaN(month) || Number.isNaN(year)) {
-    throw new Error("The date provided must be in the ISO 8601 format");
-  }
-
   return `${date}/${month}/${year}`;
 };

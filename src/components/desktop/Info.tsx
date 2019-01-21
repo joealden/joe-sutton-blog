@@ -28,7 +28,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
   selectedTags,
   addTagToSelectedTags
 }) => {
-  const dateString = createDateString("testtestet");
+  const dateString = createDateString(post.createdAt);
 
   return (
     <>
