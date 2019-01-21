@@ -1,9 +1,7 @@
-<h1>
-  <img width="50" src="src/images/listed-icon.png">
-  Listed
-</h1>
+<p align="center"><img width="50" src="src/images/listed-icon.png"></h2>
+<h1 align="center">Listed</h1>
 
-Design inspiration / resource site.
+<p align="center">Design inspiration / resource site.</p>
 
 ![Listed Screenshot](.github/listed.png)
 
