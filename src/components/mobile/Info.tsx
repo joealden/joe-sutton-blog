@@ -256,6 +256,8 @@ const InfoItem = styled.div`
     margin-bottom: 2px;
     color: #838383;
   }
+
+  max-width: 95%;
 `;
 
 const Category = styled.span`
