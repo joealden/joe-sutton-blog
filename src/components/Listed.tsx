@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "../utils/styled-components";
-import { ThemeInterface, darkTheme, lightTheme } from "../utils/theme";
+import { Theme, darkTheme, lightTheme } from "../utils/theme";
 
 import { Post } from "../utils/types";
 
@@ -13,7 +13,7 @@ type ListedProps = {
 };
 
 type ListedState = {
-  currentTheme: ThemeInterface;
+  currentTheme: Theme;
 };
 
 class Listed extends React.Component<ListedProps, ListedState> {
