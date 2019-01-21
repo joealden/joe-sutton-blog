@@ -39,10 +39,22 @@ class Filter extends React.Component<FilterProps, FilterState> {
     showSearchList: false
   };
 
+  selectedTagsRef: React.RefObject<HTMLUListElement> = React.createRef();
   filteredTagsRef: React.RefObject<HTMLUListElement> = React.createRef();
 
   componentDidUpdate() {
-    const { filteredTagsRef } = this;
+    const { selectedTagsRef, filteredTagsRef } = this;
+
+    if (selectedTagsRef.current !== null) {
+      if (
+        selectedTagsRef.current.scrollHeight >
+        selectedTagsRef.current.offsetHeight
+      ) {
+        selectedTagsRef.current.className = "list-scrollable";
+      } else {
+        selectedTagsRef.current.className = "list-not-scrollable";
+      }
+    }
 
     if (filteredTagsRef.current !== null) {
       if (
@@ -180,7 +192,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
               </div>
               <div>
                 <div>
-                  <ul>
+                  <ul ref={this.selectedTagsRef}>
                     {selectedTags.map(tag => (
                       <SelectedTagsListItem key={tag}>
                         <div>{tag}</div>
@@ -190,7 +202,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
                       </SelectedTagsListItem>
                     ))}
                   </ul>
-                  {selectedTags.length === 0 ? null : (
+                  {selectedTags.length === 0 || showSearchList ? null : (
                     <div>
                       <button onClick={clearSelectedTags}>Clear all</button>
                     </div>
@@ -331,7 +343,7 @@ const InnerFilter = styled.div`
       padding: 0 15px;
     }
     &.list-not-scrollable li div:last-child {
-      padding: 0;
+      padding-left: 30px;
     }
   }
 `;
@@ -418,8 +430,37 @@ const SearchTags = styled.div`
     flex: 1;
 
     > div:first-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
       ul {
-        margin-top: 15px;
+        max-height: 100%;
+        overflow: auto;
+
+        li:first-child {
+          margin-top: 15px;
+        }
+
+        /* Scrollbar CSS for Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: #060606 ${props => props.theme.accentColor};
+
+        /* Scrollbar CSS for Chrome and Safari */
+        &::-webkit-scrollbar {
+          width: 1px;
+          background-color: ${props => props.theme.accentColor};
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #060606;
+        }
+
+        &::-webkit-scrollbar-track {
+          margin-top: 15px;
+        }
       }
 
       > div {
