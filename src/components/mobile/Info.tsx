@@ -4,6 +4,8 @@ import Img from "gatsby-image";
 
 import { Post, FilterLineTransition, FilterSortBy } from "../../utils/types";
 
+import { createDateString } from "../../utils/createDateString";
+
 import FilterButton from "../FilterButton";
 import Arrow from "../icons/Arrow";
 
@@ -69,11 +71,7 @@ class Info extends React.Component<InfoProps> {
 
     const { onCloseButtonClick, onCategoryClick, onTagClick } = this;
 
-    const createdAt = new Date(post.createdAt);
-    const date = createdAt.getDate();
-    const month = createdAt.getMonth();
-    const year = createdAt.getFullYear();
-    const dateString = `${date}/${month}/${year}`;
+    const dateString = createDateString(post.createdAt);
 
     return (
       <InfoWrapper

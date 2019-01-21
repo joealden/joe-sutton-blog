@@ -4,6 +4,8 @@ import Img from "gatsby-image";
 
 import { Post } from "../../utils/types";
 
+import { createDateString } from "../../utils/createDateString";
+
 import InfoCategory from "./InfoCategory";
 import InfoTags from "./InfoTags";
 
@@ -26,11 +28,7 @@ const Info: React.FunctionComponent<InfoProps> = ({
   selectedTags,
   addTagToSelectedTags
 }) => {
-  const createdAt = new Date(post.createdAt);
-  const date = createdAt.getDate();
-  const month = createdAt.getMonth();
-  const year = createdAt.getFullYear();
-  const dateString = `${date}/${month}/${year}`;
+  const dateString = createDateString("testtestet");
 
   return (
     <>
