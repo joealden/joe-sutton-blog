@@ -152,7 +152,16 @@ class Filter extends React.Component<FilterProps, FilterState> {
           onClick={hideSearchList}
           style={{
             overflowY: isOpen ? "scroll" : "auto",
-            transform: isOpen ? "translateY(0)" : "translateY(-100%)"
+            /**
+             * NOTE:
+             * It is translated `-101%` instead of `-100%` because
+             * on chrome (at least on linux), the filter was still
+             * slightly visible when it was closed, meaning that you
+             * could see a small bit of the filter colour at the top
+             * of the page. This was more noticable on the light
+             * theme.
+             */
+            transform: isOpen ? "translateY(0)" : "translateY(-101%)"
           }}
         >
           <InnerFilter>
@@ -592,7 +601,7 @@ const FilterCover = styled.div`
   left: 0;
   width: 100%;
 
-  /* Work out what this actually needs to be */
+  /* This much so you can't overscroll passed it */
   height: 500px;
 
   z-index: 10001;
