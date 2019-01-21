@@ -1,6 +1,13 @@
-# Listed
+<h1>
+  <img width="50" src="src/images/listed-icon.png">
+  Listed
+</h1>
 
 Design inspiration / resource site.
+
+![Listed Screenshot](.github/listed.png)
+
+
 
 # Notes
 
