@@ -39,6 +39,23 @@ class Filter extends React.Component<FilterProps, FilterState> {
     showSearchList: false
   };
 
+  filteredTagsRef: React.RefObject<HTMLUListElement> = React.createRef();
+
+  componentDidUpdate() {
+    const { filteredTagsRef } = this;
+
+    if (filteredTagsRef.current !== null) {
+      if (
+        filteredTagsRef.current.scrollHeight >
+        filteredTagsRef.current.offsetHeight
+      ) {
+        filteredTagsRef.current.className = "list-scrollable";
+      } else {
+        filteredTagsRef.current.className = "list-not-scrollable";
+      }
+    }
+  }
+
   updateSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSearchValue = event.target.value;
     this.setState({ searchValue: newSearchValue });
@@ -190,7 +207,10 @@ class Filter extends React.Component<FilterProps, FilterState> {
                     </span>
                   ) : (
                     <div>
-                      <ul onClick={preventHideSearchList}>
+                      <ul
+                        ref={this.filteredTagsRef}
+                        onClick={preventHideSearchList}
+                      >
                         {filteredTags.map(tag => (
                           <FilteredTagsListItem key={tag}>
                             <span onClick={() => addTagToSelectedTags(tag)}>
@@ -305,6 +325,13 @@ const InnerFilter = styled.div`
           opacity: 0.5;
         }
       }
+    }
+
+    &.list-scrollable li div:last-child {
+      padding: 0 15px;
+    }
+    &.list-not-scrollable li div:last-child {
+      padding: 0;
     }
   }
 `;
@@ -490,8 +517,6 @@ const FilteredTagsListItem = styled.li`
   }
 
   div:last-child {
-    padding: 0 15px;
-
     svg {
       width: 12px;
     }
