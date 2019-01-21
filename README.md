@@ -1,7 +1,7 @@
 <p align="center"><img width="50" src="src/images/listed-icon.png"></h2>
 <h1 align="center">Listed</h1>
 
-<p align="center">Design inspiration / resource site.</p>
+<p align="center">A Curated List of Design Inspiration</p>
 
 ![Listed Screenshot](.github/listed.png)
 
