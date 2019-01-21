@@ -287,8 +287,17 @@ const InnerFilter = styled.div`
 
       span {
         padding: 1px 0;
-        transition: opacity ${props => props.theme.transition};
         user-select: none;
+
+        /**
+         * NOTE:
+         * This causes a weird rendering bug if the item is
+         * hovered upon and the container is scrolled. This only
+         * happens in Firefox, and only when the dev tools are
+         * not open. I'm pretty positive that this is a Firefox
+         * bug, so I will leave this as is. 
+         */
+        transition: opacity ${props => props.theme.transition};
       }
 
       &:hover {
