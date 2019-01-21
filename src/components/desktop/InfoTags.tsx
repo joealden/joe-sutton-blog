@@ -14,7 +14,7 @@ type InfoTagsState = {
 };
 
 class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
-  state = {
+  state: Readonly<InfoTagsState> = {
     showTooltip: false,
     mouseX: 0,
     mouseY: 0

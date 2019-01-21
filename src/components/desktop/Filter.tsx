@@ -33,7 +33,7 @@ type FilterState = {
 };
 
 class Filter extends React.Component<FilterProps, FilterState> {
-  state = {
+  state: Readonly<FilterState> = {
     searchValue: "",
     inputFocused: false,
     showSearchList: false

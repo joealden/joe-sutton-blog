@@ -17,7 +17,7 @@ class InfoCategory extends React.Component<
   InfoCategoryProps,
   InfoCategoryState
 > {
-  state = {
+  state: Readonly<InfoCategoryState> = {
     showTooltip: false,
     mouseX: 0,
     mouseY: 0

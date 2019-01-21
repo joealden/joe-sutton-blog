@@ -30,7 +30,7 @@ type FilterState = {
 };
 
 class Filter extends React.Component<FilterProps, FilterState> {
-  state = {
+  state: Readonly<FilterState> = {
     tagSearchOpen: false
   };
 
@@ -40,10 +40,13 @@ class Filter extends React.Component<FilterProps, FilterState> {
     const { filterContentsRef } = this;
 
     this.setState({ tagSearchOpen: true });
-    filterContentsRef.current.scrollTo({
-      top: 0,
-      left: 0
-    });
+
+    if (filterContentsRef.current !== null) {
+      filterContentsRef.current.scrollTo({
+        top: 0,
+        left: 0
+      });
+    }
   };
 
   closeTagSearch = () => this.setState({ tagSearchOpen: false });
@@ -54,10 +57,12 @@ class Filter extends React.Component<FilterProps, FilterState> {
 
     close();
     setTimeout(() => {
-      filterContentsRef.current.scrollTo({
-        top: 0,
-        left: 0
-      });
+      if (filterContentsRef.current !== null) {
+        filterContentsRef.current.scrollTo({
+          top: 0,
+          left: 0
+        });
+      }
     }, 300);
   };
 

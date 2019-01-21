@@ -21,7 +21,7 @@ type ListState = {
 };
 
 class List extends React.Component<ListProps, ListState> {
-  state = {
+  state: Readonly<ListState> = {
     activeItemId: this.props.posts[0] ? this.props.posts[0].id : null
   };
 

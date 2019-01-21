@@ -20,7 +20,7 @@ type TagSearchState = {
 };
 
 class TagSearch extends React.Component<TagSearchProps, TagSearchState> {
-  state = {
+  state: Readonly<TagSearchState> = {
     searchValue: "",
     inputFocused: false
   };

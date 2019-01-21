@@ -31,7 +31,7 @@ type HeaderState = {
 };
 
 class Header extends React.Component<HeaderProps, HeaderState> {
-  state = {
+  state: Readonly<HeaderState> = {
     showBackToTopButton: false
   };
 

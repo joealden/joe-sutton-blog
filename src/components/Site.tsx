@@ -55,7 +55,7 @@ type SiteState = {
 };
 
 class Site extends React.Component<SiteProps, SiteState> {
-  state = {
+  state: Readonly<SiteState> = {
     info: {
       open: false,
       post: dummyPost
