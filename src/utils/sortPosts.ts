@@ -1,18 +1,19 @@
-/* TODO: Create own impl as this is 2.6k gzipped! */
 import shuffle from "lodash.shuffle";
 
 import { Post, FilterSortBy } from "./types";
 
-const sortPosts = (posts: Array<Post>, sortBy: FilterSortBy) => {
+const sortPosts = (posts: ReadonlyArray<Post>, sortBy: FilterSortBy) => {
+  const mutablePosts: Array<Post> = [...posts];
+
   switch (sortBy) {
     case FilterSortBy.NewestFirst:
-      return posts.sort(sortPostsByNewestFirst);
+      return mutablePosts.sort(sortPostsByNewestFirst);
     case FilterSortBy.OldestFirst:
-      return posts.sort(sortPostsByOldestFirst);
+      return mutablePosts.sort(sortPostsByOldestFirst);
     case FilterSortBy.AToZ:
-      return posts.sort(sortPostsAToZ);
+      return mutablePosts.sort(sortPostsAToZ);
     case FilterSortBy.ZToA:
-      return posts.sort(sortPostsZToA);
+      return mutablePosts.sort(sortPostsZToA);
     case FilterSortBy.Random1:
     case FilterSortBy.Random2:
       return shuffle(posts);
@@ -21,25 +22,25 @@ const sortPosts = (posts: Array<Post>, sortBy: FilterSortBy) => {
 
 export default sortPosts;
 
-const sortPostsByNewestFirst = (postA, postB) => {
+const sortPostsByNewestFirst = (postA: Post, postB: Post) => {
   const postADate = new Date(postA.createdAt);
   const postBDate = new Date(postB.createdAt);
   return postBDate.valueOf() - postADate.valueOf();
 };
 
-const sortPostsByOldestFirst = (postA, postB) => {
+const sortPostsByOldestFirst = (postA: Post, postB: Post) => {
   const postADate = new Date(postA.createdAt);
   const postBDate = new Date(postB.createdAt);
   return postADate.valueOf() - postBDate.valueOf();
 };
 
-const sortPostsAToZ = (postA, postB) => {
+const sortPostsAToZ = (postA: Post, postB: Post) => {
   if (postA.title > postB.title) return 1;
   if (postA.title < postB.title) return -1;
   return 0;
 };
 
-const sortPostsZToA = (postA, postB) => {
+const sortPostsZToA = (postA: Post, postB: Post) => {
   if (postA.title > postB.title) return -1;
   if (postA.title < postB.title) return 1;
   return 0;
