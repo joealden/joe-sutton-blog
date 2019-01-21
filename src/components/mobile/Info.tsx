@@ -29,11 +29,14 @@ class Info extends React.Component<InfoProps> {
     const { infoWrapperRef } = this;
 
     close();
+
     setTimeout(() => {
-      infoWrapperRef.current.scrollTo({
-        top: 0,
-        left: 0
-      });
+      if (infoWrapperRef.current !== null) {
+        infoWrapperRef.current.scrollTo({
+          top: 0,
+          left: 0
+        });
+      }
     }, 300);
   };
 
