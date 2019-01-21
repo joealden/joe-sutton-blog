@@ -42,7 +42,7 @@ class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
 
     return (
       <>
-        <div>
+        <InfoTagsWrapper>
           {postTags.reduce((acc, currentTag, i) => {
             const isLastTag = i === postTags.length - 1;
             const punctuation = isLastTag ? "." : ", ";
@@ -67,7 +67,7 @@ class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
               </React.Fragment>
             ];
           }, [])}
-        </div>
+        </InfoTagsWrapper>
 
         <TagTooltip
           style={{
@@ -84,6 +84,10 @@ class InfoTags extends React.Component<InfoTagsProps, InfoTagsState> {
 }
 
 export default InfoTags;
+
+const InfoTagsWrapper = styled.div`
+  max-width: 95%;
+`;
 
 const Tag = styled.span`
   transition: color ${props => props.theme.transition};
@@ -102,7 +106,7 @@ const Tag = styled.span`
 `;
 
 const TagTooltip = styled.span`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: ${props => props.theme.foregroundColor};

@@ -91,8 +91,22 @@ const Category = styled.span`
   }
 `;
 
+/**
+ * NOTE:
+ * For whatever reason, in Chrome, the scrollbar appears
+ * on top of the tooltip when the tooltip is meant to go
+ * over it (due to z-index rules). This is not an issue
+ * in Firefox.
+ *
+ * https://stackoverflow.com/questions/16874546/strange-z-index-behavior-with-scrollbars-under-chrome
+ *
+ * I found the above question on stack overflow about it,
+ * but the solutions they provide don't resolve the issue
+ * for me.
+ */
+
 const CategoryTooltip = styled.span`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: ${props => props.theme.foregroundColor};
