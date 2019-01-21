@@ -105,6 +105,20 @@ const Tag = styled.span`
   }
 `;
 
+/**
+ * NOTE:
+ * For whatever reason, in Chrome, the scrollbar appears
+ * on top of the tooltip when the tooltip is meant to go
+ * over it (due to z-index rules). This is not an issue
+ * in Firefox.
+ *
+ * https://stackoverflow.com/questions/16874546/strange-z-index-behavior-with-scrollbars-under-chrome
+ *
+ * I found the above question on stack overflow about it,
+ * but the solutions they provide don't resolve the issue
+ * for me.
+ */
+
 const TagTooltip = styled.span`
   position: fixed;
   top: 0;
