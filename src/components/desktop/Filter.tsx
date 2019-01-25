@@ -83,12 +83,39 @@ class Filter extends React.Component<FilterProps, FilterState> {
 
   blurInput = () => this.setState({ inputFocused: false });
 
-  hideSearchList = () =>
+  hideSearchList = () => {
+    const { resetSearchListPosition } = this;
+
     this.setState({
       searchValue: "",
       inputFocused: false,
       showSearchList: false
     });
+
+    resetSearchListPosition();
+  };
+
+  resetSearchListPosition = () => {
+    const { filteredTagsRef } = this;
+
+    if (filteredTagsRef.current !== null) {
+      filteredTagsRef.current.scrollTo({
+        top: 0,
+        left: 0
+      });
+    }
+  };
+
+  resetSelectedListPosition = () => {
+    const { selectedTagsRef } = this;
+
+    if (selectedTagsRef.current !== null) {
+      selectedTagsRef.current.scrollTo({
+        top: 0,
+        left: 0
+      });
+    }
+  };
 
   preventHideSearchList = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -96,7 +123,13 @@ class Filter extends React.Component<FilterProps, FilterState> {
 
   closeFilter = (event: React.MouseEvent) => {
     const { close } = this.props;
-    const { preventHideSearchList, hideSearchList } = this;
+
+    const {
+      preventHideSearchList,
+      hideSearchList,
+      resetSearchListPosition,
+      resetSelectedListPosition
+    } = this;
 
     /*
      * This is so that the click handler
@@ -105,6 +138,13 @@ class Filter extends React.Component<FilterProps, FilterState> {
     preventHideSearchList(event);
 
     close();
+
+    /**
+     * Reset the scroll position of both
+     * the lists when the filter is closed.
+     */
+    resetSearchListPosition();
+    resetSelectedListPosition();
 
     /*
      * This delay is so that the search list is
