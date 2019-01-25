@@ -125,6 +125,7 @@ class Site extends React.Component<SiteProps, SiteState> {
           removeTagFromSelectedTags={removeTagFromSelectedTags}
           tags={tags}
           selectedTags={filter.selectedTags}
+          clearSelectedTags={clearSelectedTags}
         />
         <Header
           sortBy={filter.sortBy}

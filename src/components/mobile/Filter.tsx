@@ -23,6 +23,7 @@ type FilterProps = {
   selectedTags: Array<string>;
   addTagToSelectedTags: (tagToAdd: string) => void;
   removeTagFromSelectedTags: (tagToRemove: string) => void;
+  clearSelectedTags: () => void;
 };
 
 type FilterState = {
@@ -77,7 +78,8 @@ class Filter extends React.Component<FilterProps, FilterState> {
       tags,
       selectedTags,
       addTagToSelectedTags,
-      removeTagFromSelectedTags
+      removeTagFromSelectedTags,
+      clearSelectedTags
     } = this.props;
 
     const { tagSearchOpen } = this.state;
@@ -104,16 +106,23 @@ class Filter extends React.Component<FilterProps, FilterState> {
                 </div>
               </div>
               <div>
-                <ul>
-                  {selectedTags.map(tag => (
-                    <TagListItem key={tag}>
-                      <div>{tag}</div>
-                      <div onClick={() => removeTagFromSelectedTags(tag)}>
-                        <CrossIcon />
-                      </div>
-                    </TagListItem>
-                  ))}
-                </ul>
+                {selectedTags.length !== 0 ? (
+                  <>
+                    <ul>
+                      {selectedTags.map(tag => (
+                        <TagListItem key={tag}>
+                          <div>{tag}</div>
+                          <div onClick={() => removeTagFromSelectedTags(tag)}>
+                            <CrossIcon />
+                          </div>
+                        </TagListItem>
+                      ))}
+                    </ul>
+                    <ClearAllButtonWrapper>
+                      <button onClick={clearSelectedTags}>Clear All</button>
+                    </ClearAllButtonWrapper>
+                  </>
+                ) : null}
               </div>
             </div>
             <div>
@@ -264,6 +273,17 @@ const TagListItem = styled.li`
     svg {
       width: 12px;
     }
+  }
+`;
+
+const ClearAllButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin: 10px 0;
+    padding: 15px 20px;
+    color: #060606;
   }
 `;
 
