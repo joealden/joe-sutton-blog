@@ -16,7 +16,7 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "gatsby-image": "^2.0.26",
+    "gatsby-image": "^2.0.28",
     "lodash.shuffle": "^4.2.0",
     "memoize-one": "^5.0.0",
     "react": "^16.7.0",
@@ -29,12 +29,12 @@
     "@types/jest": "^23.3.13",
     "@types/lodash.shuffle": "^4.2.4",
     "@types/memoize-one": "^4.1.0",
-    "@types/react": "^16.7.20",
+    "@types/react": "^16.7.21",
     "@types/styled-components": "^4.1.6",
     "babel-plugin-styled-components": "^1.10.0",
-    "gatsby": "^2.0.91",
+    "gatsby": "^2.0.98",
     "gatsby-plugin-manifest": "^2.0.13",
-    "gatsby-plugin-netlify": "^2.0.6",
+    "gatsby-plugin-netlify": "^2.0.7",
     "gatsby-plugin-robots-txt": "^1.3.0",
     "gatsby-plugin-sitemap": "^2.0.4",
     "gatsby-plugin-styled-components": "^3.0.4",
@@ -43,9 +43,9 @@
     "jest": "^23.6.0",
     "lodash.flatten": "^4.4.0",
     "ts-jest": "^23.10.5",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.4"
   },
   "resolutions": {
-    "@types/react": "16.7.20"
+    "@types/react": "16.7.21"
   }
 }
