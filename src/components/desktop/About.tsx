@@ -31,8 +31,7 @@ const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
             </Description>
             <InstagramLink>
               <a
-                /* An instagram account needs to be created */
-                href="https://www.instagram.com/listeddesign/"
+                href="https://www.instagram.com/listed.design/"
                 rel="noreferrer noopener"
                 target="_blank"
               >
