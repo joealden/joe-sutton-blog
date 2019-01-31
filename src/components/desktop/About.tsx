@@ -23,10 +23,11 @@ const About: React.FunctionComponent<AboutProps> = ({ isOpen, close }) => (
           <AboutDetails>
             <Description>
               <p>
-                A list of curated design related links. The idea is for it to be
-                a place to search for inspiration when setting a... A list of
-                curated design related links. The idea is for it to be a place
-                to search for inspiration when setting a...
+                Listed is a place for creatives to find inspiration for upcoming
+                projects. The site is regularly updated to showcase the latest
+                in current design, so you can be sure Listed will have the
+                resources you need to find the art direction of your next
+                project.
               </p>
             </Description>
             <InstagramLink>
@@ -152,6 +153,7 @@ const Description = styled.div`
   p {
     margin: 0;
     margin-right: 15px;
+    line-height: 150%;
   }
 `;
 
