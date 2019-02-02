@@ -227,6 +227,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
                     placeholder={inputFocused ? "" : "Search Tags"}
                     onFocus={focusInput}
                     onBlur={blurInput}
+                    aria-label="search tags"
                   />
                   <div>
                     {searchValue === "" ? (
