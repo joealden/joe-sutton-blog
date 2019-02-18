@@ -13,6 +13,11 @@ const GlobalStyles = createGlobalStyle`
   * | }
   */
 
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     background-color: ${props => props.theme.backgroundColor};
     color: ${props => props.theme.foregroundColor};
